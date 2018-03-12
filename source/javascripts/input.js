@@ -75,6 +75,9 @@ function writeInputToDOM(htmlEl) {
 
   Description: Used to return an object that lets a user interact with the 
   html box on the web gui. 
+
+  parameters: 
+    htmlEl - an element from the DOM which a user would like to write inner html to.
 */ 
 function input(htmlEl) {
   /* initalize properties */
