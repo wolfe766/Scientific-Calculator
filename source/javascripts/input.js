@@ -13,11 +13,15 @@
   parameters: 
     element: element to add to string
 
-  returns:
-    undefined
+  requires:
+    function is called through an input object
+  
+  updates:
+    the inner html specified at htmlEl in the calling object
 */
 function addToString(element) {
-
+  this.leftString += element.toString();
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 
@@ -29,29 +33,67 @@ function addToString(element) {
   parameters: 
     element: element to add to string
 
+  requires:
+    function is called through an input object
+
   returns:
-    undefined
+    the input to the left of the cursor and right of the cursor, concatenated.
 */
 function returnInputString() {
-
+  return this.leftString + this.rightString;
 }
 
 /*
   CREATED: David Levine 03/12/2018
   
   Description: shifts the cursor one position to the left
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    the inner html specified at htmlEl in the calling object
 */
 function shiftCursorLeft() {
-
+  lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
+  this.rightString = lastCharFromLeftString + this.rightString;
+  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
   CREATED: David Levine 03/12/2018
   
-  Description: shifts the cursor one position to the left
+  Description: shifts the cursor one position to the right
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    the inner html specified at htmlEl in the calling object
 */
 function shiftCursorRight() {
+  firstCharFromRightString = this.rightString.charAt(0);
+  this.leftString += firstCharFromRightString;
+  this.rightString = this.rightString.slice(1, this.leftString.length);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+}
 
+/*
+  CREATED: David Levine 03/12/2018
+  
+  Description: clears the input box
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    the inner html specified at htmlEl in the calling object
+*/
+function clearInput() {
+  this.leftString = "";
+  this.rightString = "";
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -65,8 +107,8 @@ function shiftCursorRight() {
   updates:
     the inner html specified at htmlEl
 */
-function writeInputToDOM(htmlEl) {
-
+function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
+  htmlEl.innerHTML(leftString + cursor + rightString);
 }
 
 
@@ -81,8 +123,8 @@ function writeInputToDOM(htmlEl) {
 */ 
 function input(htmlEl) {
   /* initalize properties */
-  this.leftString = "";
-  this.rightString = "";
+  this.leftString = ""; /* string to the left of the cursor */
+  this.rightString = ""; /* string to the right of the cursor */
   this.cursor = "<span>|</span>";
   this.htmlEl = htmlEl;
 
@@ -90,5 +132,6 @@ function input(htmlEl) {
   this.addToString = addToString;
   this.returnInputString = returnInputString;
   this.shiftCursorLeft = shiftCursorLeft; 
-  this.shiftCursorRight = shiftCursorRight;   
+  this.shiftCursorRight = shiftCursorRight;
+  this.clearInput = clearInput;
 }
