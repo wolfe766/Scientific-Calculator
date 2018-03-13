@@ -12,7 +12,7 @@ QUnit.test( "Calculate Expression Simple Test 1", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 2", function( assert ) {
@@ -21,7 +21,7 @@ QUnit.test( "Calculate Expression Simple Test 2", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 3", function( assert ) {
@@ -30,7 +30,7 @@ QUnit.test( "Calculate Expression Simple Test 3", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 4", function( assert ) {
@@ -39,7 +39,7 @@ QUnit.test( "Calculate Expression Simple Test 4", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 5", function( assert ) {
@@ -48,7 +48,7 @@ QUnit.test( "Calculate Expression Simple Test 5", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 6", function( assert ) {
@@ -57,7 +57,7 @@ QUnit.test( "Calculate Expression Simple Test 6", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 7", function( assert ) {
@@ -66,7 +66,7 @@ QUnit.test( "Calculate Expression Simple Test 7", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 8", function( assert ) {
@@ -75,7 +75,7 @@ QUnit.test( "Calculate Expression Simple Test 8", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression Simple Test 9", function( assert ) {
@@ -84,7 +84,7 @@ QUnit.test( "Calculate Expression Simple Test 9", function( assert ) {
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 // Tests with parentheses and no functions
@@ -95,7 +95,7 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 1", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression With Parentheses And No Functions Test 2", function( assert ) {
@@ -104,7 +104,7 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 2", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression With Parentheses And No Functions Test 3", function( assert ) {
@@ -113,7 +113,7 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 3", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression With Parentheses And No Functions Test 4", function( assert ) {
@@ -122,7 +122,7 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 4", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Calculate Expression With Parentheses And No Functions Test 5", function( assert ) {
@@ -131,6 +131,245 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 5", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  assert.deepEqual(actualValue, expectedValue);
+  assert.equal(actualValue, expectedValue);
 });
 
+// Tests with trig functions in rad mode with no parentheses
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["sin", "(", "0", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 2", function( assert ) {
+  var argument = (Math.PI/2.0).toString();
+  var tokenQueue = ["sin", "(", argument, ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 3", function( assert ) {
+  var argument = (Math.PI).toString();
+  var tokenQueue = ["sin", "(", argument, ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 4", function( assert ) {
+  var argument = (3.0*Math.PI/2.0).toString();
+  var tokenQueue = ["sin", "(", argument, ")"];
+  var expectedValue = -1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 5", function( assert ) {
+  var argument = (2.0*Math.PI).toString();
+  var tokenQueue = ["sin", "(", argument, ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 6", function( assert ) {
+  var tokenQueue = ["cos", "(", "0", ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 7", function( assert ) {
+  var argument = (Math.PI/2.0).toString();
+  var tokenQueue = ["cos", "(", argument, ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 8", function( assert ) {
+  var argument = (Math.PI).toString();
+  var tokenQueue = ["cos", "(", argument, ")"];
+  var expectedValue = -1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 9", function( assert ) {
+  var argument = (3.0*Math.PI/2.0).toString();
+  var tokenQueue = ["cos", "(", argument, ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 10", function( assert ) {
+  var argument = (2.0*Math.PI).toString();
+  var tokenQueue = ["cos", "(", argument, ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Rad Mode And No Parentheses Test 7", function( assert ) {
+  var tokenQueue = ["tan", "(", "0", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue);
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+// Tests with trig functions in deg mode with no parentheses
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["sin", "(", "90", ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 2", function( assert ) {
+  var tokenQueue = ["sin", "(", "180", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+  
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 3", function( assert ) {
+  var tokenQueue = ["sin", "(", "270", ")"];
+  var expectedValue = -1;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 4", function( assert ) {
+  var tokenQueue = ["sin", "(", "0", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+  
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 5", function( assert ) {
+  var tokenQueue = ["cos", "(", "90", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 6", function( assert ) {
+  var tokenQueue = ["cos", "(", "180", ")"];
+  var expectedValue = -1;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+  
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 7", function( assert ) {
+  var tokenQueue = ["cos", "(", "270", ")"];
+  var expectedValue = 0;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Calculate Expression With Trig Functions Deg Mode And No Parentheses Test 8", function( assert ) {
+  var tokenQueue = ["cos", "(", "0", ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+  
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference < .001, true);
+});
+
+// Tests evaluating expressions with pow function and no parentheses
+
+QUnit.test( "Calculate Expression With Pow Function And No Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "1", ",", "0", ")"];
+  var expectedValue = 1;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Calculate Expression With Pow Function And No Parentheses Test 2", function( assert ) {
+  var tokenQueue = ["pow", "(", "5", ",", "2", ")"];
+  var expectedValue = 25;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
