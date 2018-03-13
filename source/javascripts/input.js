@@ -108,7 +108,7 @@ function clearInput() {
     the inner html specified at htmlEl
 */
 function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
-  htmlEl.innerHTML(leftString + cursor + rightString);
+  htmlEl.innerHTML = leftString + cursor + rightString;
 }
 
 
@@ -121,7 +121,7 @@ function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
   parameters: 
     htmlEl - an element from the DOM which a user would like to write inner html to.
 */ 
-function input(htmlEl) {
+function Input(htmlEl) {
   /* initalize properties */
   this.leftString = ""; /* string to the left of the cursor */
   this.rightString = ""; /* string to the right of the cursor */
