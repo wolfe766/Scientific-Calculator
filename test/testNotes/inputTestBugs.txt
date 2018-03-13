@@ -9,7 +9,9 @@ BUG 1:
 -Description: 
     clicking return after putting input into the text
     box does not clear the text box.
--Fix status: NOT FIXED
+
+-Discovery Date: 03/13/2018
+-Fix status: FIXED ON 03/13/2018
 
 
 BUG 2:
@@ -17,7 +19,8 @@ BUG 2:
     Clicking the left button until the cursor reaches the
     end of the input text followed by the right cursor clears
     all the text found to the right of the cursor.
-   
--Fix status: NOT FIXED
+
+-Discovery Date: 03/13/2018
+-Fix status: FIXED ON 03/13/2018
 
               

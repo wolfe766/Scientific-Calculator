@@ -40,7 +40,12 @@ function addToString(element) {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function returnInputString() {
-  return this.leftString + this.rightString;
+  var stringToReturn = this.leftString + this.rightString
+  /* clear string and write it to input box*/
+  this.leftString = "";
+  this.rightString = "";
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  return stringToReturn;
 }
 
 /*
@@ -75,7 +80,7 @@ function shiftCursorLeft() {
 function shiftCursorRight() {
   firstCharFromRightString = this.rightString.charAt(0);
   this.leftString += firstCharFromRightString;
-  this.rightString = this.rightString.slice(1, this.leftString.length);
+  this.rightString = this.rightString.slice(1, this.rightString.length);
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 

@@ -101,6 +101,7 @@ document.getElementById("id_8").addEventListener("click", button8);
 document.getElementById("id_9").addEventListener("click", button9);
 document.getElementById("plus").addEventListener("click", buttonPlus);
 document.getElementById("minus").addEventListener("click", buttonMinus);
+document.getElementById("mult").addEventListener("click", buttonMult);
 document.getElementById("divide").addEventListener("click", buttonDivide);
 document.getElementById("return").addEventListener("click", buttonReturn, false);
 document.getElementById("clear").addEventListener("click", buttonClear);
