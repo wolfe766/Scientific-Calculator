@@ -52,7 +52,7 @@ function isAFunctionName(name){
 
 	Parameters:
 		startIndex: The index in the expression string where the number will begin.
-		expression: The expression string.  Must only contains simple symbols,
+		expression: The expression string.  Must only contain simple symbols,
 		numbers, and function names.
 */
 function longestNumberFromPosition(startIndex, expression){
@@ -75,7 +75,7 @@ function longestNumberFromPosition(startIndex, expression){
 
 	Parameters:
 		startIndex: The index in the expression string where the function name will begin.
-		expression: The expression string.  Must only contains simple symbols,
+		expression: The expression string.  Must only contain simple symbols,
 		numbers, and function names.
 */
 function functionNameFromPosition(startIndex, expression){
@@ -89,7 +89,6 @@ function functionNameFromPosition(startIndex, expression){
 			break;
 		}
 	}
-
 	return expression.substring(startIndex, endIndex);
 }
 
@@ -125,6 +124,5 @@ function tokenizeExpression(expression){
 			index = index + functionName.length;
 		}
 	}
-	
 	return tokenQueue;
 }
