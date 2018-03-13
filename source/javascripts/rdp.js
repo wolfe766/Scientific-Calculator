@@ -17,6 +17,37 @@
   function_name -> fact|sin|cos|tan|sqrt
 */
 
+/* 
+  TODO: Consider parameters from the view that determine how the trig. functions will be
+  interpreted, i.e. is the calculator in degree or radian mode.  Possible solution, add
+  an extra parameter view object to each non terminal parsing method that contains this 
+  information.
+*/
+
+/*
+  CREATED: Henry Karagory 03/12/2018
+
+  Description:  Parsing function corresponding to the expr non-terminal
+  symbol.  
+
+  parameters:
+    tokenQueue: A queue of tokens with expr as a prefix.
+
+  return:  The value of the expression.
+*/
+function calculateExpression(tokenQueue){
+  var exprValue = calculateTerm(tokenQueue);
+
+  while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
+    var operation = tokenQueue.shift();
+    if(operation == "+"){
+      exprValue = exprValue + calculateTerm(tokenQueue);
+    }else{
+      exprValue = exprValue - calculateTerm(tokenQueue);
+    }
+  }
+  return exprValue;
+}
 
 /*
   CREATED: David Levine 03/12/2018
@@ -63,7 +94,7 @@ function calculateTerm(tokenQueue) {
 */
 function calculateFactor(tokenQueue) {
   /* Establish valid unary function names to check for */
-  funcNames = ["fact", "sin", "cos", "tan", "sqrt"];
+  var funcNames = ["fact", "sin", "cos", "tan", "sqrt"];
   var value;
   var token = tokenQueue.shift();    
   /* expression wraped in parenthesis */
