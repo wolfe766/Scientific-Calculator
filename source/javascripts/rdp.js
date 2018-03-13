@@ -32,18 +32,20 @@
 
   parameters:
     tokenQueue: A queue of tokens with expr as a prefix.
+    trigMode: A string giving the interpretation of the argument to trigonometric 
+    functions.  Either "rad" or "deg".
 
   return:  The value of the expression.
 */
-function calculateExpression(tokenQueue){
-  var exprValue = calculateTerm(tokenQueue);
+function calculateExpression(tokenQueue, trigMode="rad"){
+  var exprValue = calculateTerm(tokenQueue, trigMode);
 
   while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
     var operation = tokenQueue.shift();
     if(operation == "+"){
-      exprValue = exprValue + calculateTerm(tokenQueue);
+      exprValue = exprValue + calculateTerm(tokenQueue, trigMode);
     }else{
-      exprValue = exprValue - calculateTerm(tokenQueue);
+      exprValue = exprValue - calculateTerm(tokenQueue, trigMode);
     }
   }
   return exprValue;
@@ -63,18 +65,20 @@ function calculateExpression(tokenQueue){
 
   parameters: 
     -tokenQueue: a queue of tokens containing a term we want to parse
+    -trigMode: A string giving the interpretation of the argument to trigonometric 
+    functions.  Either "rad" or "deg".
 
   return: the value of the term
 */
-function calculateTerm(tokenQueue) {
-  var value = calculateFactor(tokenQueue);
+function calculateTerm(tokenQueue, trigMode) {
+  var value = calculateFactor(tokenQueue, trigMode);
   /* begin looping for multiplication operations */
   while (tokenQueue[0] == "*" || tokenQueue[0] == "/") {
     var operation = tokenQueue.shift();
     if (operation == "*") {
-      value *= calculateFactor(tokenQueue);
+      value *= calculateFactor(tokenQueue, trigMode);
     } else {
-      value /= calculateFactor(tokenQueue);
+      value /= calculateFactor(tokenQueue, trigMode);
     }
   }
   return value;
@@ -89,39 +93,38 @@ function calculateTerm(tokenQueue) {
 
   parameters: 
     -tokenQueue: a queue of tokens containing a factor we want to parse.
+    -trigMode: A string giving the interpretation of the argument to trigonometric 
+    functions.  Either "rad" or "deg".
 
   return: the value of the factor.
 */
-function calculateFactor(tokenQueue) {
-  /* Establish valid unary function names to check for */
+function calculateFactor(tokenQueue, trigMode) {
+  /* Functions names that may appear in the factor. */
   var funcNames = ["fact", "sin", "cos", "tan", "sqrt"];
   var value;
   var token = tokenQueue.shift();    
-  /* expression wraped in parenthesis */
+  
+  /* Case expression wraped in parenthesis */
   if (token == "(") {
-    value = calculateExpression(tokenQueue);
-    /* remove trailing parenthesis */
+    value = calculateExpression(tokenQueue, trigMode);
     tokenQueue.shift();
-  /* expression wrapped in a uniary function */
+  /* Case function call */
   } else if (funcNames.includes(token)) {
-    var funcString = funcNames[funcNames.indexOf(token)];
-    value = evaluateFunction(funcString, parseFloat(tokenQueue.shift));
-    /* remove trailing parenthesis */
     tokenQueue.shift();
-  /* Two expressions wrapped in a power function*/
+    var funcString = token;
+    var funcParam = calculateExpression(tokenQueue, trigMode);
+    value = evaluateFunction(funcString, funcParam, trigMode);
+    tokenQueue.shift();
+  /* Case two expressions wrapped in a power function*/
   } else if (token == "pow") {
-    /* discard "pow" and "(" tokens */
     tokenQueue.shift();
+    /* Evaluate first and second expression in pow */
+    var expr1val = calculateExpression(tokenQueue, trigMode);
     tokenQueue.shift();
-    /* evaluate first and second expression in pow */
-    var expr1val = calculateExpression(tokenQueue);
+    var expr2val = calculateExpression(tokenQueue, trigMode);
+    value = Math.pow(expr1val, expr2val);
     tokenQueue.shift();
-    var expr2val = calculateExpression(tokenQueue);
-    /* calculate the power value */
-    value = pow(expr1val, expr2val);
-    /* remove trailing parenthesis */
-    tokenQueue.shift();
-  /* otherwise, we are only dealing with a number */
+  /* Case number */
   } else {
     value = parseFloat(token);
   }
@@ -137,14 +140,16 @@ function calculateFactor(tokenQueue) {
   to evaluate.
 
   parameters: 
-    -funcString: a string representing one of five supported functions, 
+    -funcString: A string representing one of five supported functions, 
      "fact" for factorial, "sin" for sine, "cos" for cosine, "tan" for tangent,
      and "sqrt" for square root.
-    -funcParam: the parameter to pass into the function.
+    -funcParam: The parameter to pass into the function.
+    -trigMode: A string giving the interpretation of the argument to trigonometric 
+    functions.  Either "rad" or "deg".
 
   return: the value of the factor.
 */
-function evaluateFunction(funcString, funcParam) {
+function evaluateFunction(funcString, funcParam, trigMode) {
   var valToReturn;
   switch (funcString) {
     case "fact":
@@ -152,19 +157,31 @@ function evaluateFunction(funcString, funcParam) {
       break;
 
     case "sin":
-      valToReturn = sin(funcParam * Math.PI / 180);
+      if(trigMode == "rad"){
+        valToReturn = Math.sin(funcParam);
+      }else{
+        valToReturn = Math.sin(funcParam * Math.PI/180.0);
+      }
       break;
 
     case "cos":
-      valToReturn = cos(funcParam * Math.PI / 180);
+      if(trigMode == "rad"){
+        valToReturn = Math.cos(funcParam);
+      }else{
+        valToReturn = Math.cos(funcParam * Math.PI/180.0);
+      }
       break;
 
     case "tan":
-      valToReturn = tan(funcParam * Math.PI / 180);
+      if(trigMode == "rad"){
+        valToReturn = Math.tan(funcParam);
+      }else{
+        valToReturn = Math.tan(funcParam * Math.PI/180.0);
+      }
       break;
 
     case "sqrt":
-      valToReturn = sqrt(funcParam);
+      valToReturn = Math.sqrt(funcParam);
       break;
   }
 
