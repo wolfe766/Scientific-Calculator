@@ -373,3 +373,73 @@ QUnit.test( "Calculate Expression With Pow Function And No Parentheses Test 2", 
 
   assert.equal(actualValue, expectedValue);
 });
+
+// Tests evaluating expressions with pow function and parenthesis
+QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "(", "5", ")", ",", "2", ")"];
+  var expectedValue = 25;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 2", function( assert ) {
+  var tokenQueue = ["pow", "(", "(", "5", "+", "7", ")", ",", "2", ")"];
+  var expectedValue = 144;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 3", function( assert ) {
+  var tokenQueue = ["pow", "(", "(", "5", "+", "7", ")", ",", "(", "2", "*", "3", ")" , ")"];
+  var expectedValue = 2985984;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 4", function( assert ) {
+  var tokenQueue = ["pow", "(", "(", "5", "-", "7", ")", ",", "(", "2", "*", "3", ")" , ")"];
+  var expectedValue = 64;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Tests evaluating expressions with factorial and no inside parenthesis
+QUnit.test( "Calculate Expression With Factorial Function And No Inside Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "5", ")"];
+  var expectedValue = 120;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Calculate Expression With Factorial Function And No Inside Parentheses Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "5", ")" , "+", "fact", "(", "2", ")"];
+  var expectedValue = 122;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+
+
+QUnit.test( "Calculate Expression With Factorial Function And No Inside Parentheses Test 3", function( assert ) {
+  var tokenQueue = ["fact", "(", "3", ")", "*", "fact", "(", "0", ")"];
+  var expectedValue = 6;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+

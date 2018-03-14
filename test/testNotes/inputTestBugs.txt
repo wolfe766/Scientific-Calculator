@@ -23,4 +23,12 @@ BUG 2:
 -Discovery Date: 03/13/2018
 -Fix status: FIXED ON 03/13/2018
 
+BUG 3:
+-Description: 
+    Input object initalizes with "Deg" capitalized.
+    It should be "deg."
+
+-Discovery Date: 03/14/2018
+-Fix status: FIXED ON 03/14/2018
+
               

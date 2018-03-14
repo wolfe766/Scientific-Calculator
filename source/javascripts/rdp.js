@@ -202,7 +202,7 @@ function evaluateFunction(funcString, funcParam, trigMode) {
   return: the factorial value.
 */
 function factorial(value) {
-  returnVal = 0;
+  returnVal = 1;
   if (value != 0) {
     returnVal = value * factorial(value - 1);
   }

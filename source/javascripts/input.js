@@ -17,12 +17,32 @@
     function is called through an input object
   
   updates:
+    this.leftString
     the inner html specified at htmlEl in the calling object
 */
 function addToString(element) {
   this.leftString += element.toString();
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
+
+/*
+  CREATED: David Levine 03/14/2018
+
+  Description: Removes element from string based off cursor location
+               in a fashion similar to a traditional backspace function.
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    this.leftString
+    the inner html specified at htmlEl in the calling object
+*/
+function deleteFromString() {
+  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+}
+
 
 
 /*
@@ -57,10 +77,12 @@ function returnInputString() {
     function is called through an input object
   
   updates:
+    this.leftString
+    this.rightString
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorLeft() {
-  lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
+  var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
   this.rightString = lastCharFromLeftString + this.rightString;
   this.leftString = this.leftString.slice(0, this.leftString.length - 1);
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
@@ -75,10 +97,12 @@ function shiftCursorLeft() {
     function is called through an input object
   
   updates:
+    this.leftString
+    this.rightString
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorRight() {
-  firstCharFromRightString = this.rightString.charAt(0);
+  var firstCharFromRightString = this.rightString.charAt(0);
   this.leftString += firstCharFromRightString;
   this.rightString = this.rightString.slice(1, this.rightString.length);
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
@@ -93,6 +117,8 @@ function shiftCursorRight() {
     function is called through an input object
   
   updates:
+    this.leftString
+    this.rightString
     the inner html specified at htmlEl in the calling object
 */
 function clearInput() {
@@ -116,9 +142,49 @@ function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
   htmlEl.innerHTML = leftString + cursor + rightString;
 }
 
+/*
+  CREATED: David Levine 03/12/2018
+  
+  Description: Changes the toggle mode from deg to rad, or 
+               from rad to deg.
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    this.toggleTrigMode
+*/
+function toggleTrigMode() {
+  if (this.trigMode === "deg") {
+    this.trigMode = "rad";
+  } else {
+    this.trigMode = "deg";
+  }
+}
+
+/*
+  CREATED: David Levine 03/12/2018
+  
+  Description: Returns a string containing either
+               "deg" or "rad" depending on the active
+               string mode.
+
+  requires:
+    function is called through an input object
+  
+  updates:
+    this.toggleTrigMode
+*/
+function returnTrigMode() {
+  return this.trigMode;
+}
+
 
 /* 
   CREATED: David Levine 03/12/2018
+  MODIFIED: David Levine 03/14/2018
+    -Moved the input functions into another class, which 
+     are now chained using prototyping.
 
   Description: Used to return an object that lets a user interact with the 
   html box on the web gui. 
@@ -132,11 +198,30 @@ function Input(htmlEl) {
   this.rightString = ""; /* string to the right of the cursor */
   this.cursor = "<span>|</span>";
   this.htmlEl = htmlEl;
+  this.trigMode = "deg";
 
-  /* Functions to manipulate input string */
+  /* write cursor to input box during initalization */
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor)
+  
+}
+
+/* 
+  CREATED: David Levine 03/14/2018
+
+  Description: Object containing properites to their corresponding functions
+               for handling input. 
+
+*/ 
+function InputFunctions() {
   this.addToString = addToString;
   this.returnInputString = returnInputString;
   this.shiftCursorLeft = shiftCursorLeft; 
   this.shiftCursorRight = shiftCursorRight;
   this.clearInput = clearInput;
+  this.deleteFromString = deleteFromString;
+  this.toggleTrigMode = toggleTrigMode;
+  this.returnTrigMode = returnTrigMode;
 }
+
+/* Chain Input to InputFunctions through prototype  */
+Input.prototype = new InputFunctions();

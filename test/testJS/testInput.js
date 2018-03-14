@@ -86,6 +86,25 @@ function buttonClear() {
     inputObject.clearInput();
 }
 
+function buttonDel() {      
+    inputObject.deleteFromString();
+}
+
+function buttonTan() {      
+    inputObject.addToString("tan()");
+    inputObject.shiftCursorLeft();
+}
+
+function toggleTrigMode() {
+  inputObject.toggleTrigMode();
+  el = document.getElementById("trig_out");
+  el.innerHTML = inputObject.returnTrigMode();
+}
+
+/* Write trig mode out */
+el = document.getElementById("trig_out");
+el.innerHTML = inputObject.returnTrigMode();
+
 /* add event listeners */
 document.getElementById("left").addEventListener("click", leftCursorPress);
 document.getElementById("right").addEventListener("click", rightCursorPress);
@@ -105,4 +124,7 @@ document.getElementById("mult").addEventListener("click", buttonMult);
 document.getElementById("divide").addEventListener("click", buttonDivide);
 document.getElementById("return").addEventListener("click", buttonReturn, false);
 document.getElementById("clear").addEventListener("click", buttonClear);
+document.getElementById("del").addEventListener("click", buttonDel);
+document.getElementById("tan").addEventListener("click", buttonTan);
+document.getElementById("trig").addEventListener("click", toggleTrigMode);
 
