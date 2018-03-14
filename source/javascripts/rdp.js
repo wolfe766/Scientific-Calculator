@@ -25,6 +25,13 @@
 */
 
 /*
+  TODO: Need to add mechanism for recovering for false input. Some cases to consider:
+    -Mismatched parenthesis
+    -Domain of factorial function
+    -multiple occurances of add-ops or mult-ops (**, ++, /*, etc.)
+*/
+
+/*
   CREATED: Henry Karagory 03/12/2018
 
   Description:  Parsing function corresponding to the expr non-terminal

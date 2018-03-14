@@ -442,4 +442,25 @@ QUnit.test( "Calculate Expression With Factorial Function And No Inside Parenthe
   assert.equal(actualValue, expectedValue);
 });
 
+// Tests evaluating expressions with factorial and inside paraenthese
+QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "(","3", "*", "3" ,")", ")", "*", "fact", "(", "0", ")"];
+  var expectedValue = 362880;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Tests evaluating expressions with factorial and inside paraenthese
+QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "(","3", "*", "3" ,")", "+", "(","3", "/", "3" ,")", ")"];
+  var expectedValue = 3628800;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
 
