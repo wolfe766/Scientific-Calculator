@@ -270,5 +270,9 @@ function checkFactorialArg(arg) {
   Returns: true if arg is valid, false otherwise.
 */
 function checkSqrtArg(arg) {
-  
+  var isValid = true;
+  if (arg < 0) {
+    isValid = false;
+  }
+  return isValid;
 }
