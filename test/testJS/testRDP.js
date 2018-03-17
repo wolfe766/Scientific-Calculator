@@ -550,3 +550,64 @@ QUnit.test( "Check Factorial Arg With Non-Integer Arg 3", function( assert ) {
 
   assert.equal(actualValue, expectedValue);
 });
+
+/*
+  Tests for checkSqrtArg
+*/
+
+// tests involving valid arguments
+QUnit.test( "Check Sqrt Arg With Valid Arg 1", function( assert ) {
+  var arg = 0;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Valid Arg 2", function( assert ) {
+  var arg = 2;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Valid Arg 3", function( assert ) {
+  var arg = 12897456.32;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// tests involving negative arguments
+QUnit.test( "Check Sqrt Arg With Negative Arg 1", function( assert ) {
+  var arg = -1;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Negative Arg 2", function( assert ) {
+  var arg = -13214;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Negative Arg 3", function( assert ) {
+  var arg = -0.4578156669;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+

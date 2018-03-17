@@ -231,8 +231,44 @@ function checkFactorialArg(arg) {
   var error = 1;
   if (arg < 0) {
     error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
-  } else if (!Number.isInteger(arg)) {
+  } else if (Number.isInteger(arg)) {
     error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
   }
   return error;
+}
+
+/*
+  CREATED: David Levine 3/17/2018
+
+  Description: checks the given value and 
+  ensures it is valid for a factorial function
+  
+  Parameters:
+    -arg: the argument passed into the facorial
+
+  Returns: 1 if arg is valid, ERR string describing message otherwise.
+*/
+function checkFactorialArg(arg) {
+  var error = 1;
+  if (arg < 0) {
+    error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+  } else if (Number.isInteger(arg)) {
+    error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+  }
+  return error;
+}
+
+/*
+  CREATED: David Levine 3/17/2018
+
+  Description: checks the given value and 
+  ensures it is valid for a square root function
+  
+  Parameters:
+    -arg: the argument passed into the square root
+
+  Returns: true if arg is valid, false otherwise.
+*/
+function checkSqrtArg(arg) {
+  
 }
