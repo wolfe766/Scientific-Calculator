@@ -25,7 +25,7 @@
 */
 
 /*
-  TODO: Need to add mechanism for recovering for false input. Some cases to consider:
+  TODO: Need to add mechanism for recovering from false input. Some cases to consider:
     -Mismatched parenthesis
     -Domain of factorial function
     -multiple occurances of add-ops or mult-ops (**, ++, /*, etc.)
@@ -214,4 +214,19 @@ function factorial(value) {
     returnVal = value * factorial(value - 1);
   }
   return returnVal;
+}
+
+/*
+  CREATED: David Levine 3/17/2018
+
+  Description: checks the given value and 
+  ensures it is valid for a factorial function
+  
+  Parameters:
+    -arg: the argument passed into the facorial
+
+  Returns: 1 if arg is valid, ERR string describing message otherwise.
+*/
+function checkFactorialArg(arg) {
+
 }

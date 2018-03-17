@@ -452,7 +452,6 @@ QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses
   assert.equal(actualValue, expectedValue);
 });
 
-// Tests evaluating expressions with factorial and inside paraenthese
 QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses Test 2", function( assert ) {
   var tokenQueue = ["fact", "(", "(","3", "*", "3" ,")", "+", "(","3", "/", "3" ,")", ")"];
   var expectedValue = 3628800;
@@ -463,4 +462,91 @@ QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses
 });
 
 
+/*
+  Tests for checkFactorialArg
+*/
 
+/* tests involving valid factorial arguments */
+QUnit.test( "Check Factorial Arg With Valid Arg 1", function( assert ) {
+  var arg = 0;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Valid Arg 2", function( assert ) {
+  var arg = 3;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Valid Arg 3", function( assert ) {
+  var arg = 43365431;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/* tests involving negative factorial values */
+QUnit.test( "Check Factorial Arg With Negative Arg 1", function( assert ) {
+  var arg = -1;
+  var expectedValue = "ERR: FACTORIAL DOMAIN";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Negative Arg 2", function( assert ) {
+  var arg = -3;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Negative Arg 3", function( assert ) {
+  var arg = -328091;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/* tests involving non-integer values */
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 1", function( assert ) {
+  var arg = 0.5;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 2", function( assert ) {
+  var arg = 2.75;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 3", function( assert ) {
+  var arg = 431.543276;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
