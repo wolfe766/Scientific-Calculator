@@ -209,7 +209,7 @@ function evaluateFunction(funcString, funcParam, trigMode) {
   return: the factorial value.
 */
 function factorial(value) {
-  returnVal = 1;
+  var returnVal = 1;
   if (value != 0) {
     returnVal = value * factorial(value - 1);
   }
@@ -228,5 +228,11 @@ function factorial(value) {
   Returns: 1 if arg is valid, ERR string describing message otherwise.
 */
 function checkFactorialArg(arg) {
-
+  var error = 1;
+  if (arg < 0) {
+    error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+  } else if (!Number.isInteger(arg)) {
+    error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+  }
+  return error;
 }
