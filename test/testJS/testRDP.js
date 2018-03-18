@@ -452,7 +452,6 @@ QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses
   assert.equal(actualValue, expectedValue);
 });
 
-// Tests evaluating expressions with factorial and inside paraenthese
 QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses Test 2", function( assert ) {
   var tokenQueue = ["fact", "(", "(","3", "*", "3" ,")", "+", "(","3", "/", "3" ,")", ")"];
   var expectedValue = 3628800;
@@ -463,4 +462,411 @@ QUnit.test( "Calculate Expression With Factorial Function And Inside Parentheses
 });
 
 
+/*
+  Tests for checkFactorialArg
+*/
+
+/* tests involving valid factorial arguments */
+QUnit.test( "Check Factorial Arg With Valid Arg 1", function( assert ) {
+  var arg = 0;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Valid Arg 2", function( assert ) {
+  var arg = 3;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Valid Arg 3", function( assert ) {
+  var arg = 43365431;
+  var expectedValue = 1;
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/* tests involving negative factorial values */
+QUnit.test( "Check Factorial Arg With Negative Arg 1", function( assert ) {
+  var arg = -1;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Negative Arg 2", function( assert ) {
+  var arg = -3;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Negative Arg 3", function( assert ) {
+  var arg = -328091;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/* tests involving non-integer values */
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 1", function( assert ) {
+  var arg = 0.5;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 2", function( assert ) {
+  var arg = 2.75;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Factorial Arg With Non-Integer Arg 3", function( assert ) {
+  var arg = 431.543276;
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = checkFactorialArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/*
+  Tests for checkSqrtArg
+*/
+
+// tests involving valid arguments
+QUnit.test( "Check Sqrt Arg With Valid Arg 1", function( assert ) {
+  var arg = 0;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Valid Arg 2", function( assert ) {
+  var arg = 2;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Valid Arg 3", function( assert ) {
+  var arg = 12897456.32;
+  var expectedValue = true;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// tests involving negative arguments
+QUnit.test( "Check Sqrt Arg With Negative Arg 1", function( assert ) {
+  var arg = -1;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Negative Arg 2", function( assert ) {
+  var arg = -13214;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Check Sqrt Arg With Negative Arg 3", function( assert ) {
+  var arg = -0.4578156669;
+  var expectedValue = false;
+
+  var actualValue = checkSqrtArg(arg);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/*
+  Error message detection in RDP.
+*/
+
+
+// Factorial tests
+QUnit.test( "Test Error Message With Negative Factorial Argument Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "-1", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+QUnit.test( "Test Error Message With Negative Factorial Argument Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "-43254", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "0.25243", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "6.5", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Square root tests
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 1", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "-1", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 2", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "-4315", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 3", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "-1", "*", "6", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/*
+  syntax error messages
+*/
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 1", function( assert ) {
+  var tokenQueue = ["(", "-1", "*", "6", ")", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 2", function( assert ) {
+  var tokenQueue = ["-1", "*", "6", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 3", function( assert ) {
+  var tokenQueue = ["(", "-1", "*", "6"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 4", function( assert ) {
+  var tokenQueue = ["("];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 5", function( assert ) {
+  var tokenQueue = [")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// pow syntax error
+QUnit.test( "Test Pow One Argument 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "23", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 2", function( assert ) {
+  var tokenQueue = ["pow", "(", "23", "*", "2" , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 3", function( assert ) {
+  var tokenQueue = ["pow", "(", "3", "," , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 4", function( assert ) {
+  var tokenQueue = ["pow", "(", "," , "3" , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+// Test all functions with no arguments
+QUnit.test( "Test Pow No Args 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "," , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow No Args 2", function( assert ) {
+  var tokenQueue = ["pow", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Fact No Args", function( assert ) {
+  var tokenQueue = ["fact", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sin No Args", function( assert ) {
+  var tokenQueue = ["sin", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Cos No Args", function( assert ) {
+  var tokenQueue = ["cos", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Tan No Args", function( assert ) {
+  var tokenQueue = ["tan", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sqrt No Args", function( assert ) {
+  var tokenQueue = ["sqrt", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Test function missing parentheses
+QUnit.test( "Test Sqrt Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["sqrt", "259", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sqrt Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "259"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["pow", "259", ",", "1", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["pow", "(", "259", ",", "1"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
 
