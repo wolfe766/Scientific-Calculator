@@ -430,9 +430,6 @@ QUnit.test( "Calculate Expression With Factorial Function And No Inside Parenthe
   assert.equal(actualValue, expectedValue);
 });
 
-
-
-
 QUnit.test( "Calculate Expression With Factorial Function And No Inside Parentheses Test 3", function( assert ) {
   var tokenQueue = ["fact", "(", "3", ")", "*", "fact", "(", "0", ")"];
   var expectedValue = 6;
@@ -654,7 +651,54 @@ QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", fun
   assert.equal(actualValue, expectedValue);
 });
 
-// Square root tests
+// Simple error message tests
+
+QUnit.test( "Test Simple Syntax Error Message 1", function( assert ) {
+  var tokenQueue = ["*"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Simple Syntax Error Message 2", function( assert ) {
+  var tokenQueue = ["+"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Simple Syntax Error Message 3", function( assert ) {
+  var tokenQueue = ["1", "+"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Simple Syntax Error Message 4", function( assert ) {
+  var tokenQueue = ["1", "+", "+"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Simple Syntax Error Message 5", function( assert ) {
+  var tokenQueue = ["+", "1"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Square root error message tests
 QUnit.test( "Test Error Message With Negative Square Root Argument Test 1", function( assert ) {
   var tokenQueue = ["sqrt", "(", "-1", ")"];
   var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
@@ -769,7 +813,7 @@ QUnit.test( "Test Pow One Argument 4", function( assert ) {
 });
 
 
-// Test all functions with no arguments
+// Test all functions with no arguments error message
 QUnit.test( "Test Pow No Args 1", function( assert ) {
   var tokenQueue = ["pow", "(", "," , ")"];
   var expectedValue = "ERR: SYNTAX";
@@ -868,5 +912,146 @@ QUnit.test( "Test Pow Missing Second Parentheses", function( assert ) {
   var actualValue = calculateExpression(tokenQueue);
 
   assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sin Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["sin", "(", "259"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sin Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["sin", "259", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Cos Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["cos", "(", "259"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Cos Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["cos", "259", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Tan Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["tan", "(", "259"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Tan Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["tan", "259", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Test nested functions with error messages
+QUnit.test( "Test Nested Function Call Negative Factorial Argument", function( assert ) {
+  var tokenQueue = ["fact", "(", "cos", "(", "3.14", ")",")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Nested Function Call Negative Sqrt Argument", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "cos", "(", "3.14", ")",")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+// Test nested functions
+
+QUnit.test( "Test Nested Functions Trig Mode Rad 1", function( assert ) {
+  var tokenQueue = ["cos", "(", "sqrt", "(", "2", ")",")"];
+  var expectedValue = 0.15594369;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
+});
+
+QUnit.test( "Test Nested Functions Trig Mode Rad 2", function( assert ) {
+  var tokenQueue = ["cos", "(", "1", "+", "sqrt", "(", "2", ")",")"];
+  var expectedValue = -0.7469196;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
+});
+
+QUnit.test( "Test Nested Functions Trig Mode Rad 3", function( assert ) {
+  var tokenQueue = ["sin", "(", "cos", "(", "tan", "(", "0", ")", ")", ")"];
+  var expectedValue = 0.8414709848;
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
+});
+
+QUnit.test( "Test Nested Functions Trig Mode Deg 1", function( assert ) {
+  var tokenQueue = ["cos", "(", "sqrt", "(", "2", ")",")"];
+  var expectedValue = 0.999695;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
+});
+
+QUnit.test( "Test Nested Functions Trig Mode Deg 2", function( assert ) {
+  var tokenQueue = ["cos", "(", "1", "+", "sqrt", "(", "2", ")",")"];
+  var expectedValue = 0.999112;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
+});
+
+QUnit.test( "Test Nested Functions Trig Mode Deg 3", function( assert ) {
+  var tokenQueue = ["sin", "(", "cos", "(", "tan", "(", "0", ")", ")", ")"];
+  var expectedValue = 0.01745;
+
+  var actualValue = calculateExpression(tokenQueue, "deg");
+
+  var difference = Math.abs(actualValue - expectedValue);
+
+  assert.equal(difference<0.001, true);
 });
 

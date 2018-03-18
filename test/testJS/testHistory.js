@@ -12,9 +12,14 @@ var testEntry = new Entry(equation, answer);
 input = document.getElementById("input");
 input.addEventListener("click", function(){
 	historyController.addToHistory(testEntry);
+	testEntry = new Entry(equation, answer);
 	testEntry.equation = Math.floor(Math.random() * 100).toString() + " + " + Math.floor(Math.random() * 100).toString();
 	testEntry.answer = Math.floor(Math.random() * 100).toString();
 });
+
+document.getElementById("up").addEventListener("click", function(){historyController.scrollUp()});
+document.getElementById("down").addEventListener("click", function(){historyController.scrollDown()});
+
 
 //Will be more fully fleshed out in the future once actual
 //calculation abilities are up and running

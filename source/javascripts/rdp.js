@@ -17,13 +17,6 @@
   function_name -> fact|sin|cos|tan|sqrt
 */
 
-/* 
-  TODO: Consider parameters from the view that determine how the trig. functions will be
-  interpreted, i.e. is the calculator in degree or radian mode.  Possible solution, add
-  an extra parameter view object to each non terminal parsing method that contains this 
-  information.
-*/
-
 /*
   TODO: Need to add mechanism for recovering from false input. Some cases to consider:
     -Mismatched parenthesis
@@ -35,7 +28,28 @@
   CREATED: Henry Karagory 03/12/2018
 
   Description:  Parsing function corresponding to the expr non-terminal
-  symbol.  
+  symbol.
+
+  parameters:
+    tokenQueue: A queue of tokens with expr as a prefix.
+    trigMode: A string giving the interpretation of the argument to trigonometric 
+    functions.  Either "rad" or "deg".
+
+    return:  The value of the expression.
+*/
+function calculateExpression(tokenQueue, trigMode="rad"){
+  var exprValue = calculateExpressionRecursive(tokenQueue, trigMode);
+  if(tokenQueue.length != 0){
+    return "ERR: SYNTAX";
+  }
+  return exprValue;
+}
+
+/*
+  CREATED: Henry Karagory 03/12/2018
+
+  Description:  Parsing function corresponding to the expr non-terminal
+  symbol. Involved in mutual recursion with calculateTerm and calculateFactor functions. 
 
   parameters:
     tokenQueue: A queue of tokens with expr as a prefix.
@@ -44,17 +58,33 @@
 
   return:  The value of the expression.
 */
-function calculateExpression(tokenQueue, trigMode="rad"){
+function calculateExpressionRecursive(tokenQueue, trigMode){
   var exprValue = calculateTerm(tokenQueue, trigMode);
+
+  // If a string is returned then it is an error message, return the message.
+  if(typeof exprValue == "string"){
+    return exprValue;
+  }
 
   while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
     var operation = tokenQueue.shift();
     if(operation == "+"){
-      exprValue = exprValue + calculateTerm(tokenQueue, trigMode);
+      var exprValueTemp = calculateTerm(tokenQueue, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof exprValueTemp == "string"){
+        return exprValueTemp;
+      }
+      exprValue = exprValue + exprValueTemp;
     }else{
-      exprValue = exprValue - calculateTerm(tokenQueue, trigMode);
+      var exprValueTemp = calculateTerm(tokenQueue, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof exprValueTemp == "string"){
+        return exprValueTemp;
+      }
+      exprValue = exprValue - exprValueTemp;
     }
   }
+
   return exprValue;
 }
 
@@ -79,13 +109,27 @@ function calculateExpression(tokenQueue, trigMode="rad"){
 */
 function calculateTerm(tokenQueue, trigMode) {
   var value = calculateFactor(tokenQueue, trigMode);
+  // If a string is returned then it is an error message, return the message.
+  if(typeof value == "string"){
+    return value;
+  }
   /* begin looping for multiplication operations */
   while (tokenQueue[0] == "*" || tokenQueue[0] == "/") {
     var operation = tokenQueue.shift();
     if (operation == "*") {
-      value *= calculateFactor(tokenQueue, trigMode);
+      var valueTemp = calculateFactor(tokenQueue, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof valueTemp == "string"){
+        return valueTemp;
+      }
+      value *= valueTemp;
     } else {
-      value /= calculateFactor(tokenQueue, trigMode);
+      var valueTemp = calculateFactor(tokenQueue, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof valueTemp == "string"){
+        return valueTemp;
+      }
+      value /= valueTemp;
     }
   }
   return value;
@@ -111,9 +155,13 @@ function calculateFactor(tokenQueue, trigMode) {
   var value;
   var token = tokenQueue.shift();    
   
-  /* Case expression wraped in parenthesis */
+  /* Case expression wrapped in parenthesis */
   if (token == "(") {
-    value = calculateExpression(tokenQueue, trigMode);
+    value = calculateExpressionRecursive(tokenQueue, trigMode);
+    // If a string is returned then it is an error message, return the message.
+    if(typeof value == "string"){
+      return value;
+    }
     if (tokenQueue.shift() != ")") { /* It true, mismatched parenthesis */
       value = "ERR: SYNTAX";
     }
@@ -121,8 +169,12 @@ function calculateFactor(tokenQueue, trigMode) {
   } else if (funcNames.includes(token)) {
     if (tokenQueue.shift() == "(") {
       var funcString = token;
-      var funcParam = calculateExpression(tokenQueue, trigMode);
+      var funcParam = calculateExpressionRecursive(tokenQueue, trigMode);
       value = evaluateFunction(funcString, funcParam, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof funcParam == "string"){
+        return funcParam;
+      }
       if (tokenQueue.shift() != ")") {
          value = "ERR: SYNTAX";
       }
@@ -134,9 +186,17 @@ function calculateFactor(tokenQueue, trigMode) {
   } else if (token == "pow") {
     if (tokenQueue.shift() == "(") {
       /* Evaluate first and second expression in pow */
-      var expr1val = calculateExpression(tokenQueue, trigMode);
+      var expr1val = calculateExpressionRecursive(tokenQueue, trigMode);
+      // If a string is returned then it is an error message, return the message.
+      if(typeof expr1val == "string"){
+        return expr1val;
+      }
       if (tokenQueue.shift() == ",") {
-        var expr2val = calculateExpression(tokenQueue, trigMode);
+        var expr2val = calculateExpressionRecursive(tokenQueue, trigMode);
+        // If a string is returned then it is an error message, return the message.
+        if(typeof expr2val == "string"){
+          return expr2val;
+        }
         value = Math.pow(expr1val, expr2val);
         if (tokenQueue.shift() != ")") {
         value = "ERR: SYNTAX";
