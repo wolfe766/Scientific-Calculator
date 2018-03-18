@@ -114,29 +114,45 @@ function calculateFactor(tokenQueue, trigMode) {
   /* Case expression wraped in parenthesis */
   if (token == "(") {
     value = calculateExpression(tokenQueue, trigMode);
-    tokenQueue.shift();
+    if (tokenQueue.shift() != ")") { /* It true, mismatched parenthesis */
+      value = "ERR: SYNTAX";
+    }
   /* Case function call */
   } else if (funcNames.includes(token)) {
-    tokenQueue.shift();
-    var funcString = token;
-    var funcParam = calculateExpression(tokenQueue, trigMode);
-    value = evaluateFunction(funcString, funcParam, trigMode);
-    tokenQueue.shift();
-  /* Case two expressions wrapped in a power function*/
-  } else if (token == "pow") {
-    tokenQueue.shift();
-    /* Evaluate first and second expression in pow */
-    var expr1val = calculateExpression(tokenQueue, trigMode);
-    if (tokenQueue.shift() == ",") {
-      var expr2val = calculateExpression(tokenQueue, trigMode);
-      value = Math.pow(expr1val, expr2val);
+    if (tokenQueue.shift() == "(") {
+      var funcString = token;
+      var funcParam = calculateExpression(tokenQueue, trigMode);
+      value = evaluateFunction(funcString, funcParam, trigMode);
+      if (tokenQueue.shift() != ")") {
+         value = "ERR: SYNTAX";
+      }
     } else {
       value = "ERR: SYNTAX";
     }
-    tokenQueue.shift();
+    
+  /* Case two expressions wrapped in a power function*/
+  } else if (token == "pow") {
+    if (tokenQueue.shift() == "(") {
+      /* Evaluate first and second expression in pow */
+      var expr1val = calculateExpression(tokenQueue, trigMode);
+      if (tokenQueue.shift() == ",") {
+        var expr2val = calculateExpression(tokenQueue, trigMode);
+        value = Math.pow(expr1val, expr2val);
+        if (tokenQueue.shift() != ")") {
+        value = "ERR: SYNTAX";
+        }
+      } else { /* If no comma, then input here is wrong */
+        value = "ERR: SYNTAX";
+      }
+    } else { /* missing parenthesis */
+      value = "ERR: SYNTAX";
+    }
+    
   /* Case number */
-  } else {
+  } else if (!isNaN(token)) { 
     value = parseFloat(token);
+  } else {
+    value = "ERR: SYNTAX"
   }
   return value;
 }
@@ -191,7 +207,11 @@ function evaluateFunction(funcString, funcParam, trigMode) {
       break;
 
     case "sqrt":
-      valToReturn = Math.sqrt(funcParam);
+      if (checkSqrtArg(funcParam)) {
+        valToReturn = Math.sqrt(funcParam);
+      } else {
+        valToReturn = "ERR: SQRT DOMAIN (NEGATIVE)";
+      }
       break;
   }
 
@@ -212,33 +232,13 @@ function evaluateFunction(funcString, funcParam, trigMode) {
   return: the factorial value.
 */
 function factorial(value) {
-  var returnVal = 1;
-  if (value != 0) {
+  var returnVal = checkFactorialArg(value);
+  if (value != 0 && (typeof(returnVal) == "number")) {
     returnVal = value * factorial(value - 1);
   }
   return returnVal;
 }
 
-/*
-  CREATED: David Levine 3/17/2018
-
-  Description: checks the given value and 
-  ensures it is valid for a factorial function
-  
-  Parameters:
-    -arg: the argument passed into the facorial
-
-  Returns: 1 if arg is valid, ERR string describing message otherwise.
-*/
-function checkFactorialArg(arg) {
-  var error = 1;
-  if (arg < 0) {
-    error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
-  } else if (Number.isInteger(arg)) {
-    error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
-  }
-  return error;
-}
 
 /*
   CREATED: David Levine 3/17/2018

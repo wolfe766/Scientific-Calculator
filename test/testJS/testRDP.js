@@ -642,9 +642,7 @@ QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 1", fun
 
   var actualValue = calculateExpression(tokenQueue);
 
-  var difference = Math.abs(expectedValue - actualValue);
-
-  assert.equal(difference < .001, true);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", function( assert ) {
@@ -658,7 +656,7 @@ QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", fun
 
 // Square root tests
 QUnit.test( "Test Error Message With Negative Square Root Argument Test 1", function( assert ) {
-  var tokenQueue = ["fact", "(", "-1", ")"];
+  var tokenQueue = ["sqrt", "(", "-1", ")"];
   var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
 
   var actualValue = calculateExpression(tokenQueue);
@@ -667,7 +665,7 @@ QUnit.test( "Test Error Message With Negative Square Root Argument Test 1", func
 });
 
 QUnit.test( "Test Error Message With Negative Square Root Argument Test 2", function( assert ) {
-  var tokenQueue = ["fact", "(", "-4315", ")"];
+  var tokenQueue = ["sqrt", "(", "-4315", ")"];
   var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
 
   var actualValue = calculateExpression(tokenQueue);
@@ -676,7 +674,7 @@ QUnit.test( "Test Error Message With Negative Square Root Argument Test 2", func
 });
 
 QUnit.test( "Test Error Message With Negative Square Root Argument Test 3", function( assert ) {
-  var tokenQueue = ["fact", "(", "-1", "*", "6", ")"];
+  var tokenQueue = ["sqrt", "(", "-1", "*", "6", ")"];
   var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
 
   var actualValue = calculateExpression(tokenQueue);
@@ -834,3 +832,41 @@ QUnit.test( "Test Sqrt No Args", function( assert ) {
 
   assert.equal(actualValue, expectedValue);
 });
+
+// Test function missing parentheses
+QUnit.test( "Test Sqrt Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["sqrt", "259", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sqrt Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["sqrt", "(", "259"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow Missing First Parentheses", function( assert ) {
+  var tokenQueue = ["pow", "259", ",", "1", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow Missing Second Parentheses", function( assert ) {
+  var tokenQueue = ["pow", "(", "259", ",", "1"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
