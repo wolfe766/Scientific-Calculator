@@ -3,6 +3,9 @@ Description: This file manages both the smaller history
 box and the big history box. 
 */
 
+//TODO: Bind scrollUp/Down to mousewheel
+//TODO: Make a visual "scroll to bottom" indication and function
+
 //Number of entries to display in the history at one time
 //Edit to account for size of history display
 const BIG_HISTORY_ENTRY_SIZE = 7;
@@ -29,9 +32,8 @@ var historyController =
   //The stack of all past entries.
   entryStack: [],
 
-  //Num entries currently in each history box
-  largeHistoryEntryCount: 0,
-  smallHistoryEntryCount: 0,
+  //Determines current position of big history box in the stack of entries
+  historyOffset: 0,
 
   /*CREATED: Sam Wolfe 3/18/2018
   Description: Generates an HTML element to place inside of the
@@ -41,7 +43,7 @@ var historyController =
       entry: Entry - Object containing information to be contained in element
   */
   generateHistoryElement: function(entry){
-    var historyElement = document.createElement("div");
+    var historyElement = document.createElement("span");
     historyElement.className = "historyElement";
 
     var eq = document.createElement("p");
@@ -79,30 +81,41 @@ var historyController =
     historyElementBig = this.generateHistoryElement(entry);
     historyElementSmall = historyElementBig.cloneNode(true);
 
-    bigContainer.insertBefore(historyElementBig,bigContainer.firstChild);
+    //Only add this element to the big visual history if they aren't scrolled up
+    if(this.historyOffset == 0){
+      bigContainer.insertBefore(historyElementBig,bigContainer.firstChild);
+    }else{
+      //TODO: Display "Scroll to bottom"
+      this.historyOffset++;
+    }
     smallContainer.insertBefore(historyElementSmall,smallContainer.firstChild);
-
-    //Increment history count, remove overflow
-    this.largeHistoryEntryCount++;
-    this.smallHistoryEntryCount++;
-    historyController.removeHistoryOverflow();
+  
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
-  Description: Adjusts the view of the HTML object when the history
-  boxes become full
+  Description: Scroll up one entry in the big history pane
   */
-  removeHistoryOverflow: function (){
-    if (this.largeHistoryEntryCount >= BIG_HISTORY_ENTRY_SIZE){
+  scrollUp: function(){
+    if((this.historyOffset + BIG_HISTORY_ENTRY_SIZE) > this.entryStack.length){
+      //do not scroll
+    }else{
+      this.historyOffset++;
       bigContainer = document.getElementById("bigHistory");
-      bigContainer.removeChild(bigContainer.lastChild);
-      this.largeHistoryEntryCount--;
+      bigHistory.removeChild(bigHistory.firstChild);
     }
+  },
 
-    if (this.smallHistoryEntryCount >= SMALL_HISTORY_ENTRY_SIZE){
-      smallContainer = document.getElementById("smallHistory");
-      smallContainer.removeChild(smallContainer.lastChild);
-      this.smallHistoryEntryCount--;
-    }
+  /*CREATED: Sam Wolfe 3/18/2018
+  Description: Scroll down one entry in the big history pane
+  */
+  scrollDown: function(){
+    if(this.historyOffset == 0){
+      //do not scroll
+    }else{
+      this.historyOffset--;
+      bigContainer = document.getElementById("bigHistory");
+      historyElement = this.generateHistoryElement(this.entryStack[this.entryStack.length - 1 - this.historyOffset]);
+      bigHistory.insertBefore(historyElement, bigContainer.firstChild);
+   }
   }
 };
