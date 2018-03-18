@@ -4,50 +4,52 @@ title: Calculator  Home Page
 
 <!-- 
   Created: Brandon Brown 3/14/2018
-  Description: 
+   EDITED: Alec Maier 3/18/2018
+  Description: HTML for calculator interface
+
 -->
 
     <form id="calculator">
         <!-- Display user input from calculator -->
-        <input type="text" name="display" value="">
+      <img src="./images/calclogoclear.png">
+      <textarea title="input" rows="8" readonly="readonly"></textarea>
         <div>
-          <input type="button" name="buttons" value="MS">
-          <input type="button" name="buttons" value="&radic;">
-          <input type="button" name="buttons" value="ANS">
-          <input type="button" name="buttons" value="7">
-          <input type="button" name="buttons" value="8"> </td>
-          <input type="button" name="buttons" value="9"> </td>
-          <input type="button" name="buttons" value="+">
+          <input type="button" name="buttons" value="MS" id="ms">
+          <input type="button" name="buttons" value="&radic;" id="squareRoot">
+          <input type="button" name="buttons" value="ANS" id="ans">
+          <input type="button" name="buttons" value="7" id="7">
+          <input type="button" name="buttons" value="8" id="8">
+          <input type="button" name="buttons" value="9" id="9">
+          <input type="button" name="buttons" value="+" id="plus">
         </div>
         <div>
-          <input type="button" name="buttons" value="MR">
-          <input type="button" name="buttons" value="x&sup-1">
-          <input type="button" name="buttons" value="sine">
-          <input type="button" name="buttons" value="4">
-          <input type="button" name="buttons" value="5">
-          <input type="button" name="buttons" value="6">
-          <input type="button" name="buttons" value="&times;">
+          <input type="button" name="buttons" value="MR" id="mr">
+          <input type="button" name="buttons" value="x⁻¹" id="inverse">
+          <input type="button" name="buttons" value="sin" id="sine">
+          <input type="button" name="buttons" value="4" id="4">
+          <input type="button" name="buttons" value="5" id="5">
+          <input type="button" name="buttons" value="6" id="6">
+          <input type="button" name="buttons" value="&times;" id="multiply">
         </div>
         <div>
-          <input type="button" name="buttons" value="M+">
-          <input type="button" name="buttons" value="x&sup2">
-          <input type="button" name="buttons" value="cos">
-          <input type="button" name="buttons" value="1">
-          <input type="button" name="buttons" value="2">
-          <input type="button" name="buttons" value="3">
-          <input type="button" name="buttons" value="&minus;">
+          <input type="button" name="buttons" value="M+" id="memoryAdd">
+          <input type="button" name="buttons" value="x&sup2" id="square">
+          <input type="button" name="buttons" value="cos" id="cosine">
+          <input type="button" name="buttons" value="1" id="1">
+          <input type="button" name="buttons" value="2" id="2">
+          <input type="button" name="buttons" value="3" id="3">
+          <input type="button" name="buttons" value="&minus;" id="minus">
         </div>
         <div>
-          <input type="button" name="buttons" value="M-">
-          <input type="button" name="buttons" value="!">
-          <input type="button" name="buttons" value="x&supy">
-          <input type="button" name="buttons" value="0">
-          <input type="button" name="buttons" value="&#8333;">
-          <input type="button" name="buttons" value="&#8334;">
-          <input type="button" name="buttons" value="ENTER">
+          <input type="button" name="buttons" value="M-" id="memorySub">
+          <input type="button" name="buttons" value="!" id="factorial">
+          <input type="button" name="buttons" value="xⁿ" id="exponent">
+          <input type="button" name="buttons" value="0" id="0">
+          <input type="button" name="buttons" value="(" id="parenLeft">
+          <input type="button" name="buttons" value=")" id="parenRight">
+          <input type="button" name="buttons" value="ENTER" id="enter">
         </div>
     </form>
-  </div>
 
 <!-- CREATED: Sam Wolfe
 Description: Container for the calculator history
