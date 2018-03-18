@@ -8,6 +8,7 @@ Description: CSS style for tests and debugging;
     width: 200px;
     border: 2px solid black;
     height: 120px;
+    overflow: hidden;
 }
 
 #bigHistory{
