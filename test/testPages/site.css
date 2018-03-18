@@ -1,13 +1,23 @@
 /*CREATED: Sam Wolfe 3/18/2018
 Description: CSS style for tests and debugging;
 */
-#historyContainer{
+#smallHistory{
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 50px auto;
+    width: 200px;
+    border: 2px solid black;
+    height: 120px;
+}
+
+#bigHistory{
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
     width: 200px;
     border: 2px solid black;
     height: 400px;
+    overflow: hidden;
 }
 
 .historyElement{
