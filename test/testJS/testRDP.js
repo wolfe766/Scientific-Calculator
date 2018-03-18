@@ -616,16 +616,14 @@ QUnit.test( "Check Sqrt Arg With Negative Arg 3", function( assert ) {
 */
 
 
-// Factorial Values
+// Factorial tests
 QUnit.test( "Test Error Message With Negative Factorial Argument Test 1", function( assert ) {
   var tokenQueue = ["fact", "(", "-1", ")"];
   var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
 
   var actualValue = calculateExpression(tokenQueue);
 
-  var difference = Math.abs(expectedValue - actualValue);
-
-  assert.equal(difference < .001, true);
+  assert.equal(actualValue, expectedValue);
 });
 
 
@@ -635,14 +633,12 @@ QUnit.test( "Test Error Message With Negative Factorial Argument Test 2", functi
 
   var actualValue = calculateExpression(tokenQueue);
 
-  var difference = Math.abs(expectedValue - actualValue);
-
-  assert.equal(difference < .001, true);
+  assert.equal(actualValue, expectedValue);
 });
 
 QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 1", function( assert ) {
   var tokenQueue = ["fact", "(", "0.25243", ")"];
-  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
 
   var actualValue = calculateExpression(tokenQueue);
 
@@ -653,13 +649,88 @@ QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 1", fun
 
 QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", function( assert ) {
   var tokenQueue = ["fact", "(", "6.5", ")"];
-  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
 
   var actualValue = calculateExpression(tokenQueue);
 
-  var difference = Math.abs(expectedValue - actualValue);
+  assert.equal(actualValue, expectedValue);
+});
 
-  assert.equal(difference < .001, true);
+// Square root tests
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "-1", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "-4315", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Error Message With Negative Square Root Argument Test 3", function( assert ) {
+  var tokenQueue = ["fact", "(", "-1", "*", "6", ")"];
+  var expectedValue = "ERR: SQRT DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+/*
+  syntax error messages
+*/
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 1", function( assert ) {
+  var tokenQueue = ["(", "-1", "*", "6", ")", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 2", function( assert ) {
+  var tokenQueue = ["-1", "*", "6", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 3", function( assert ) {
+  var tokenQueue = ["(", "-1", "*", "6"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 4", function( assert ) {
+  var tokenQueue = ["("];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 5", function( assert ) {
+  var tokenQueue = [")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
 });
 
 
