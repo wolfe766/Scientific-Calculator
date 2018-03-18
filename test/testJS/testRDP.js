@@ -497,7 +497,7 @@ QUnit.test( "Check Factorial Arg With Valid Arg 3", function( assert ) {
 /* tests involving negative factorial values */
 QUnit.test( "Check Factorial Arg With Negative Arg 1", function( assert ) {
   var arg = -1;
-  var expectedValue = "ERR: FACTORIAL DOMAIN";
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
 
   var actualValue = checkFactorialArg(arg);
 
@@ -610,4 +610,56 @@ QUnit.test( "Check Sqrt Arg With Negative Arg 3", function( assert ) {
 
   assert.equal(actualValue, expectedValue);
 });
+
+/*
+  Error message detection in RDP.
+*/
+
+
+// Factorial Values
+QUnit.test( "Test Error Message With Negative Factorial Argument Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "-1", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+
+QUnit.test( "Test Error Message With Negative Factorial Argument Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "-43254", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 1", function( assert ) {
+  var tokenQueue = ["fact", "(", "0.25243", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
+QUnit.test( "Test Error Message With Non-Integer Factorial Argument Test 2", function( assert ) {
+  var tokenQueue = ["fact", "(", "6.5", ")"];
+  var expectedValue = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  var difference = Math.abs(expectedValue - actualValue);
+
+  assert.equal(difference < .001, true);
+});
+
 

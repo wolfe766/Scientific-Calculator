@@ -252,7 +252,7 @@ function checkFactorialArg(arg) {
   var error = 1;
   if (arg < 0) {
     error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
-  } else if (Number.isInteger(arg)) {
+  } else if (!Number.isInteger(arg)) {
     error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
   }
   return error;
