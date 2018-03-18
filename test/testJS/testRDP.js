@@ -733,4 +733,104 @@ QUnit.test( "Test Syntax Error Message With Mismatched Parenthesis 5", function(
   assert.equal(actualValue, expectedValue);
 });
 
+// pow syntax error
+QUnit.test( "Test Pow One Argument 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "23", ")"];
+  var expectedValue = "ERR: SYNTAX";
 
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 2", function( assert ) {
+  var tokenQueue = ["pow", "(", "23", "*", "2" , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 3", function( assert ) {
+  var tokenQueue = ["pow", "(", "3", "," , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow One Argument 4", function( assert ) {
+  var tokenQueue = ["pow", "(", "," , "3" , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+
+// Test all functions with no arguments
+QUnit.test( "Test Pow No Args 1", function( assert ) {
+  var tokenQueue = ["pow", "(", "," , ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Pow No Args 2", function( assert ) {
+  var tokenQueue = ["pow", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Fact No Args", function( assert ) {
+  var tokenQueue = ["fact", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sin No Args", function( assert ) {
+  var tokenQueue = ["sin", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Cos No Args", function( assert ) {
+  var tokenQueue = ["cos", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Tan No Args", function( assert ) {
+  var tokenQueue = ["tan", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});
+
+QUnit.test( "Test Sqrt No Args", function( assert ) {
+  var tokenQueue = ["sqrt", "(", ")"];
+  var expectedValue = "ERR: SYNTAX";
+
+  var actualValue = calculateExpression(tokenQueue);
+
+  assert.equal(actualValue, expectedValue);
+});

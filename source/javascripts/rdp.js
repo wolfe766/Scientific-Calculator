@@ -127,9 +127,12 @@ function calculateFactor(tokenQueue, trigMode) {
     tokenQueue.shift();
     /* Evaluate first and second expression in pow */
     var expr1val = calculateExpression(tokenQueue, trigMode);
-    tokenQueue.shift();
-    var expr2val = calculateExpression(tokenQueue, trigMode);
-    value = Math.pow(expr1val, expr2val);
+    if (tokenQueue.shift() == ",") {
+      var expr2val = calculateExpression(tokenQueue, trigMode);
+      value = Math.pow(expr1val, expr2val);
+    } else {
+      value = "ERR: SYNTAX";
+    }
     tokenQueue.shift();
   /* Case number */
   } else {
