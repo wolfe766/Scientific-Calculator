@@ -10,45 +10,53 @@ title: Calculator  Home Page
 -->
 
     <form id="calculator">
-        <!-- Display user input from calculator -->
+      <!-- Display user input from calculator -->
       <img src="./images/calclogoclear.png">
-      <textarea title="input" rows="8" readonly="readonly"></textarea>
-        <div>
-          <input type="button" name="buttons" value="MS" id="ms">
-          <input type="button" name="buttons" value="&radic;" id="squareRoot">
-          <input type="button" name="buttons" value="ANS" id="ans">
-          <input type="button" name="buttons" value="7" id="7">
-          <input type="button" name="buttons" value="8" id="8">
-          <input type="button" name="buttons" value="9" id="9">
-          <input type="button" name="buttons" value="+" id="plus">
-        </div>
-        <div>
-          <input type="button" name="buttons" value="MR" id="mr">
-          <input type="button" name="buttons" value="x⁻¹" id="inverse">
-          <input type="button" name="buttons" value="sin" id="sine">
-          <input type="button" name="buttons" value="4" id="4">
-          <input type="button" name="buttons" value="5" id="5">
-          <input type="button" name="buttons" value="6" id="6">
-          <input type="button" name="buttons" value="&times;" id="multiply">
-        </div>
-        <div>
-          <input type="button" name="buttons" value="M+" id="mAdd">
-          <input type="button" name="buttons" value="x&sup2" id="square">
-          <input type="button" name="buttons" value="cos" id="cosine">
-          <input type="button" name="buttons" value="1" id="1">
-          <input type="button" name="buttons" value="2" id="2">
-          <input type="button" name="buttons" value="3" id="3">
-          <input type="button" name="buttons" value="&minus;" id="minus">
-        </div>
-        <div>
-          <input type="button" name="buttons" value="M-" id="mSub">
-          <input type="button" name="buttons" value="!" id="factorial">
-          <input type="button" name="buttons" value="xⁿ" id="exponent">
-          <input type="button" name="buttons" value="0" id="0">
-          <input type="button" name="buttons" value="(" id="parenLeft">
-          <input type="button" name="buttons" value=")" id="parenRight">
-          <input type="button" name="buttons" value="ENTER" id="enter">
-        </div>
+      <textarea id="display" title="input" rows="8" readonly="readonly"></textarea>
+      <div>
+        <input type="button" name="buttons" value="MS" id="ms">
+        <input type="button" name="buttons" value="&radic;" id="squareRoot">
+        <input type="button" name="buttons" value="ANS" id="ans">
+        <input type="button" name="buttons" value="7" id="7">
+        <input type="button" name="buttons" value="8" id="8">
+        <input type="button" name="buttons" value="9" id="9">
+        <input type="button" name="buttons" value="+"  id="plus">
+        <br />
+        <input type="button" name="buttons" value="MR" id="mr">
+        <input type="button" name="buttons" value="x⁻¹" id="inverse">
+        <input type="button" name="buttons" value="sin"  id="sine">
+        <input type="button" name="buttons" value="4" id="4">
+        <input type="button" name="buttons" value="5" id="5">
+        <input type="button" name="buttons" value="6" id="6">
+        <input type="button" name="buttons" value="&times;" id="multiply">
+        <br />
+        <input type="button" name="buttons" value="M+" id="mAdd">
+        <input type="button" name="buttons" value="x&sup2" id="square">
+        <input type="button" name="buttons" value="cos" id="cosine">
+        <input type="button" name="buttons" value="1" id="1">
+        <input type="button" name="buttons" value="2" id="2">
+        <input type="button" name="buttons" value="3" id="3">
+        <input type="button" name="buttons" value="&minus;" id="minus">
+        <br />
+        <input type="button" name="buttons" value="M-" id="mSub">
+        <input type="button" name="buttons" value="xⁿ" id="exponent">
+        <input type="button" name="buttons" value="tan" id="tan">
+        <input type="button" name="buttons" value="0" id="0">
+        <input type="button" name="buttons" value="(" id="parenLeft">
+        <input type="button" name="buttons" value=")" id="parenRight">
+        <input type="button" name="buttons" value="&divide" id="divide">
+        <br />
+        <input type="button" name="buttons" value="MC" id="mc">
+        <input type="button" name="buttons" value="!" id="factorial">
+        <input type="button" name="buttons" value="(-)" id="negative">
+        <input type="button" name="buttons" value="." id="decimal">
+        <input type="button" name="buttons" value="DEL" id="delete">
+        <input type="button" name="buttons" value="CLEAR" id="clear">
+        <input type="button" name="buttons" value="ENTER" id="enter">
+        <br />
+        <input type="button" name="buttons" value="&larr;" id="left">
+        <input type="button" name="buttons" value="&rarr;" id="right">
+      </div>
     </form>
 
 <!-- CREATED: Sam Wolfe
