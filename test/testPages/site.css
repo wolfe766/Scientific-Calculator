@@ -21,6 +21,17 @@ Description: CSS style for tests and debugging;
     overflow: hidden;
 }
 
+#scrollToBottom{
+    height:20px;
+    background-color: blue;
+    width: 200px;
+    color:white;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+    cursor: pointer;
+}
+
 .historyElement{
     border-top: 1px solid black;
 }
@@ -30,6 +41,11 @@ Description: CSS style for tests and debugging;
     padding: 5px 10px;
     background: lightgrey;
     text-align: left;
+}
+
+.historyEq:hover, .historyAns:hover{
+    background-color: rgb(120,120,120);
+    cursor: pointer;
 }
 
 .historyAns{

@@ -4,12 +4,12 @@ box and the big history box.
 */
 
 //TODO: Bind scrollUp/Down to mousewheel
-//TODO: Make a visual "scroll to bottom" indication and function
+//TODO: ANS object, --> preprocess stirng to replace ANS with actual value
+//TODO: Memory feature
 
 //Number of entries to display in the history at one time
 //Edit to account for size of history display
-const BIG_HISTORY_ENTRY_SIZE = 7;
-const SMALL_HISTORY_ENTRY_SIZE = 2;
+const BIG_HISTORY_ENTRY_COUNT = 7;
 
 /*CREATED: Sam Wolfe 3/18/2018
 Description: Constructor method for the Entry object.
@@ -43,7 +43,7 @@ var historyController =
       entry: Entry - Object containing information to be contained in element
   */
   generateHistoryElement: function(entry){
-    var historyElement = document.createElement("span");
+    var historyElement = document.createElement("div");
     historyElement.className = "historyElement";
 
     var eq = document.createElement("p");
@@ -79,7 +79,7 @@ var historyController =
     var smallContainer = document.getElementById("smallHistory");
 
     historyElementBig = this.generateHistoryElement(entry);
-    historyElementSmall = historyElementBig.cloneNode(true);
+    historyElementSmall = this.generateHistoryElement(entry);
 
     //Only add this element to the big visual history if they aren't scrolled up
     if(this.historyOffset == 0){
@@ -89,19 +89,19 @@ var historyController =
       this.historyOffset++;
     }
     smallContainer.insertBefore(historyElementSmall,smallContainer.firstChild);
-  
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
   Description: Scroll up one entry in the big history pane
   */
   scrollUp: function(){
-    if((this.historyOffset + BIG_HISTORY_ENTRY_SIZE) > this.entryStack.length){
+    if((this.historyOffset + BIG_HISTORY_ENTRY_COUNT) > this.entryStack.length){
       //do not scroll
     }else{
       this.historyOffset++;
       bigContainer = document.getElementById("bigHistory");
       bigHistory.removeChild(bigHistory.firstChild);
+      document.getElementById("scrollToBottom").style.display = "block";
     }
   },
 
@@ -116,6 +116,20 @@ var historyController =
       bigContainer = document.getElementById("bigHistory");
       historyElement = this.generateHistoryElement(this.entryStack[this.entryStack.length - 1 - this.historyOffset]);
       bigHistory.insertBefore(historyElement, bigContainer.firstChild);
+
+      //Hide the scrollToBottom button when at the bottom of the list
+      if(this.historyOffset == 0){
+        document.getElementById("scrollToBottom").style.display = "none";
+      }
    }
+  },
+
+  /*CREATED: Sam Wolfe 3/18/2018
+  Description: Scroll down to the first entry
+  */
+  scrollToBottom: function(){
+    while(this.historyOffset != 0){
+      this.scrollDown();
+    }
   }
 };

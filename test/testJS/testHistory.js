@@ -19,7 +19,15 @@ input.addEventListener("click", function(){
 
 document.getElementById("up").addEventListener("click", function(){historyController.scrollUp()});
 document.getElementById("down").addEventListener("click", function(){historyController.scrollDown()});
-
-
+document.getElementById("scrollToBottom").addEventListener("click", function(){historyController.scrollToBottom()});
+document.addEventListener("click", function(e){
+	var e = e;
+	var target = e.target;
+	if((target.className == "historyEq") || (target.className == "historyAns")){
+		console.log(target.innerHTML);
+		//clearInput();
+		//addToString(target.innerHTML);
+	}
+})
 //Will be more fully fleshed out in the future once actual
 //calculation abilities are up and running
