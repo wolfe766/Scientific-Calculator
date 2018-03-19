@@ -32,7 +32,7 @@ title: Calculator  Home Page
           <input type="button" name="buttons" value="&times;" id="multiply">
         </div>
         <div>
-          <input type="button" name="buttons" value="M+" id="memoryAdd">
+          <input type="button" name="buttons" value="M+" id="mAdd">
           <input type="button" name="buttons" value="x&sup2" id="square">
           <input type="button" name="buttons" value="cos" id="cosine">
           <input type="button" name="buttons" value="1" id="1">
@@ -41,7 +41,7 @@ title: Calculator  Home Page
           <input type="button" name="buttons" value="&minus;" id="minus">
         </div>
         <div>
-          <input type="button" name="buttons" value="M-" id="memorySub">
+          <input type="button" name="buttons" value="M-" id="mSub">
           <input type="button" name="buttons" value="!" id="factorial">
           <input type="button" name="buttons" value="xⁿ" id="exponent">
           <input type="button" name="buttons" value="0" id="0">
@@ -54,8 +54,13 @@ title: Calculator  Home Page
 <!-- CREATED: Sam Wolfe
 Description: Container for the calculator history
 -->
-  <div id="bigHistory">
-  </div>
+  <div id="smallHistory"></div>
 
-  <div id="smallHistory">
+  <div id="historyPane">
+    <div id="bigHistory"></div>
+    <div id="scrollButtons">
+      <p id=scrollUp>↑</p>
+      <p id=scrollDown>↓</p>
+      <p id=scrollToBottom>↓↓↓</p>
+    </div>
   </div>

@@ -58,23 +58,54 @@ form {
 // end of calculator css
 
 
+/*CREATED: Sam Wolfe 3/18/2018
+Description: CSS style for History
+*/
+#historyPane{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#scrollButtons{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 3em;
+}
+
+#scrollUp:hover, #scrollDown:hover, #scrollToBottom:hover{
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
 #smallHistory{
     display: flex;
     flex-direction: column-reverse;
     margin: 50px auto;
     width: 200px;
     border: 2px solid black;
-    height: 200px;
+    height: 120px;
+    overflow: hidden;
+
+    /*TEMPORARY DISPAY NONE*/
+    display: none;
 }
 
 #bigHistory{
     display: flex;
     flex-direction: column-reverse;
-    margin: 0 auto;
     width: 200px;
     border: 2px solid black;
     height: 400px;
     overflow: hidden;
+}
+
+#scrollToBottom{
+    text-align: center;
+    display: none;
+    cursor: pointer;
 }
 
 .historyElement{
@@ -88,9 +119,16 @@ form {
     text-align: left;
 }
 
+.historyEq:hover, .historyAns:hover{
+    background-color: rgb(120,120,120);
+    cursor: pointer;
+}
+
 .historyAns{
     margin: 0;
     padding: 5px 10px;
     background: darkgrey;
     text-align: right;
 }
+
+/*End CSS Style for History */

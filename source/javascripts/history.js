@@ -3,9 +3,6 @@ Description: This file manages both the smaller history
 box and the big history box. 
 */
 
-//TODO: Bind scrollUp/Down to mousewheel
-//TODO: Memory feature
-
 //Number of entries to display in the history at one time
 //Edit to account for size of history display
 const BIG_HISTORY_ENTRY_COUNT = 7;
@@ -84,7 +81,6 @@ var historyController =
     if(this.historyOffset == 0){
       bigContainer.insertBefore(historyElementBig,bigContainer.firstChild);
     }else{
-      //TODO: Display "Scroll to bottom"
       this.historyOffset++;
     }
     smallContainer.insertBefore(historyElementSmall,smallContainer.firstChild);
@@ -94,6 +90,7 @@ var historyController =
   Description: Scroll up one entry in the big history pane
   */
   scrollUp: function(){
+    console.log("scrolling up");
     if((this.historyOffset + BIG_HISTORY_ENTRY_COUNT) > this.entryStack.length){
       //do not scroll
     }else{
@@ -108,6 +105,7 @@ var historyController =
   Description: Scroll down one entry in the big history pane
   */
   scrollDown: function(){
+    console.log("scrolling down");
     if(this.historyOffset == 0){
       //do not scroll
     }else{
@@ -127,6 +125,7 @@ var historyController =
   Description: Scroll down to the first entry
   */
   scrollToBottom: function(){
+    console.log("scrolling to bottom");
     while(this.historyOffset != 0){
       this.scrollDown();
     }
@@ -138,6 +137,10 @@ var memoryController =
   ansValue: null,
   memValue: null,
 
+  ansToString: function(){
+    addToString('ans');
+  },
+
   memoryClear: function(){
     this.memValue = null;
   },
@@ -148,6 +151,7 @@ var memoryController =
 
   memoryPlus: function(){
     this.memValue += this.ansValue;
+    console.log(this.memValue);
   },
 
   memoryMinus: function(){
