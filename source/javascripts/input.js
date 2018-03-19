@@ -1,6 +1,7 @@
 /*
   CREATED: David Levine 03/12/2018
-  
+  MODIFIED: Sam Wolfe 03/18/2018
+    -Added preprocessor function
   The following file is responsible for dealing with all input 
   to the calculator through the gui.
 */
@@ -66,6 +67,37 @@ function returnInputString() {
   this.rightString = "";
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
   return stringToReturn;
+}
+
+/*
+  CREATED: Sam Wolfe 03/18/2018
+
+  Description: Attempts to fix unbalanced parentheses
+  Replaces "ANS" with approriate value
+
+  Parameters:
+    eq: String - Equation stored as a string
+    ansValue: Number - Value to replace all 'ans' substrings with
+
+  Return:
+    The updated equation
+*/
+function preprocess(eq, ansValue){
+  eq = eq.replace("ans",ansValue.toString());
+  var openBracketCount = 0;
+  for(var i = 0; i < eq.length; i++){
+    if(eq.charAt(i) == '('){
+      openBracketCount++;
+    }else if (eq.charAt(i) == ')'){
+      openBracketCount--;
+    }
+  }
+
+  for(;openBracketCount > 0; openBracketCount--){
+    eq = eq + ')';
+  }
+
+  return eq;
 }
 
 /*
