@@ -4,7 +4,6 @@ box and the big history box.
 */
 
 //TODO: Bind scrollUp/Down to mousewheel
-//TODO: ANS object, --> preprocess stirng to replace ANS with actual value
 //TODO: Memory feature
 
 //Number of entries to display in the history at one time
@@ -131,5 +130,31 @@ var historyController =
     while(this.historyOffset != 0){
       this.scrollDown();
     }
+  }
+};
+
+var memoryController = 
+{
+  ansValue: null,
+  memValue: null,
+
+  memoryClear: function(){
+    this.memValue = null;
+  },
+
+  memoryStore: function(){
+    this.memValue = this.ansValue;
+  },
+
+  memoryPlus: function(){
+    this.memValue += this.ansValue;
+  },
+
+  memoryMinus: function(){
+    this.memValue -= this.ansValue;
+  },
+
+  memoryRecall: function(){
+    addToString(this.memValue);
   }
 };

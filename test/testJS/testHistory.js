@@ -25,9 +25,10 @@ document.addEventListener("click", function(e){
 	var target = e.target;
 	if((target.className == "historyEq") || (target.className == "historyAns")){
 		console.log(target.innerHTML);
-		//clearInput();
 		//addToString(target.innerHTML);
 	}
-})
+});
+
+
 //Will be more fully fleshed out in the future once actual
 //calculation abilities are up and running

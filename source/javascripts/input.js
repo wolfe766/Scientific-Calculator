@@ -73,7 +73,7 @@ function returnInputString() {
   CREATED: Sam Wolfe 03/18/2018
 
   Description: Attempts to fix unbalanced parentheses
-  Replaces "ANS" with approriate value
+  Replaces "ans" with approriate value
 
   Parameters:
     eq: String - Equation stored as a string
