@@ -247,7 +247,7 @@ function Input(htmlEl) {
   /* initalize properties */
   this.leftString = ""; /* string to the left of the cursor */
   this.rightString = ""; /* string to the right of the cursor */
-  this.cursor = "<span>|</span>";
+  this.cursor = "<span class=\"blinking-cursor\">|</span>";
   this.htmlEl = htmlEl;
   this.trigMode = "deg";
 
