@@ -72,7 +72,7 @@ function press_plus() {
 
 // User pressed button to enter '-'
 function press_minus() {
-    inputObject.addToString("-");
+    inputObject.addToString("\u2212");
 }
 
 // User pressed button to enter '*'
@@ -153,7 +153,7 @@ function press_factorial() {
 
 // User pressed button to make the value negative
 function press_negative() {
-    inputObject.addToString("\u207B");
+    inputObject.addToString("-");
 }
 
 // User pressed button to make value a decimal

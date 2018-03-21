@@ -66,7 +66,7 @@ function calculateExpressionRecursive(tokenQueue, trigMode){
         return exprValue;
     }
 
-    while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
+    while(tokenQueue[0] == "+" || tokenQueue[0] == "\u2212" ){
         var operation = tokenQueue.shift();
         if(operation == "+"){
             var exprValueTemp = calculateTerm(tokenQueue, trigMode);
