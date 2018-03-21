@@ -11,6 +11,7 @@ body {
  */
 
 #calculator input[type="button"] {
+  color: black;
   padding: 10px;
   margin: 2px;
   background: lightgray;
@@ -139,6 +140,23 @@ Description: CSS style for History
 }
 
 /*End CSS Style for History */
+
+/* CREATED: Sam Wolfe 3/20/2018
+/*Begin CSS style for enabled/disabled buttons*/
+
+.enabled{
+  color: black;
+  background: lightgray;
+  pointer-events: auto;
+}
+
+.disabled{
+  color: lightgrey !important;
+  background: rgba(100,100,100,.2) !important;
+  pointer-events: none;
+}
+
+/*End style for enabled/disabled buttons */
 
 /* CSS styling for input box cursor*/
 /*

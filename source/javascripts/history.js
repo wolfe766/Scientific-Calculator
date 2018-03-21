@@ -17,7 +17,6 @@ Parameters:
 function Entry(eq, ans){
   this.equation = eq;
   this.answer = ans;
-  //We could automatically add this to the entryStack right here if desired
 }
 
 /*CREATED: Sam Wolfe 3/18/2018
@@ -132,32 +131,99 @@ var historyController =
   }
 };
 
+/*CREATED: Sam Wolfe 3/18/2018
+
+Description: This is the controller object for everything related
+to memory. Properties include the values for ans and the current 
+value stored in memory.
+*/
 var memoryController = 
 {
   ansValue: null,
   memValue: null,
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Prints the string "ans" to the display
+  This string is handled by the preprocessor
+  */
   ansToString: function(){
     addToString('ans');
   },
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Clears the current value stored in memory
+  disables all memory buttons
+  */
   memoryClear: function(){
     this.memValue = null;
+    disableAllMemoryButtons();
+    console.log("Memory Cleared: " + this.memValue)
   },
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Stores the current value in the display to memory
+  enables all memory buttons upon success
+  */
   memoryStore: function(){
-    this.memValue = this.ansValue;
+    var eq = peakString();
+    //Null checking for ans value is handled in the preprocessor
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Store Failed -- RDP returned error: " + eq);
+    }else{
+      this.memValue = eq;
+      console.log("Memory Store Success -- New Value: " + this.memValue);
+
+      //Enable memory buttons on success
+      enableAllMemoryButtons();
+    }
   },
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Adds the current value in the display to the
+  value stored in memory. 
+  */
   memoryPlus: function(){
-    this.memValue += this.ansValue;
-    console.log(this.memValue);
+    var eq = peakString();
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Plus Failed -- RDP returned error: " + eq);
+    }else{
+      this.memValue += eq;
+      console.log("Memory Add Success -- New Value: " + this.memValue);
+    }
   },
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Prints the string "ans" to the display
+  This string is handled by the preprocessor
+  */
   memoryMinus: function(){
-    this.memValue -= this.ansValue;
+    var eq = peakString();
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Minus Failed -- RDP returned: " + eq);
+    }else{
+      this.memValue -= eq;
+      console.log("Memory Subtract Success -- New Value: " + this.memValue);
+    }
   },
 
+  /*CREATED: Sam Wolfe 3/18/2018
+
+  Description: Prints the current value in memory to the screen
+  */
   memoryRecall: function(){
     addToString(this.memValue);
   }
