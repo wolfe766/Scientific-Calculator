@@ -17,72 +17,72 @@ function press_right() {
 // User pressed button to enter '0' 
 function press_0() {
     //alert("zero pressed");
-    inputObject.addToString(0);
+    inputObject.addToString(0, false);
 }
 
 // User pressed button to enter '1'
 function press_1() {
-    inputObject.addToString(1);
+    inputObject.addToString(1, false);
 }
 
 // User pressed button to enter '2'
 function press_2() {
-    inputObject.addToString(2);
+    inputObject.addToString(2, false);
 }
 
 // User pressed button to enter '3'
 function press_3() {
-    inputObject.addToString(3);
+    inputObject.addToString(3, false);
 }
 
 // User pressed button to enter '4'
 function press_4() {
-    inputObject.addToString(4);
+    inputObject.addToString(4, false);
 }
 
 // User pressed button to enter '5'
 function press_5() {
-    inputObject.addToString(5);
+    inputObject.addToString(5, false);
 }
 
 // User pressed button to enter '6'
 function press_6() {
-    inputObject.addToString(6);
+    inputObject.addToString(6, false);
 }
 
 // User pressed button to enter '7'
 function press_7() {
-    inputObject.addToString(7);
+    inputObject.addToString(7, false);
 }
 
 // User pressed button to enter '8'
 function press_8() {
-    inputObject.addToString(8);
+    inputObject.addToString(8, false);
 }
 
 // User pressed button to enter '9'
 function press_9() {
-    inputObject.addToString(9);
+    inputObject.addToString(9, false);
 }
 
 // User pressed button to enter '+'
 function press_plus() {
-    inputObject.addToString("+");
+    inputObject.addToString("+", false);
 }
 
 // User pressed button to enter '-'
 function press_minus() {
-    inputObject.addToString("\u2212");
+    inputObject.addToString("\u2212", false);
 }
 
 // User pressed button to enter '*'
 function press_multiply() {
-    inputObject.addToString("*");
+    inputObject.addToString("*", false);
 }
 
 // User pressed button to enter '/'
 function press_divide() {
-    inputObject.addToString("/");
+    inputObject.addToString("/", false);
 }
 
 function press_return() {
@@ -101,44 +101,44 @@ function press_delete() {
 
 // User pressed button to enter 'tan'
 function press_tan() {
-    inputObject.addToString("tan()");
+    inputObject.addToString("tan()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter 'sin'
 function press_sin() {
-    inputObject.addToString("sin()");
+    inputObject.addToString("sin()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter 'cos'
 function press_cos() {
-    inputObject.addToString("cos()");
+    inputObject.addToString("cos()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter 'sqrt'
 function press_radical() {
-    inputObject.addToString("sqrt()");
+    inputObject.addToString("sqrt()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter invervse
 function press_inverse() {
-    inputObject.addToString("inv()");
+    inputObject.addToString("inv()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter exponent
 function press_exponent() {
-    inputObject.addToString("pow(,)");
+    inputObject.addToString("pow(,)", false);
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter square
 function press_square() {
-    inputObject.addToString("pow(,2)");
+    inputObject.addToString("pow(,2)", false);
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
@@ -146,28 +146,28 @@ function press_square() {
 
 // User pressed button to enter '/'
 function press_factorial() {
-    inputObject.addToString("fact()");
+    inputObject.addToString("fact()", false);
     inputObject.shiftCursorLeft();
 }
 
 // User pressed button to make the value negative
 function press_negative() {
-    inputObject.addToString("-")
+    inputObject.addToString("-", false)
 }
 
 // User pressed button to make value a decimal
 function press_point() {
-    inputObject.addToString(".");
+    inputObject.addToString(".", false);
 }
 
 // User pressed button to enter '('
 function press_left_paren() {
-    inputObject.addToString("(");
+    inputObject.addToString("(", false);
 }
 
 // User pressed button to enter ')'
 function press_right_paren() {
-    inputObject.addToString(")");
+    inputObject.addToString(")", false);
 }
 
 // User pressed button to toggole between radians and degrees
@@ -209,5 +209,7 @@ function press_enter() {
     historyController.addToHistory(historyEntry);
 
     // Update display of computed value
-    inputObject.addToString(value);
+    inputObject.addToString(value, true);
+    var top = document.getElementById("display");
+    top.scrollTop = top.scrollHeight;
 }
