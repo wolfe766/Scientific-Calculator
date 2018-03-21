@@ -219,6 +219,6 @@ function press_enter() {
         setNotification(previousResult.getPriorityState());
 
         // Update display of computed value
-        inputObject.addToString(value);
+        inputObject.addToString(value, true);
     }
 }
