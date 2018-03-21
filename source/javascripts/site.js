@@ -50,6 +50,7 @@ window.onload = function(){
   document.getElementById("left").addEventListener("click", press_left);
   document.getElementById("right").addEventListener("click", press_right);
   document.getElementById("enter").addEventListener("click", press_enter);
+  document.getElementById("trig").addEventListener("click", toggle_trig_mode);
 
   // History scroll buttons
   document.getElementById("scrollUp").addEventListener("click", function(){historyController.scrollUp()});

@@ -126,28 +126,34 @@ function press_radical() {
 
 // User pressed button to enter invervse
 function press_inverse() {
-    inputObject.addToString("^-1");
+    inputObject.addToString("inv()");
+    inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter exponent
 function press_exponent() {
-    inputObject.addToString("^")
+    inputObject.addToString("pow(,)")
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter square
 function press_square() {
-    inputObject.addToString("^2");
+    inputObject.addToString("pow(,2)");
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
 }
 
 // User pressed button to enter '/'
 function press_factorial() {
-    inputObject.addToString("!");
+    inputObject.addToString("fact()");
+    inputObject.shiftCursorLeft();
 }
 
 // User pressed button to make the value negative
 function press_negative() {
-    inputObject.addToString("(-)");
-    inputObject.shiftCursorLeft();
+    inputObject.addToString("-");
 }
 
 // User pressed button to make value a decimal
@@ -166,10 +172,10 @@ function press_right_paren() {
 }
 
 // User pressed button to toggole between radians and degrees
-function toggleTrigMode() {
+function toggle_trig_mode() {
     inputObject.toggleTrigMode();
-    el = document.getElementById("trig_out");
-    el.innerHTML = inputObject.returnTrigMode();
+    el = document.getElementById("trig_display");
+    el.value = inputObject.returnTrigMode();
 }
 
 // User pressed button to evaluat and display result

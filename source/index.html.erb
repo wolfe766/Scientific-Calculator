@@ -14,7 +14,11 @@ title: Calculator  Home Page
       <!-- Display user input from calculator -->
       <img src="./images/calclogoclear.png">
       <div id="smallHistory"><p></p></div>
-      <textarea id="display" title="input" rows="8" readonly="readonly"></textarea>
+      <div id="flex_container">
+        <textarea id="trig_display" title="trig" rows="1" readonly="readonly">
+        </textarea>
+        <textarea id="display" title="input" rows="8" readonly="readonly"></textarea>
+      </div>
       <div>
         <input type="button" name="buttons" value="MS" id="ms">
         <input type="button" name="buttons" value="&radic;" id="squareRoot">
@@ -56,6 +60,7 @@ title: Calculator  Home Page
         <input type="button" name="buttons" value="CLEAR" id="clear">
         <input type="button" name="buttons" value="ENTER" id="enter">
         <br />
+        <input type="button" name="buttons" value="deg/rad" id="trig">
         <input type="button" name="buttons" value="&larr;" id="left">
         <input type="button" name="buttons" value="&rarr;" id="right">
       </div>
