@@ -4,15 +4,17 @@ title: Calculator  Home Page
 
 <!-- 
   Created: Brandon Brown 3/14/2018
-   EDITED: Alec Maier 3/18/2018
+   MODIFIED: Alec Maier 3/18/2018
+   MODIFIED: David Levine 3/21/2018
+    -fixed html so that it passes w3's validators
   Description: HTML for calculator interface
 
 -->
 <div id="fullContainer">
-  <span>
+  <div>
     <form id="calculator">
       <!-- Display user input from calculator -->
-      <img src="./images/calclogoclear.png">
+      <img src="./images/calclogoclear.png" alt="calc logo">
       <div>
         <div id="notification"></div>
         <div id="smallHistory"><p></p></div>
@@ -40,7 +42,7 @@ title: Calculator  Home Page
         <input type="button" name="buttons" value="&times;" id="multiply">
         <br />
         <input type="button" name="buttons" value="M+" id="mAdd">
-        <input type="button" name="buttons" value="x&sup2" id="square">
+        <input type="button" name="buttons" value="x&sup;2" id="square">
         <input type="button" name="buttons" value="cos" id="cosine">
         <input type="button" name="buttons" value="1" id="1">
         <input type="button" name="buttons" value="2" id="2">
@@ -53,7 +55,7 @@ title: Calculator  Home Page
         <input type="button" name="buttons" value="0" id="0">
         <input type="button" name="buttons" value="(" id="parenLeft">
         <input type="button" name="buttons" value=")" id="parenRight">
-        <input type="button" name="buttons" value="&divide" id="divide">
+        <input type="button" name="buttons" value="&divide;" id="divide">
         <br />
         <input type="button" name="buttons" value="MC" id="mc">
         <input type="button" name="buttons" value="!" id="factorial">
@@ -68,12 +70,12 @@ title: Calculator  Home Page
         <input type="button" name="buttons" value="&rarr;" id="right">
       </div>
     </form>
-    </span>
+    </div>
 
 <!-- CREATED: Sam Wolfe
 Description: Container for the calculator history
 -->
-  <span>
+  <div>
   <div id="historyPane">
     <div>
       <p id="historyTitle">History</p>
@@ -87,5 +89,5 @@ Description: Container for the calculator history
   </div>
   <div id=scrollToBottom>Return To Bottom</div>
   <div id="memoryValue"></div>
-  </span>
+  </div>
 </div>
