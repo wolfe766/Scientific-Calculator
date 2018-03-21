@@ -38,11 +38,11 @@
     return:  The value of the expression.
 */
 function calculateExpression(tokenQueue, trigMode="rad"){
-  var exprValue = calculateExpressionRecursive(tokenQueue, trigMode);
-  if(tokenQueue.length != 0){
-    return "ERR: SYNTAX";
-  }
-  return exprValue;
+    var exprValue = calculateExpressionRecursive(tokenQueue, trigMode);
+    if(tokenQueue.length != 0){
+        return "ERR: SYNTAX";
+    }
+    return exprValue;
 }
 
 /*
@@ -59,33 +59,33 @@ function calculateExpression(tokenQueue, trigMode="rad"){
   return:  The value of the expression.
 */
 function calculateExpressionRecursive(tokenQueue, trigMode){
-  var exprValue = calculateTerm(tokenQueue, trigMode);
+    var exprValue = calculateTerm(tokenQueue, trigMode);
 
-  // If a string is returned then it is an error message, return the message.
-  if(typeof exprValue == "string"){
-    return exprValue;
-  }
-
-  while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
-    var operation = tokenQueue.shift();
-    if(operation == "+"){
-      var exprValueTemp = calculateTerm(tokenQueue, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof exprValueTemp == "string"){
-        return exprValueTemp;
-      }
-      exprValue = exprValue + exprValueTemp;
-    }else{
-      var exprValueTemp = calculateTerm(tokenQueue, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof exprValueTemp == "string"){
-        return exprValueTemp;
-      }
-      exprValue = exprValue - exprValueTemp;
+    // If a string is returned then it is an error message, return the message.
+    if(typeof exprValue == "string"){
+        return exprValue;
     }
-  }
 
-  return exprValue;
+    while(tokenQueue[0] == "+" || tokenQueue[0] == "-" ){
+        var operation = tokenQueue.shift();
+        if(operation == "+"){
+            var exprValueTemp = calculateTerm(tokenQueue, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof exprValueTemp == "string"){
+                return exprValueTemp;
+            }
+            exprValue = exprValue + exprValueTemp;
+        }else{
+            var exprValueTemp = calculateTerm(tokenQueue, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof exprValueTemp == "string"){
+                return exprValueTemp;
+            }
+            exprValue = exprValue - exprValueTemp;
+        }
+    }
+
+    return exprValue;
 }
 
 /*
@@ -108,31 +108,31 @@ function calculateExpressionRecursive(tokenQueue, trigMode){
   return: the value of the term
 */
 function calculateTerm(tokenQueue, trigMode) {
-  var value = calculateFactor(tokenQueue, trigMode);
-  // If a string is returned then it is an error message, return the message.
-  if(typeof value == "string"){
-    return value;
-  }
-  /* begin looping for multiplication operations */
-  while (tokenQueue[0] == "*" || tokenQueue[0] == "/") {
-    var operation = tokenQueue.shift();
-    if (operation == "*") {
-      var valueTemp = calculateFactor(tokenQueue, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof valueTemp == "string"){
-        return valueTemp;
-      }
-      value *= valueTemp;
-    } else {
-      var valueTemp = calculateFactor(tokenQueue, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof valueTemp == "string"){
-        return valueTemp;
-      }
-      value /= valueTemp;
+    var value = calculateFactor(tokenQueue, trigMode);
+    // If a string is returned then it is an error message, return the message.
+    if(typeof value == "string"){
+        return value;
     }
-  }
-  return value;
+    /* begin looping for multiplication operations */
+    while (tokenQueue[0] == "*" || tokenQueue[0] == "/") {
+        var operation = tokenQueue.shift();
+        if (operation == "*") {
+            var valueTemp = calculateFactor(tokenQueue, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof valueTemp == "string"){
+                return valueTemp;
+            }
+            value *= valueTemp;
+        } else {
+            var valueTemp = calculateFactor(tokenQueue, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof valueTemp == "string"){
+                return valueTemp;
+            }
+            value /= valueTemp;
+        }
+    }
+    return value;
 }
 
 /*
@@ -150,71 +150,71 @@ function calculateTerm(tokenQueue, trigMode) {
   return: the value of the factor.
 */
 function calculateFactor(tokenQueue, trigMode) {
-  /* Functions names that may appear in the factor. */
-  var funcNames = ["fact", "sin", "cos", "tan", "sqrt"];
-  var value;
-  var token = tokenQueue.shift();    
-  
-  /* Case expression wrapped in parenthesis */
-  if (token == "(") {
-    value = calculateExpressionRecursive(tokenQueue, trigMode);
-    // If a string is returned then it is an error message, return the message.
-    if(typeof value == "string"){
-      return value;
-    }
-    if (tokenQueue.shift() != ")") { /* It true, mismatched parenthesis */
-      value = "ERR: SYNTAX";
-    }
-  /* Case function call */
-  } else if (funcNames.includes(token)) {
-    if (tokenQueue.shift() == "(") {
-      var funcString = token;
-      var funcParam = calculateExpressionRecursive(tokenQueue, trigMode);
-      value = evaluateFunction(funcString, funcParam, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof funcParam == "string"){
-        return funcParam;
-      }
-      if (tokenQueue.shift() != ")") {
-         value = "ERR: SYNTAX";
-      }
-    } else {
-      value = "ERR: SYNTAX";
-    }
-    
-  /* Case two expressions wrapped in a power function*/
-  } else if (token == "pow") {
-    if (tokenQueue.shift() == "(") {
-      /* Evaluate first and second expression in pow */
-      var expr1val = calculateExpressionRecursive(tokenQueue, trigMode);
-      // If a string is returned then it is an error message, return the message.
-      if(typeof expr1val == "string"){
-        return expr1val;
-      }
-      if (tokenQueue.shift() == ",") {
-        var expr2val = calculateExpressionRecursive(tokenQueue, trigMode);
+    /* Functions names that may appear in the factor. */
+    var funcNames = ["inv","fact", "sin", "cos", "tan", "sqrt"];
+    var value;
+    var token = tokenQueue.shift();
+
+    /* Case expression wrapped in parenthesis */
+    if (token == "(") {
+        value = calculateExpressionRecursive(tokenQueue, trigMode);
         // If a string is returned then it is an error message, return the message.
-        if(typeof expr2val == "string"){
-          return expr2val;
+        if(typeof value == "string"){
+            return value;
         }
-        value = Math.pow(expr1val, expr2val);
-        if (tokenQueue.shift() != ")") {
-        value = "ERR: SYNTAX";
+        if (tokenQueue.shift() != ")") { /* It true, mismatched parenthesis */
+            value = "ERR: SYNTAX";
         }
-      } else { /* If no comma, then input here is wrong */
-        value = "ERR: SYNTAX";
-      }
-    } else { /* missing parenthesis */
-      value = "ERR: SYNTAX";
+        /* Case function call */
+    } else if (funcNames.includes(token)) {
+        if (tokenQueue.shift() == "(") {
+            var funcString = token;
+            var funcParam = calculateExpressionRecursive(tokenQueue, trigMode);
+            value = evaluateFunction(funcString, funcParam, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof funcParam == "string"){
+                return funcParam;
+            }
+            if (tokenQueue.shift() != ")") {
+                value = "ERR: SYNTAX";
+            }
+        } else {
+            value = "ERR: SYNTAX";
+        }
+
+        /* Case two expressions wrapped in a power function*/
+    } else if (token == "pow") {
+        if (tokenQueue.shift() == "(") {
+            /* Evaluate first and second expression in pow */
+            var expr1val = calculateExpressionRecursive(tokenQueue, trigMode);
+            // If a string is returned then it is an error message, return the message.
+            if(typeof expr1val == "string"){
+                return expr1val;
+            }
+            if (tokenQueue.shift() == ",") {
+                var expr2val = calculateExpressionRecursive(tokenQueue, trigMode);
+                // If a string is returned then it is an error message, return the message.
+                if(typeof expr2val == "string"){
+                    return expr2val;
+                }
+                value = Math.pow(expr1val, expr2val);
+                if (tokenQueue.shift() != ")") {
+                    value = "ERR: SYNTAX";
+                }
+            } else { /* If no comma, then input here is wrong */
+                value = "ERR: SYNTAX";
+            }
+        } else { /* missing parenthesis */
+            value = "ERR: SYNTAX";
+        }
+
+        /* Case number */
+    } else if (!isNaN(token)) {
+        value = parseFloat(token);
+    } else {
+        value = "ERR: SYNTAX"
     }
-    
-  /* Case number */
-  } else if (!isNaN(token)) { 
-    value = parseFloat(token);
-  } else {
-    value = "ERR: SYNTAX"
-  }
-  return value;
+    return value;
 }
 
 
@@ -236,46 +236,50 @@ function calculateFactor(tokenQueue, trigMode) {
   return: the value of the factor.
 */
 function evaluateFunction(funcString, funcParam, trigMode) {
-  var valToReturn;
-  switch (funcString) {
-    case "fact":
-      valToReturn = factorial(funcParam);
-      break;
+    var valToReturn;
+    switch (funcString) {
+        case "fact":
+            valToReturn = factorial(funcParam);
+            break;
 
-    case "sin":
-      if(trigMode == "rad"){
-        valToReturn = Math.sin(funcParam);
-      }else{
-        valToReturn = Math.sin(funcParam * Math.PI/180.0);
-      }
-      break;
+        case "inv":
+            valToReturn = 1 / funcParam;
+            break;
 
-    case "cos":
-      if(trigMode == "rad"){
-        valToReturn = Math.cos(funcParam);
-      }else{
-        valToReturn = Math.cos(funcParam * Math.PI/180.0);
-      }
-      break;
+        case "sin":
+            if(trigMode == "rad"){
+                valToReturn = Math.sin(funcParam);
+            }else{
+                valToReturn = Math.sin(funcParam * Math.PI/180.0);
+            }
+            break;
 
-    case "tan":
-      if(trigMode == "rad"){
-        valToReturn = Math.tan(funcParam);
-      }else{
-        valToReturn = Math.tan(funcParam * Math.PI/180.0);
-      }
-      break;
+        case "cos":
+            if(trigMode == "rad"){
+                valToReturn = Math.cos(funcParam);
+            }else{
+                valToReturn = Math.cos(funcParam * Math.PI/180.0);
+            }
+            break;
 
-    case "sqrt":
-      if (checkSqrtArg(funcParam)) {
-        valToReturn = Math.sqrt(funcParam);
-      } else {
-        valToReturn = "ERR: SQRT DOMAIN (NEGATIVE)";
-      }
-      break;
-  }
+        case "tan":
+            if(trigMode == "rad"){
+                valToReturn = Math.tan(funcParam);
+            }else{
+                valToReturn = Math.tan(funcParam * Math.PI/180.0);
+            }
+            break;
 
-  return valToReturn;
+        case "sqrt":
+            if (checkSqrtArg(funcParam)) {
+                valToReturn = Math.sqrt(funcParam);
+            } else {
+                valToReturn = "ERR: SQRT DOMAIN (NEGATIVE)";
+            }
+            break;
+    }
+
+    return valToReturn;
 }
 
 /*
@@ -292,11 +296,11 @@ function evaluateFunction(funcString, funcParam, trigMode) {
   return: the factorial value.
 */
 function factorial(value) {
-  var returnVal = checkFactorialArg(value);
-  if (value != 0 && (typeof(returnVal) == "number")) {
-    returnVal = value * factorial(value - 1);
-  }
-  return returnVal;
+    var returnVal = checkFactorialArg(value);
+    if (value != 0 && (typeof(returnVal) == "number")) {
+        returnVal = value * factorial(value - 1);
+    }
+    return returnVal;
 }
 
 
@@ -312,13 +316,13 @@ function factorial(value) {
   Returns: 1 if arg is valid, ERR string describing message otherwise.
 */
 function checkFactorialArg(arg) {
-  var error = 1;
-  if (arg < 0) {
-    error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
-  } else if (!Number.isInteger(arg)) {
-    error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
-  }
-  return error;
+    var error = 1;
+    if (arg < 0) {
+        error = "ERR: FACTORIAL DOMAIN (NEGATIVE)";
+    } else if (!Number.isInteger(arg)) {
+        error = "ERR: FACTORIAL DOMAIN (NOT INTEGER)";
+    }
+    return error;
 }
 
 /*
@@ -333,9 +337,9 @@ function checkFactorialArg(arg) {
   Returns: true if arg is valid, false otherwise.
 */
 function checkSqrtArg(arg) {
-  var isValid = true;
-  if (arg < 0) {
-    isValid = false;
-  }
-  return isValid;
+    var isValid = true;
+    if (arg < 0) {
+        isValid = false;
+    }
+    return isValid;
 }

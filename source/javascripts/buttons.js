@@ -105,19 +105,27 @@ function press_radical() {
 }
 
 function press_inverse() {
-    inputObject.addToString("^-1");
+    inputObject.addToString("inv()");
+    inputObject.shiftCursorLeft();
+
 }
 
 function press_exponent() {
-    inputObject.addToString("^")
+    inputObject.addToString("pow(,)");
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
 }
 
 function press_square() {
-    inputObject.addToString("^2");
+    inputObject.addToString("pow(,2)");
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
+    inputObject.shiftCursorLeft();
 }
 
 function press_factorial() {
-    inputObject.addToString("!");
+    inputObject.addToString("fact()");
+    inputObject.shiftCursorLeft();
 }
 
 function press_negative() {
@@ -138,10 +146,10 @@ function press_right_paren() {
 }
 
 
-function toggleTrigMode() {
+function toggle_trig_mode() {
     inputObject.toggleTrigMode();
-    el = document.getElementById("trig_out");
-    el.innerHTML = inputObject.returnTrigMode();
+    el = document.getElementById("trig_display");
+    el.value = inputObject.returnTrigMode();
 }
 
 function press_enter() {
@@ -167,10 +175,10 @@ function press_enter() {
     // Get evaluation of entered equation
     var value = calculateExpression(tokenize, trigMode)
     //alert(value);
-    
+
     // Update display of computed value
     inputObject.addToString(value);
 
     // Add computed value to memory
-    
+
 }

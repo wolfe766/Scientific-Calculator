@@ -39,10 +39,26 @@ form {
   transition: ease-in-out, background .25s ease-in-out;
 }
 
-#calculator textarea{
+#calculator #flex_container {
+  display: flex;
+  justify-content: center;
+}
+
+#calculator #trig_display {
+  margin-right: 1%;
+  width: 5%;
+  text-align: center;
+  height: 20px;
+  border-style: inset;
+  border-width: 2px;
+  resize: none;
+  font-size: 100%;
+  font-family: sans-serif;
+}
+
+#calculator #display{
   width: 70%;
-  margin-right: 50px;
-  height: 200px;
+  height: auto;
   border-style: inset;
   border-width: 5px;
   resize: none;
@@ -53,13 +69,11 @@ form {
 }
 
 #calculator img {
+  padding: 5%;
   max-width: 100%;
   max-height: 100%;
   width: 150px;
   height: 107px;
-  padding: 15px;
-  margin-right: 2%;
-  margin-bottom: 5%;
 }
 
 

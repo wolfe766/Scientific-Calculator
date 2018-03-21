@@ -13,7 +13,7 @@
     nunberString: A string.
 */
 function isANumber(numberString){
-  return !isNaN(numberString);
+    return !isNaN(numberString);
 }
 
 
@@ -26,9 +26,9 @@ function isANumber(numberString){
     symbol: A string.
 */
 function isASimpleSymbol(symbol){
-  var symbolsArray = ["(", ")", "+", "-", "*", "/", ","];
+    var symbolsArray = ["(", ")", "+", "-", "*","!", "/", ","];
 
-  return symbolsArray.includes(symbol);
+    return symbolsArray.includes(symbol);
 }
 
 /*
@@ -40,9 +40,9 @@ function isASimpleSymbol(symbol){
     name: A string.
 */
 function isAFunctionName(name){
-  var functionNames = ["sin", "cos", "tan", "inv", "pow"];
+    var functionNames = ["sin", "cos", "tan", "inv", "pow"];
 
-  return functionNames.includes(name);
+    return functionNames.includes(name);
 }
 
 /*
@@ -56,16 +56,16 @@ function isAFunctionName(name){
     numbers, and function names.
 */
 function longestNumberFromPosition(startIndex, expression){
-  var endIndex = startIndex + 1;
+    var endIndex = startIndex + 1;
 
-  while(endIndex < expression.length){
-    if(isANumber(expression.substring(startIndex, endIndex+1))){
-          endIndex++;
-    }else{
-      break;
+    while(endIndex < expression.length){
+        if(isANumber(expression.substring(startIndex, endIndex+1))){
+            endIndex++;
+        }else{
+            break;
+        }
     }
-  }
-  return expression.substring(startIndex, endIndex);
+    return expression.substring(startIndex, endIndex);
 }
 
 /*
@@ -79,17 +79,17 @@ function longestNumberFromPosition(startIndex, expression){
     numbers, and function names.
 */
 function functionNameFromPosition(startIndex, expression){
-  var endIndex = startIndex + 1;
-  var alphaRegEx = /^[a-zA-Z]+$/;
+    var endIndex = startIndex + 1;
+    var alphaRegEx = /^[a-zA-Z]+$/;
 
-  while(endIndex < expression.length && alphaRegEx.exec(expression.substring(startIndex, endIndex)) != null){
-    if(alphaRegEx.exec(expression.substring(startIndex, endIndex+1)) != null){
-      endIndex++;
-    }else{
-      break;
+    while(endIndex < expression.length && alphaRegEx.exec(expression.substring(startIndex, endIndex)) != null){
+        if(alphaRegEx.exec(expression.substring(startIndex, endIndex+1)) != null){
+            endIndex++;
+        }else{
+            break;
+        }
     }
-  }
-  return expression.substring(startIndex, endIndex);
+    return expression.substring(startIndex, endIndex);
 }
 
 /*
@@ -103,26 +103,26 @@ function functionNameFromPosition(startIndex, expression){
     numbers, and function names.
 */
 function tokenizeExpression(expression){
-  var index = 0;
-  var tokenQueue = [];
+    var index = 0;
+    var tokenQueue = [];
 
-  while(index<expression.length){
-    var startChar = expression.charAt(index);
-    // Three cases to consider.  Simple symbol, number, and function name.
-    if(isASimpleSymbol(startChar)){
-      tokenQueue.push(startChar);
-      index = index + 1;
-    }else if(isANumber(startChar)){
-      // Push the number starting at position index onto the queue.
-      var numToPush = longestNumberFromPosition(index, expression);
-      tokenQueue.push(numToPush);
-      index = index + numToPush.length;
-    }else{
-      // Push the function name starting at position index onto the queue.
-      var functionName = functionNameFromPosition(index, expression);
-      tokenQueue.push(functionName);
-      index = index + functionName.length;
+    while(index<expression.length){
+        var startChar = expression.charAt(index);
+        // Three cases to consider.  Simple symbol, number, and function name.
+        if(isASimpleSymbol(startChar)){
+            tokenQueue.push(startChar);
+            index = index + 1;
+        }else if(isANumber(startChar)){
+            // Push the number starting at position index onto the queue.
+            var numToPush = longestNumberFromPosition(index, expression);
+            tokenQueue.push(numToPush);
+            index = index + numToPush.length;
+        }else{
+            // Push the function name starting at position index onto the queue.
+            var functionName = functionNameFromPosition(index, expression);
+            tokenQueue.push(functionName);
+            index = index + functionName.length;
+        }
     }
-  }
-  return tokenQueue;
+    return tokenQueue;
 }
