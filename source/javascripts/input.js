@@ -119,16 +119,16 @@ function preprocess(eq, ansValue, replace=true){
 
   if(replace){
     // Global regular expression to find missing implied multiplication symbols.
-    var missingMultSymbolNoAnsRE = /\)\d|\d\(|\d[a-zA-Z]/g;
+    var missingMultSymbolOneAnsRE = /\)\d|\d\(|\d[a-zA-Z]|\)ans/g;
 
     // Insert a multiplication symbol everywhere the regular expression matches.
     var multSymbolArray = [];
-    while ((multSymbolArray = missingMultSymbolNoAnsRE.exec(eq)) !== null) {
+    while ((multSymbolArray = missingMultSymbolOneAnsRE.exec(eq)) !== null) {
       var indexToInsertMultSym = multSymbolArray.index;
       eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
     }
 
-    var missingMultSymbolAnsRE = /ans[a-zA-Z]|\)ans|ans\(|ans\d]/g;
+    var missingMultSymbolAnsRE = /ans[a-zA-Z]|ans\(|ans\d]/g;
     multSymbolArray = [];
     while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
       var indexToInsertMultSym = multSymbolArray.index;
