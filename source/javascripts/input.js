@@ -22,8 +22,8 @@
     the inner html specified at htmlEl in the calling object
 */
 function addToString(element) {
-    this.leftString += element.toString();
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  this.leftString += element.toString();
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -40,8 +40,8 @@ function addToString(element) {
     the inner html specified at htmlEl in the calling object
 */
 function deleteFromString() {
-    this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -60,7 +60,7 @@ function deleteFromString() {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function peakString() {
-    return this.leftString + this.rightString;
+  return this.leftString + this.rightString;
 }
 
 /*
@@ -80,12 +80,12 @@ function peakString() {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function returnInputString() {
-    var stringToReturn = this.leftString + this.rightString
-    /* clear string and write it to input box*/
-    this.leftString = "";
-    this.rightString = "";
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
-    return stringToReturn;
+  var stringToReturn = this.leftString + this.rightString
+  /* clear string and write it to input box*/
+  this.leftString = "";
+  this.rightString = "";
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  return stringToReturn;
 }
 
 /*
@@ -104,27 +104,29 @@ function returnInputString() {
     The updated equation
 */
 function preprocess(eq, ansValue){
-    if (ansValue != null){
-        eq = eq.replace(/ans/gi,ansValue.toString());
-    }
+  if (ansValue != null){
+    eq = eq.replace(/ans/g,ansValue.toString());
+  }
 
-    /*Add up the total number of left paren
-    Subtract off the total num of right paren
-    The result is the number of left paren to add */
-    var openBracketCount = 0;
-    for(var i = 0; i < eq.length; i++){
-        if(eq.charAt(i) == '('){
-            openBracketCount++;
-        }else if (eq.charAt(i) == ')'){
-            openBracketCount--;
-        }
-    }
+  console.log("Processed eq: " + eq);
 
-    for(;openBracketCount > 0; openBracketCount--){
-        eq = eq + ')';
+  /*Add up the total number of left paren
+  Subtract off the total num of right paren
+  The result is the number of left paren to add */
+  var openBracketCount = 0;
+  for(var i = 0; i < eq.length; i++){
+    if(eq.charAt(i) == '('){
+      openBracketCount++;
+    }else if (eq.charAt(i) == ')'){
+      openBracketCount--;
     }
+  }
 
-    return eq;
+  for(;openBracketCount > 0; openBracketCount--){
+    eq = eq + ')';
+  }
+
+  return eq;
 }
 
 /*
@@ -140,13 +142,13 @@ function preprocess(eq, ansValue){
     buttonID: CSS selector ID of the HTML object 
 */
 function enableButton(buttonID){
-    var button = document.getElementById(buttonID);
-    button.className = "enabled";
+  var button = document.getElementById(buttonID);
+  button.className = "enabled";
 }
 
 function disableButton(buttonID){
-    var button = document.getElementById(buttonID);
-    button.className = "disabled";
+  var button = document.getElementById(buttonID);
+  button.className = "disabled";
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
@@ -155,17 +157,17 @@ Description: Disables / Enables all memory buttons that should not
 function when no value is stored in memory.
 */
 function disableAllMemoryButtons(){
-    disableButton("mr");
-    disableButton("mAdd");
-    disableButton("mSub");
-    disableButton("mc");
+  disableButton("mr");
+  disableButton("mAdd");
+  disableButton("mSub");
+  disableButton("mc");
 }
 
 function enableAllMemoryButtons(){
-    enableButton("mr");
-    enableButton("mAdd");
-    enableButton("mSub");
-    enableButton("mc");
+  enableButton("mr");
+  enableButton("mAdd");
+  enableButton("mSub");
+  enableButton("mc");
 }
 
 /*
@@ -182,10 +184,10 @@ function enableAllMemoryButtons(){
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorLeft() {
-    var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
-    this.rightString = lastCharFromLeftString + this.rightString;
-    this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
+  this.rightString = lastCharFromLeftString + this.rightString;
+  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -202,10 +204,10 @@ function shiftCursorLeft() {
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorRight() {
-    var firstCharFromRightString = this.rightString.charAt(0);
-    this.leftString += firstCharFromRightString;
-    this.rightString = this.rightString.slice(1, this.rightString.length);
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  var firstCharFromRightString = this.rightString.charAt(0);
+  this.leftString += firstCharFromRightString;
+  this.rightString = this.rightString.slice(1, this.rightString.length);
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -222,9 +224,9 @@ function shiftCursorRight() {
     the inner html specified at htmlEl in the calling object
 */
 function clearInput() {
-    this.leftString = "";
-    this.rightString = "";
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  this.leftString = "";
+  this.rightString = "";
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -239,7 +241,7 @@ function clearInput() {
     the inner html specified at htmlEl
 */
 function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
-    htmlEl.innerHTML = leftString + cursor + rightString;
+  htmlEl.innerHTML = leftString + cursor + rightString;
 }
 
 /*
@@ -255,11 +257,11 @@ function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
     this.toggleTrigMode
 */
 function toggleTrigMode() {
-    if (this.trigMode === "deg") {
-        this.trigMode = "rad";
-    } else {
-        this.trigMode = "deg";
-    }
+  if (this.trigMode === "deg") {
+    this.trigMode = "rad";
+  } else {
+    this.trigMode = "deg";
+  }
 }
 
 /*
@@ -276,7 +278,7 @@ function toggleTrigMode() {
     this.toggleTrigMode
 */
 function returnTrigMode() {
-    return this.trigMode;
+  return this.trigMode;
 }
 
 
@@ -291,18 +293,18 @@ function returnTrigMode() {
 
   parameters: 
     htmlEl - an element from the DOM which a user would like to write inner html to.
-*/
+*/ 
 function Input(htmlEl) {
-    /* initalize properties */
-    this.leftString = ""; /* string to the left of the cursor */
-    this.rightString = ""; /* string to the right of the cursor */
-    this.cursor = "|";
-    this.htmlEl = htmlEl;
-    this.trigMode = "deg";
+  /* initalize properties */
+  this.leftString = ""; /* string to the left of the cursor */
+  this.rightString = ""; /* string to the right of the cursor */
+  this.cursor = "|";
+  this.htmlEl = htmlEl;
+  this.trigMode = "deg";
 
-    /* write cursor to input box during initalization */
-    writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor)
-
+  /* write cursor to input box during initalization */
+  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor)
+  
 }
 
 /* 
@@ -311,17 +313,17 @@ function Input(htmlEl) {
   Description: Object containing properites to their corresponding functions
                for handling input. 
 
-*/
+*/ 
 function InputFunctions() {
-    this.addToString = addToString;
-    this.returnInputString = returnInputString;
-    this.peakString = peakString;
-    this.shiftCursorLeft = shiftCursorLeft;
-    this.shiftCursorRight = shiftCursorRight;
-    this.clearInput = clearInput;
-    this.deleteFromString = deleteFromString;
-    this.toggleTrigMode = toggleTrigMode;
-    this.returnTrigMode = returnTrigMode;
+  this.addToString = addToString;
+  this.returnInputString = returnInputString;
+  this.peakString = peakString;
+  this.shiftCursorLeft = shiftCursorLeft; 
+  this.shiftCursorRight = shiftCursorRight;
+  this.clearInput = clearInput;
+  this.deleteFromString = deleteFromString;
+  this.toggleTrigMode = toggleTrigMode;
+  this.returnTrigMode = returnTrigMode;
 }
 
 /* Chain Input to InputFunctions through prototype  */
