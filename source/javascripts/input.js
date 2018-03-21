@@ -107,6 +107,10 @@ function preprocess(eq, ansValue){
   if (ansValue != null){
     eq = eq.replace(/ans/gi,ansValue.toString());
   }
+
+  /*Add up the total number of left paren
+  Subtract off the total num of right paren
+  The result is the number of left paren to add */
   var openBracketCount = 0;
   for(var i = 0; i < eq.length; i++){
     if(eq.charAt(i) == '('){
