@@ -8,7 +8,8 @@ title: Calculator  Home Page
   Description: HTML for calculator interface
 
 -->
-
+<div id="fullContainer">
+  <span>
     <form id="calculator">
       <!-- Display user input from calculator -->
       <div id="flex_container">
@@ -63,17 +64,27 @@ title: Calculator  Home Page
         <input type="button" name="buttons" value="&rarr;" id="right">
       </div>
     </form>
+    </span>
 
 <!-- CREATED: Sam Wolfe
 Description: Container for the calculator history
 -->
+  <span>
   <div id="smallHistory"></div>
 
   <div id="historyPane">
-    <div id="bigHistory"></div>
+    <div>
+      <p id="historyTitle">History</p>
+      <p id="historySubtext">Click An Entry To Insert</p>
+      <div id="bigHistory"></div>
+    </div>
     <div id="scrollButtons">
-      <p id=scrollUp>↑</p>
-      <p id=scrollDown>↓</p>
-      <p id=scrollToBottom>↓↓↓</p>
+      <p id=scrollUp class="scrollButton">↑</p>
+      <p id=scrollDown class="scrollButton">↓</p>
+      <p id=scrollToBottom class="scrollButton">Bottom</p>
     </div>
   </div>
+
+  <div id="memoryValue"></div>
+  </span>
+</div>
