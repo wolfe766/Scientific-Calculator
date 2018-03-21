@@ -1,7 +1,15 @@
+/*
+  Created By: Alec Maier
+  
+  Description: 
+*/
+
+// User pressed button to move left
 function press_left() {
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to move right
 function press_right() {
     inputObject.shiftCursorRight();
 }
@@ -134,4 +142,35 @@ function toggleTrigMode() {
     inputObject.toggleTrigMode();
     el = document.getElementById("trig_out");
     el.innerHTML = inputObject.returnTrigMode();
+}
+
+function press_enter() {
+
+    // Get entered equation
+    var input = inputObject.returnInputString();
+    //alert(input);
+
+    // Get the last 'ANS' if it exists
+
+    // Preprocess equation - need to add result from 'ANS' and replace null
+    var equation = preprocess(input, null);
+    //alert(equation);
+
+    // Get Trig Mode
+    var trigMode = inputObject.returnTrigMode();
+    //alert(trigMode);
+
+    // Tokenize expression
+    var tokenize = tokenizeExpression(equation)
+    //alert(tokenize);
+
+    // Get evaluation of entered equation
+    var value = calculateExpression(tokenize, trigMode)
+    //alert(value);
+    
+    // Update display of computed value
+    inputObject.addToString(value);
+
+    // Add computed value to memory
+    
 }

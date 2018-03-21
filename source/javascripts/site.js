@@ -10,11 +10,11 @@
 var inputObject = new Input(document.getElementById("display"));
 
 window.onload = function(){
-  //Initial button states
+  // Initial button states
   disableButton("ans");
   disableAllMemoryButtons();
 
-  //Memory functionality
+  // Memory functionality
   document.getElementById("ms").addEventListener("click", function(){memoryController.memoryStore()});
   document.getElementById("ans").addEventListener("click", function(){memoryController.ansToString()});
   document.getElementById("mr").addEventListener("click", function(){memoryController.memoryRecall()});
@@ -53,9 +53,9 @@ window.onload = function(){
   document.getElementById("clear").addEventListener("click", press_clear);
   document.getElementById("left").addEventListener("click", press_left);
   document.getElementById("right").addEventListener("click", press_right);
+  document.getElementById("enter").addEventListener("click", press_enter);
 
   // History scroll buttons
-
   document.getElementById("scrollUp").addEventListener("click", function(){historyController.scrollUp()});
   document.getElementById("scrollDown").addEventListener("click", function(){historyController.scrollDown()});
   document.getElementById("scrollToBottom").addEventListener("click", function(){historyController.scrollToBottom()});
