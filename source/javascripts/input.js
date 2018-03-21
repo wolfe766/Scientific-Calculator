@@ -44,15 +44,34 @@ function deleteFromString() {
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }
 
+/*
+  CREATED: David Levine 03/12/2018
 
+  Description: Returns the current input without clearing string
+               or updating the inner html of htmlEl.
+
+  parameters: 
+    element: element to add to string
+
+  requires:
+    function is called through an input object
+
+  returns:
+    the input to the left of the cursor and right of the cursor, concatenated.
+*/
+function peakString() {
+  return this.leftString + this.rightString;
+}
 
 /*
   CREATED: David Levine 03/12/2018
 
-  Description: Returns input string to user
+  Description: Returns input string to user, clears string, and
+               writes string to the htmlEl dom element.
 
-  parameters: 
-    element: element to add to string
+  clears: 
+    this.leftString
+    this.rightString
 
   requires:
     function is called through an input object
@@ -228,7 +247,7 @@ function Input(htmlEl) {
   /* initalize properties */
   this.leftString = ""; /* string to the left of the cursor */
   this.rightString = ""; /* string to the right of the cursor */
-  this.cursor = "<span>|</span>";
+  this.cursor = "<span class=\"blinking-cursor\">|</span>";
   this.htmlEl = htmlEl;
   this.trigMode = "deg";
 
@@ -247,6 +266,7 @@ function Input(htmlEl) {
 function InputFunctions() {
   this.addToString = addToString;
   this.returnInputString = returnInputString;
+  this.peakString = peakString;
   this.shiftCursorLeft = shiftCursorLeft; 
   this.shiftCursorRight = shiftCursorRight;
   this.clearInput = clearInput;
