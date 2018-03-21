@@ -14,59 +14,73 @@ function press_right() {
     inputObject.shiftCursorRight();
 }
 
+// User pressed button to enter '0' 
 function press_0() {
     //alert("zero pressed");
     inputObject.addToString(0);
 }
 
+// User pressed button to enter '1'
 function press_1() {
     inputObject.addToString(1);
 }
 
+// User pressed button to enter '2'
 function press_2() {
     inputObject.addToString(2);
 }
 
+// User pressed button to enter '3'
 function press_3() {
     inputObject.addToString(3);
 }
 
+// User pressed button to enter '4'
 function press_4() {
     inputObject.addToString(4);
 }
 
+// User pressed button to enter '5'
 function press_5() {
     inputObject.addToString(5);
 }
 
+// User pressed button to enter '6'
 function press_6() {
     inputObject.addToString(6);
 }
 
+// User pressed button to enter '7'
 function press_7() {
     inputObject.addToString(7);
 }
 
+// User pressed button to enter '8'
 function press_8() {
     inputObject.addToString(8);
 }
 
+// User pressed button to enter '9'
 function press_9() {
     inputObject.addToString(9);
 }
 
+// User pressed button to enter '+'
 function press_plus() {
     inputObject.addToString("+");
 }
 
+// User pressed button to enter '-'
 function press_minus() {
     inputObject.addToString("-");
 }
 
+// User pressed button to enter '*'
 function press_multiply() {
     inputObject.addToString("*");
 }
 
+// User pressed button to enter '/'
 function press_divide() {
     inputObject.addToString("/");
 }
@@ -76,74 +90,89 @@ function press_return() {
     document.getElementById("output").innerHTML = text;
 }
 
+// User pressed button to clear display
 function press_clear() {
     inputObject.clearInput();
 }
 
+// User pressed button to delete last operation or number
 function press_delete() {
     inputObject.deleteFromString();
 }
 
+// User pressed button to enter 'tan'
 function press_tan() {
     inputObject.addToString("tan()");
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to enter 'sin'
 function press_sin() {
     inputObject.addToString("sin()");
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to enter 'cos'
 function press_cos() {
     inputObject.addToString("cos()");
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to enter 'sqrt'
 function press_radical() {
     inputObject.addToString("sqrt()");
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to enter invervse
 function press_inverse() {
     inputObject.addToString("^-1");
 }
 
+// User pressed button to enter exponent
 function press_exponent() {
     inputObject.addToString("^")
 }
 
+// User pressed button to enter square
 function press_square() {
     inputObject.addToString("^2");
 }
 
+// User pressed button to enter '/'
 function press_factorial() {
     inputObject.addToString("!");
 }
 
+// User pressed button to make the value negative
 function press_negative() {
     inputObject.addToString("(-)");
     inputObject.shiftCursorLeft();
 }
 
+// User pressed button to make value a decimal
 function press_point() {
     inputObject.addToString(".");
 }
 
+// User pressed button to enter '('
 function press_left_paren() {
     inputObject.addToString("(");
 }
 
+// User pressed button to enter ')'
 function press_right_paren() {
     inputObject.addToString(")");
 }
 
-
+// User pressed button to toggole between radians and degrees
 function toggleTrigMode() {
     inputObject.toggleTrigMode();
     el = document.getElementById("trig_out");
     el.innerHTML = inputObject.returnTrigMode();
 }
 
+// User pressed button to evaluat and display result
 function press_enter() {
 
     // Get entered equation
@@ -155,22 +184,33 @@ function press_enter() {
     // Preprocess equation - need to add result from 'ANS' and replace null
     var equation = preprocess(input, null);
     //alert(equation);
+ 
+    // Check length of user inputted equation 
+    if(equation.length > 0){
 
-    // Get Trig Mode
-    var trigMode = inputObject.returnTrigMode();
-    //alert(trigMode);
+        // Get Trig Mode
+        var trigMode = inputObject.returnTrigMode();
+        //alert(trigMode);
 
-    // Tokenize expression
-    var tokenize = tokenizeExpression(equation)
-    //alert(tokenize);
+        // Tokenize expression
+        var tokenize = tokenizeExpression(equation)
+        //alert(tokenize);
 
-    // Get evaluation of entered equation
-    var value = calculateExpression(tokenize, trigMode)
-    //alert(value);
-    
-    // Update display of computed value
-    inputObject.addToString(value);
+        // Get evaluation of entered equation
+        var value = calculateExpression(tokenize, trigMode)
+        //alert(value);
 
-    // Add computed value to memory
-    
+        // Update display of computed value
+        inputObject.addToString(value);
+        
+        // Add computed value and equation to memory
+
+    } else {
+      
+      // if memory is size 0 
+      // User entered empty input
+      inputObject.addToString(0);
+
+      // else result is last value in memory
+    }
 }
