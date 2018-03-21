@@ -19,6 +19,31 @@ function Entry(eq, ans){
   this.answer = ans;
 }
 
+/*CREATED: Sam Wolfe 3/21/2018
+Description: Constructor for object that contains the state of the previous calculation
+*/
+function PreviousResult(){
+  this.wasError = false,
+  this.wasWarning = false,
+  this.wasNumber = false,
+
+  this.reset = function(){
+    this.wasError = false;
+    this.wasWarning = false;
+    this.wasNumber = false;
+  },
+
+  this.getPriorityState = function(){
+    if(this.wasError){
+      return 2;
+    }else if(this.wasWarning){
+      return 1;
+    }else if(this.wasNumber){
+      return 0;
+    }
+  }
+}
+
 /*CREATED: Sam Wolfe 3/18/2018
 Description: Controller object for everything related to the history boxes
 */
@@ -64,10 +89,15 @@ var historyController =
   Parameters:
    entry: Entry - The entry to be written
   */
-  generateSmallHistoryElement: function(entry){
+  generateSmallHistoryElement: function(entry, error=false){
     var element = document.createElement("p");
     var eq = this.prettifyEquation(entry.equation);
-    fullText = eq + " = " + entry.answer;
+    var fulltext = "";
+    if(!error){
+      fullText = eq + " = " + entry.answer;
+    }else{
+      fullText = entry.answer;
+    }
     element.innerHTML = fullText;
     return element;
   },
@@ -119,8 +149,10 @@ var historyController =
     //do not print small history of the result is an error
     if(!isNaN(entry.answer)){
       var historyElementSmall = this.generateSmallHistoryElement(entry);
-      smallContainer.replaceChild(historyElementSmall, smallContainer.childNodes[0]);
+    }else{
+      var historyElementSmall = this.generateSmallHistoryElement(entry,true);
     }
+    smallContainer.replaceChild(historyElementSmall, smallContainer.childNodes[0]);
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
