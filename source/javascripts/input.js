@@ -210,9 +210,6 @@ function setNotification(status){
     notEl.style.background = "rgba(255,0,0,.1)";
     notEl.innerHTML = "Error :(";
   }
-
-  //We always reset the previous result upon updating this banner
-  previousResult.reset();
 }
 
 /*
