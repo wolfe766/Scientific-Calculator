@@ -111,7 +111,7 @@ function preprocess(eq, ansValue, replace = true){
 
   if(replace){
     // Global regular expression to find missing implied multiplication symbols.
-    var missingMultSymbolRE = /\d\(|\d[a-zA-Z]/g;
+    var missingMultSymbolRE = /\)\d|\d\(|\d[a-zA-Z]/g;
 
     // Insert a multiplication symbol everywhere the regular expression matches.
     var multSymbolArray = [];
