@@ -1,7 +1,7 @@
 // This is where it all goes :)
 
 //TODO: Disable ANS/Memory buttons when there is no previous ANS or memory
-//TODO: Add a physical button for MC (memory clear)
+//DONE: Add a physical button for MC (memory clear)
 //DONE: Integrate memory functions with evaluate_expression so that an equation can be evaluated and the result stored (need to check for errors)
 //TODO: Update/Enable ANS when enter button is clicked and result is valid
 //TODO: Update history when enter button is clicked
