@@ -93,7 +93,7 @@ Description: CSS style for History
     font-size: 3em;
 }
 
-#scrollUp:hover, #scrollDown:hover, #scrollToBottom:hover{
+#scrollUp:hover, #scrollDown:hover{
   cursor: pointer;
   background-color: lightgrey;
 }
@@ -125,7 +125,20 @@ Description: CSS style for History
     text-align: center;
     display: none;
     cursor: pointer;
-    font-size: .4em;
+    font-size: 1em;
+    margin-left: 0;
+    width: 200px;
+    margin-left: 10px;
+    background-color: black;
+    color:white;
+    border: 2px solid black;
+    border-top: 0px solid black;
+    transition: background .2s;
+}
+
+#scrollToBottom:hover{
+  background-color:white;
+  color: grey;
 }
 
 .historyElement{

@@ -1,8 +1,7 @@
 // This is where it all goes :)
 
-//TODO: Update/Enable ANS when enter button is clicked and result is valid
-//TODO: Update history when enter button is clicked
-//TODO: Call preprocssor when enter is clicked (and produce test cases for preprocessor function)
+//TODO: transition for "scroll to bottom"
+//TODO: Small history on top
 
 //window.onload stops JS from executing until the HTML page is fully formed
 //this is necessary otherwise we risk getting null objects if an element was not yet created
@@ -65,7 +64,7 @@ window.onload = function(){
       var e = e;
       var target = e.target;
       if((target.className == "historyEq") || (target.className == "historyAns")){
-          addToString(target.innerHTML);
+          inputObject.addToString(target.innerHTML);
       }
   });
 };

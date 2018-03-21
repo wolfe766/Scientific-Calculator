@@ -105,8 +105,10 @@ function returnInputString() {
 */
 function preprocess(eq, ansValue){
   if (ansValue != null){
-    eq = eq.replace(/ans/gi,ansValue.toString());
+    eq = eq.replace(/ans/g,ansValue.toString());
   }
+
+  console.log("Processed eq: " + eq);
 
   /*Add up the total number of left paren
   Subtract off the total num of right paren

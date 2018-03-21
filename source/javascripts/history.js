@@ -81,6 +81,8 @@ var historyController =
       bigContainer.insertBefore(historyElementBig,bigContainer.firstChild);
     }else{
       this.historyOffset++;
+      scroll = document.getElementById("scrollToBottom");
+      scroll.style.background = "blue";
     }
     smallContainer.insertBefore(historyElementSmall,smallContainer.firstChild);
   },
@@ -115,7 +117,9 @@ var historyController =
 
       //Hide the scrollToBottom button when at the bottom of the list
       if(this.historyOffset == 0){
-        document.getElementById("scrollToBottom").style.display = "none";
+        scroll = document.getElementById("scrollToBottom");
+        scroll.style.display = "none";
+        scroll.style.background = "black";
       }
    }
   },
@@ -125,6 +129,8 @@ var historyController =
   */
   scrollToBottom: function(){
     console.log("scrolling to bottom");
+    scroll = document.getElementById("scrollToBottom");
+    scroll.style.background = "black";
     while(this.historyOffset != 0){
       this.scrollDown();
     }
@@ -148,7 +154,7 @@ var memoryController =
   This string is handled by the preprocessor
   */
   ansToString: function(){
-    addToString('ans');
+    inputObject.addToString('ans');
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
@@ -169,14 +175,12 @@ var memoryController =
   enables all memory buttons upon success
   */
   memoryStore: function(){
-    var eq = peakString();
+    var eq = inputObject.peakString();
+    var trigMode = inputObject.returnTrigMode();
     //Null checking for ans value is handled in the preprocessor
-    console.log("Peek: " + eq);
     eq = preprocess(eq,this.ansValue);
-    console.log("Preprocess: " + eq);
     eq = tokenizeExpression(eq);
-    console.log("Tokenize: " + eq);
-    eq = calculateExpression(eq);
+    eq = calculateExpression(eq, trigMode);
     if(isNaN(eq)){
       console.log("Memory Store Failed -- RDP returned error: " + eq);
     }else{
@@ -195,10 +199,11 @@ var memoryController =
   value stored in memory. 
   */
   memoryPlus: function(){
-    var eq = peakString();
+    var eq = inputObject.peakString();
+    var trigMode = inputObject.returnTrigMode();
     eq = preprocess(eq,this.ansValue);
     eq = tokenizeExpression(eq);
-    eq = calculateExpression(eq);
+    eq = calculateExpression(eq, trigMode);
     if(isNaN(eq)){
       console.log("Memory Plus Failed -- RDP returned error: " + eq);
     }else{
@@ -214,10 +219,11 @@ var memoryController =
   This string is handled by the preprocessor
   */
   memoryMinus: function(){
-    var eq = peakString();
+    var eq = inputObject.peakString();
+    var trigMode = inputObject.returnTrigMode();
     eq = preprocess(eq,this.ansValue);
     eq = tokenizeExpression(eq);
-    eq = calculateExpression(eq);
+    eq = calculateExpression(eq, trigMode);
     if(isNaN(eq)){
       console.log("Memory Minus Failed -- RDP returned: " + eq);
     }else{
@@ -232,7 +238,7 @@ var memoryController =
   Description: Prints the current value in memory to the screen
   */
   memoryRecall: function(){
-    addToString(this.memValue);
+    inputObject.addToString(this.memValue);
   },
 
   /*CREATED: Sam Wolfe 3/21/2018

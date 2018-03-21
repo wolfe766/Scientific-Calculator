@@ -153,7 +153,7 @@ function press_enter() {
     // Get the last 'ANS' if it exists
 
     // Preprocess equation - need to add result from 'ANS' and replace null
-    var equation = preprocess(input, null);
+    var equation = preprocess(input, memoryController.ansValue);
     //alert(equation);
 
     // Get Trig Mode
@@ -166,11 +166,17 @@ function press_enter() {
 
     // Get evaluation of entered equation
     var value = calculateExpression(tokenize, trigMode)
-    //alert(value);
+
+    //enable the ans button if value returned non-error
+    if(!isNaN(value)){
+        enableButton("ans");
+        memoryController.ansValue = value;
+    }
+    
+    //add to history
+    historyEntry = new Entry(equation,value);
+    historyController.addToHistory(historyEntry);
     
     // Update display of computed value
     inputObject.addToString(value);
-
-    // Add computed value to memory
-    
 }
