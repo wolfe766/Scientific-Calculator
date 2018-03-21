@@ -59,6 +59,38 @@ var historyController =
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
+  Description: Generates the object that appears above the calculator
+
+  Parameters:
+   entry: Entry - The entry to be written
+  */
+  generateSmallHistoryElement: function(entry){
+    var element = document.createElement("p");
+    var eq = this.prettifyEquation(entry.equation);
+    fullText = eq + " = " + entry.answer;
+    element.innerHTML = fullText;
+    return element;
+  },
+
+  /*CREATED: Sam Wolfe 3/18/2018
+  Description: Prints spaces before and after operators
+  in order to generate a more pleasant visual output
+
+  Parameters:
+    eq: String - The equation to be prettified
+
+  Returns:
+    Prettified equation string
+  */
+  prettifyEquation: function(eq){
+    var updated = eq.replace(/\+/g," + ");
+    updated = updated.replace(/\-/g," - ");
+    updated = updated.replace(/\//g," / ");
+    updated = updated.replace(/\*/g," * ");
+    return updated;
+  },
+
+  /*CREATED: Sam Wolfe 3/18/2018
   Description: Prints the given entry to the approriate history container
   and updates history containers accordingly.
 
@@ -74,7 +106,6 @@ var historyController =
     var smallContainer = document.getElementById("smallHistory");
 
     historyElementBig = this.generateHistoryElement(entry);
-    historyElementSmall = this.generateHistoryElement(entry);
 
     //Only add this element to the big visual history if they aren't scrolled up
     if(this.historyOffset == 0){
@@ -82,9 +113,11 @@ var historyController =
     }else{
       this.historyOffset++;
       scroll = document.getElementById("scrollToBottom");
-      scroll.style.background = "blue";
+      scroll.style.background = "#bb0000";
     }
-    smallContainer.insertBefore(historyElementSmall,smallContainer.firstChild);
+
+    var historyElementSmall = this.generateSmallHistoryElement(entry);
+    smallContainer.replaceChild(historyElementSmall, smallContainer.childNodes[0]);
   },
 
   /*CREATED: Sam Wolfe 3/18/2018

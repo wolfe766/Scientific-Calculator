@@ -1,8 +1,5 @@
 // This is where it all goes :)
 
-//TODO: transition for "scroll to bottom"
-//TODO: Small history on top
-
 //window.onload stops JS from executing until the HTML page is fully formed
 //this is necessary otherwise we risk getting null objects if an element was not yet created
 

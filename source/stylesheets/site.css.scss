@@ -51,12 +51,11 @@ form {
 
 #calculator textarea{
   width: 70%;
-  margin-right: 50px;
+  margin: 0px auto 20px;
   height: 200px;
   border-style: inset;
   border-width: 5px;
   resize: none;
-  margin-bottom: 20px;
   font-weight: bolder;
   font-size: 25px;
   font-family: sans-serif;
@@ -69,7 +68,6 @@ form {
   height: 107px;
   padding: 15px;
   margin-right: 2%;
-  margin-bottom: 5%;
 }
 
 
@@ -99,16 +97,19 @@ Description: CSS style for History
 }
 
 #smallHistory{
-    display: flex;
-    flex-direction: column-reverse;
-    margin: 50px auto;
-    width: 200px;
-    border: 2px solid black;
-    height: 120px;
-    overflow: hidden;
+    height: 40px;
+    background-color: rgba(255,255,255,.3);
+    overflow: auto;
+    display: block;
+    margin-bottom: 10px;
+}
 
-    /*TEMPORARY DISPAY NONE*/
-    display: none;
+#smallHistory p{
+  margin: auto;
+  padding-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgba(20,20,20,.5);
 }
 
 #bigHistory{
