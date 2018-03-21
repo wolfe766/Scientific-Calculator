@@ -64,6 +64,7 @@ form {
   resize: none;
   font-size: 100%;
   font-family: sans-serif;
+  pointer-events: none;
 }
 
 #calculator #display{
@@ -76,6 +77,7 @@ form {
   font-weight: bolder;
   font-size: 20px;
   font-family: sans-serif;
+  pointer-events: none;
 }
 
 #calculator img {
@@ -215,67 +217,3 @@ Description: CSS style for History
 }
 
 // end style for enabled/disabled buttons
-
-/* CSS styling for input box cursor*/
-/*
-  NOTE ABOUT CURSOR:
-
-  The following cursor implementation was developed by 
-  Artem Gordinsky at codepen.io. Link can be found below:
-  https://codepen.io/ArtemGordinsky/pen/GnLBq
-*/
-.blinking-cursor {
-  font-weight: 100;
-  font-size: 30px;
-  color: #2E3D48;
-  -webkit-animation: 1s blink step-end infinite;
-  -moz-animation: 1s blink step-end infinite;
-  -ms-animation: 1s blink step-end infinite;
-  -o-animation: 1s blink step-end infinite;
-  animation: 1s blink step-end infinite;
-}
-
-@keyframes "blink" {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
-
-@-moz-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
-
-@-webkit-keyframes "blink" {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
-
-@-ms-keyframes "blink" {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
-
-@-o-keyframes "blink" {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: black;
-  }
-}
