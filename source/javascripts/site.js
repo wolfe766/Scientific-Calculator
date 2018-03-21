@@ -9,6 +9,7 @@ window.onload = function(){
   // Initial button states
   disableButton("ans");
   disableAllMemoryButtons();
+  toggle_trig_mode();
 
   // Memory functionality
   document.getElementById("ms").addEventListener("click", function(){memoryController.memoryStore()});

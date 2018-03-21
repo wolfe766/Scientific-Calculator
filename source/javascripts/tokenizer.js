@@ -11,9 +11,12 @@
 
   Parameters:
     nunberString: A string.
+
+  MODIFIED: Henry Karagory 3/21/2018
+  - Consider a single . as a number now to account for decimals with no leading 0.
 */
 function isANumber(numberString){
-    return !isNaN(numberString);
+    return numberString=="." || !isNaN(numberString);
 }
 
 
@@ -59,7 +62,7 @@ function longestNumberFromPosition(startIndex, expression){
     var endIndex = startIndex + 1;
 
     while(endIndex < expression.length){
-        if(isANumber(expression.substring(startIndex, endIndex+1))){
+        if(isANumber(expression.substring(startIndex, endIndex+1)){
             endIndex++;
         }else{
             break;
