@@ -114,7 +114,7 @@ var historyController =
   */
   prettifyEquation: function(eq){
     var updated = eq.replace(/\+/g," + ");
-    updated = updated.replace(/-/g," - ");
+    updated = updated.replace(/\-/g," - ");
     updated = updated.replace(/\//g," / ");
     updated = updated.replace(/\*/g," * ");
     return updated;

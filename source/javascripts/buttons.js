@@ -198,6 +198,13 @@ function press_enter() {
         // Get evaluation of entered equation
         var value = calculateExpression(tokenize, trigMode);
 
+        //Add to history 
+        //eqRaw is the raw user input without * inserted at implicit mult spots
+        //This is what is printed to history and to the display - ans is still replaced
+        var eqRaw = preprocess(input, memoryController.ansValue, false);
+        historyEntry = new Entry(eqRaw,value);
+        historyController.addToHistory(historyEntry);
+
         //enable the ans button if value returned non-error
         if(!isNaN(value)){
             enableButton("ans");
@@ -207,13 +214,6 @@ function press_enter() {
             //Update previous result object to notify user that it was an error
             previousResult.wasError = true;
         }
-
-        //Add to history 
-        //eqRaw is the raw user input without * inserted at implicit mult spots
-        //This is what is printed to history and to the display - ans is still replaced
-        var eqRaw = preprocess(input, memoryController.ansValue, false);
-        historyEntry = new Entry(eqRaw,value);
-        historyController.addToHistory(historyEntry);
 
         //Update the notification panel
         setNotification(previousResult.getPriorityState());
