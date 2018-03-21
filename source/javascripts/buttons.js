@@ -182,21 +182,15 @@ function press_enter() {
 
     // Get entered equation
     var input = inputObject.returnInputString();
-    //alert(input);
 
-    // Get the last 'ANS' if it exists
-
-    // Preprocess equation - need to add result from 'ANS' and replace null
+    // Preprocess equation
     var equation = preprocess(input, memoryController.ansValue);
-    //alert(equation);
 
     // Get Trig Mode
     var trigMode = inputObject.returnTrigMode();
-    //alert(trigMode);
 
     // Tokenize expression
     var tokenize = tokenizeExpression(equation);
-    //alert(tokenize);
 
     // Get evaluation of entered equation
     var value = calculateExpression(tokenize, trigMode);
@@ -207,8 +201,11 @@ function press_enter() {
         memoryController.ansValue = value;
     }
 
-    //add to history
-    historyEntry = new Entry(equation,value);
+    //Add to history 
+    //eqRaw is the raw user input without * inserted at mult spots like 5sin(4)
+    //This is what is printed to history and to the display - ans is still replaced
+    var eqRaw = preprocess(input, memoryController.ansValue, false);
+    historyEntry = new Entry(eqRaw,value);
     historyController.addToHistory(historyEntry);
 
     // Update display of computed value
