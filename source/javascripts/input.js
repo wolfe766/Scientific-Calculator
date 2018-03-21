@@ -89,7 +89,7 @@ function returnInputString() {
     var stringToReturn = this.leftString + this.rightString;
     /* clear string and write it to input box*/
     this.outputString += (stringToReturn + "\n");
-    this.leftString = " ";
+    this.leftString = "";
     this.rightString = "";
     writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
     return stringToReturn;
@@ -248,7 +248,7 @@ function shiftCursorRight() {
 */
 function clearInput() {
     this.outputString = "";
-    this.leftString = " ";
+    this.leftString = "";
     this.rightString = "";
     writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
@@ -321,7 +321,7 @@ function returnTrigMode() {
 function Input(htmlEl) {
     /* initalize properties */
     this.outputString = "";
-    this.leftString = " "; /* string to the left of the cursor */
+    this.leftString = ""; /* string to the left of the cursor */
     this.rightString = ""; /* string to the right of the cursor */
     this.cursor = "|";
     this.htmlEl = htmlEl;

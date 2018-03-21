@@ -17,8 +17,6 @@ window.onload = function(){
     // sets initial trig mode/displays to user
     toggle_trig_mode();
 
-    // default scrollbar to bottom as user input overflows
-
     //document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight;
 
     // Memory functionality
