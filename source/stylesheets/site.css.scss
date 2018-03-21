@@ -6,6 +6,16 @@ body {
   text-align: center;
 }
 
+#fullContainer{
+  display: flex;
+  justify-content: center;
+}
+
+#calculator{
+  width:70%;
+  min-width: 400px;
+}
+
 /* CREATED: Alec Maier 3/18/2018
     Description: CSS for calculator
  */
@@ -101,12 +111,14 @@ Description: CSS style for History
     border: 2px solid black;
     height: 400px;
     overflow: hidden;
+    margin-left:10px;
 }
 
 #scrollToBottom{
     text-align: center;
     display: none;
     cursor: pointer;
+    font-size: .4em;
 }
 
 .historyElement{
@@ -130,6 +142,15 @@ Description: CSS style for History
     padding: 5px 10px;
     background: darkgrey;
     text-align: right;
+}
+
+#historyTitle{
+  font-size: 1.5em;
+}
+
+#historySubtext{
+  margin-top: -20px;
+  color:rgb(128,128,128);
 }
 
 /*End CSS Style for History */

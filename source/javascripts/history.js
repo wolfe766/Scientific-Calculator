@@ -160,6 +160,7 @@ var memoryController =
     this.memValue = null;
     disableAllMemoryButtons();
     console.log("Memory Cleared: " + this.memValue)
+    this.updateMemoryDisplay(true);
   },
 
   /*CREATED: Sam Wolfe 3/18/2018
@@ -170,8 +171,11 @@ var memoryController =
   memoryStore: function(){
     var eq = peakString();
     //Null checking for ans value is handled in the preprocessor
+    console.log("Peek: " + eq);
     eq = preprocess(eq,this.ansValue);
+    console.log("Preprocess: " + eq);
     eq = tokenizeExpression(eq);
+    console.log("Tokenize: " + eq);
     eq = calculateExpression(eq);
     if(isNaN(eq)){
       console.log("Memory Store Failed -- RDP returned error: " + eq);
@@ -181,6 +185,7 @@ var memoryController =
 
       //Enable memory buttons on success
       enableAllMemoryButtons();
+      this.updateMemoryDisplay();
     }
   },
 
@@ -199,6 +204,7 @@ var memoryController =
     }else{
       this.memValue += eq;
       console.log("Memory Add Success -- New Value: " + this.memValue);
+      this.updateMemoryDisplay();
     }
   },
 
@@ -217,6 +223,7 @@ var memoryController =
     }else{
       this.memValue -= eq;
       console.log("Memory Subtract Success -- New Value: " + this.memValue);
+      this.updateMemoryDisplay();
     }
   },
 
@@ -226,5 +233,20 @@ var memoryController =
   */
   memoryRecall: function(){
     addToString(this.memValue);
+  },
+
+  /*CREATED: Sam Wolfe 3/21/2018
+
+  Descriptions: Updates the on screen view of the memory value
+  */
+  updateMemoryDisplay: function(clear = false){
+    var display = document.getElementById("memoryValue");
+    if(!clear){
+      var fullText = "Memory Value: ";
+      fullText += this.memValue.toString();
+      display.innerHTML = fullText;
+    }else{
+      display.innerHTML = "";
+    }
   }
 };
