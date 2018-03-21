@@ -11,9 +11,12 @@
 
   Parameters:
     nunberString: A string.
+
+  MODIFIED: Henry Karagory 3/21/2018
+  - Consider a single . as a number now to account for decimals with no leading 0.
 */
 function isANumber(numberString){
-    return !isNaN(numberString);
+    return numberString=="." || !isNaN(numberString);
 }
 
 
