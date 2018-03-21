@@ -142,20 +142,46 @@ var memoryController =
   },
 
   memoryClear: function(){
+    //TODO: disable MC, M+, M-, and MR
     this.memValue = null;
   },
 
   memoryStore: function(){
-    this.memValue = this.ansValue;
+    var eq = peakString();
+    //Not checking if ansValue is null because it should
+    //never be possible to insert ans if it is null
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Store Failed -- RDP returned error: " + eq);
+    }else{
+      this.memValue = eq;
+    }
   },
 
   memoryPlus: function(){
-    this.memValue += this.ansValue;
-    console.log(this.memValue);
+    var eq = peakString();
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Plus Failed -- RDP returned error: " + eq);
+    }else{
+      this.memValue += eq;
+    }
   },
 
   memoryMinus: function(){
-    this.memValue -= this.ansValue;
+    var eq = peakString();
+    eq = preprocess(eq,this.ansValue);
+    eq = tokenizeExpression(eq);
+    eq = calculateExpression(eq);
+    if(isNaN(eq)){
+      console.log("Memory Minus Failed -- RDP returned: " + eq);
+    }else{
+      this.memValue -= eq;
+    }
   },
 
   memoryRecall: function(){

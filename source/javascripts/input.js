@@ -90,6 +90,8 @@ function returnInputString() {
 
 /*
   CREATED: Sam Wolfe 03/18/2018
+  MODIFIED: Sam Wolfe 3/20/2018
+    -Bugfix: Now replaces all instances of 'ans'
 
   Description: Attempts to fix unbalanced parentheses
   Replaces "ans" with approriate value
@@ -102,7 +104,9 @@ function returnInputString() {
     The updated equation
 */
 function preprocess(eq, ansValue){
-  eq = eq.replace("ans",ansValue.toString());
+  if (ansValue != null){
+    eq = eq.replace(/ans/gi,ansValue.toString());
+  }
   var openBracketCount = 0;
   for(var i = 0; i < eq.length; i++){
     if(eq.charAt(i) == '('){
