@@ -40,7 +40,7 @@ function isASimpleSymbol(symbol){
     name: A string.
 */
 function isAFunctionName(name){
-    var functionNames = ["sin", "cos", "tan", "inv", "pow"];
+    var functionNames = ["sin","fact", "cos", "tan", "inv", "pow"];
 
     return functionNames.includes(name);
 }
