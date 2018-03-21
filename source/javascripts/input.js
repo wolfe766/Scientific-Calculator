@@ -80,7 +80,7 @@ function peakString() {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function returnInputString() {
-  var stringToReturn = this.leftString + this.rightString
+  var stringToReturn = this.leftString + this.rightString;
   /* clear string and write it to input box*/
   this.leftString = "";
   this.rightString = "";
@@ -204,8 +204,7 @@ function shiftCursorLeft() {
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorRight() {
-  var firstCharFromRightString = this.rightString.charAt(0);
-  this.leftString += firstCharFromRightString;
+  this.leftString += this.rightString.charAt(0);
   this.rightString = this.rightString.slice(1, this.rightString.length);
   writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
 }

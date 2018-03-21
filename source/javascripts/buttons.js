@@ -1,7 +1,7 @@
 /*
-  Created By: Alec Maier
+  Created By: Alec Maier 3/18/2018
   
-  Description: 
+  Description: functions for all button presses
 */
 
 // User pressed button to move left
@@ -86,8 +86,7 @@ function press_divide() {
 }
 
 function press_return() {
-    var text = inputObject.returnInputString();
-    document.getElementById("output").innerHTML = text;
+    document.getElementById("output").innerHTML = inputObject.returnInputString;
 }
 
 // User pressed button to clear display
@@ -132,7 +131,7 @@ function press_inverse() {
 
 // User pressed button to enter exponent
 function press_exponent() {
-    inputObject.addToString("pow(,)")
+    inputObject.addToString("pow(,)");
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
 }
@@ -190,28 +189,28 @@ function press_enter() {
     // Preprocess equation - need to add result from 'ANS' and replace null
     var equation = preprocess(input, memoryController.ansValue);
     //alert(equation);
-    
+
     // Get Trig Mode
     var trigMode = inputObject.returnTrigMode();
     //alert(trigMode);
 
     // Tokenize expression
-    var tokenize = tokenizeExpression(equation)
+    var tokenize = tokenizeExpression(equation);
     //alert(tokenize);
 
     // Get evaluation of entered equation
-    var value = calculateExpression(tokenize, trigMode)
+    var value = calculateExpression(tokenize, trigMode);
 
     //enable the ans button if value returned non-error
     if(!isNaN(value)){
         enableButton("ans");
         memoryController.ansValue = value;
     }
-    
+
     //add to history
     historyEntry = new Entry(equation,value);
     historyController.addToHistory(historyEntry);
-    
+
     // Update display of computed value
     inputObject.addToString(value);
 }
