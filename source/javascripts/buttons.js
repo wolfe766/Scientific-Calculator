@@ -180,6 +180,9 @@ function toggle_trig_mode() {
 // User pressed button to evaluat and display result
 function press_enter() {
     if(inputObject.peakString().length > 0){
+        //Reset the previous result upon beginning the ENTER sequence
+        previousResult.reset();
+
         // Get entered equation
         var input = inputObject.returnInputString();
 
