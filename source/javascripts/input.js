@@ -92,6 +92,10 @@ function returnInputString() {
   CREATED: Sam Wolfe 03/18/2018
   MODIFIED: Sam Wolfe 3/20/2018
     -Bugfix: Now replaces all instances of 'ans'
+  MODIFIED: Henry Karagory 03/21/2018
+    - The function will now insert implied multiplication symbols.
+  MODIFIED: Sam Wolfe 03/21/2018
+    -Added parameter to disable implied multiplcation
 
   Description: Attempts to fix unbalanced parentheses
   Replaces "ans" with approriate value
@@ -103,9 +107,6 @@ function returnInputString() {
 
   Return:
     The updated equation
-
-    MODIFIED: Henry Karagory 03/21/2018
-    - The function will now insert implied multiplication symbols.
 */
 function preprocess(eq, ansValue, replace = true){
 
@@ -121,8 +122,9 @@ function preprocess(eq, ansValue, replace = true){
     }
   }
 
-  if (ansValue != null){
-    eq = eq.replace(/ans/g,ansValue.toString());
+  //Replace the ans string with the actual value
+  if ((ansValue != null) && (eq.includes("ans"))){
+    eq = eq.replace(/ans/g,'(' + ansValue.toString() + ')');
   }
 
   console.log("Processed eq: " + eq);
@@ -139,8 +141,13 @@ function preprocess(eq, ansValue, replace = true){
     }
   }
 
-  for(;openBracketCount > 0; openBracketCount--){
-    eq = eq + ')';
+  if(openBracketCount > 0){
+    //The previous answer warning state is updated so that "paren were modifed"
+    //Notification can be displayed
+    previousResult.wasWarning = true;
+    for(;openBracketCount > 0; openBracketCount--){
+      eq = eq + ')';
+    }
   }
 
   return eq;
@@ -185,6 +192,27 @@ function enableAllMemoryButtons(){
   enableButton("mAdd");
   enableButton("mSub");
   enableButton("mc");
+}
+
+/*CREATED: Sam Wolfe 03/20/2018
+
+Description: Toggles the "An attempt was made to fix paren" notification
+*/
+function setNotification(status){
+  var notEl = document.getElementById("notification");
+  if(status == 0){
+    notEl.style.background = "rgba(0,255,0,.1)";
+    notEl.innerHTML = "\u2714";
+  }else if(status == 1){
+    notEl.style.background = "rgba(255,128,0,.2)";
+    notEl.innerHTML = "An Attempt Was Made To Fix Parentheses";
+  }else if(status == 2){
+    notEl.style.background = "rgba(255,0,0,.1)";
+    notEl.innerHTML = "Error :(";
+  }
+
+  //We always reset the previous result upon updating this banner
+  previousResult.reset();
 }
 
 /*
