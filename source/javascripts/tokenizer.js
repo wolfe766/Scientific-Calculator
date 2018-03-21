@@ -16,7 +16,7 @@
   - Consider a single . as a number now to account for decimals with no leading 0.
 */
 function isANumber(numberString){
-    return numberString=="." || !isNaN(numberString);
+    return numberString=="." || numberString=="-" || !isNaN(numberString);
 }
 
 
