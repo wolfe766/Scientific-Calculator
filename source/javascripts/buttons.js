@@ -152,7 +152,7 @@ function press_factorial() {
 
 // User pressed button to make the value negative
 function press_negative() {
-    inputObject.addToString("-");
+    inputObject.addToString("-")
 }
 
 // User pressed button to make value a decimal

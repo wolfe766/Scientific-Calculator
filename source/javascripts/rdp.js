@@ -76,13 +76,16 @@ function calculateExpressionRecursive(tokenQueue, trigMode){
                 return exprValueTemp;
             }
             exprValue = exprValue + exprValueTemp;
-        }else{
+        }else if (operation == "\u2212"){
             var exprValueTemp = calculateTerm(tokenQueue, trigMode);
             // If a string is returned then it is an error message, return the message.
             if(typeof exprValueTemp == "string"){
                 return exprValueTemp;
             }
             exprValue = exprValue - exprValueTemp;
+        }
+        else {
+
         }
     }
 
@@ -151,6 +154,7 @@ function calculateTerm(tokenQueue, trigMode) {
   return: the value of the factor.
 */
 function calculateFactor(tokenQueue, trigMode) {
+    console.log(tokenQueue);
     /* Functions names that may appear in the factor. */
     var funcNames = ["inv","fact", "sin", "cos", "tan", "sqrt"];
     var value;
