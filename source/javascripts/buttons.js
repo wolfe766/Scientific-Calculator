@@ -1,8 +1,8 @@
-function pressLeft() {
+function press_left() {
     inputObject.shiftCursorLeft();
 }
 
-function pressRight() {
+function press_right() {
     inputObject.shiftCursorRight();
 }
 

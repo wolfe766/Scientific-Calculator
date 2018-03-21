@@ -41,8 +41,8 @@ window.onload = function(){
         document.getElementById("decimal").addEventListener("click", press_point);
         document.getElementById("delete").addEventListener("click", press_delete);
         document.getElementById("clear").addEventListener("click", press_clear);
-        document.getElementById("left").addEventListener("click", shiftCursorLeft);
-        document.getElementById("right").addEventListener("click", shiftCursorRight);
+        document.getElementById("left").addEventListener("click", press_left);
+        document.getElementById("right").addEventListener("click", press_right);
 
             // Memory Functionality
         document.getElementById("ms").addEventListener("click", function(){memoryController.memoryStore()});
