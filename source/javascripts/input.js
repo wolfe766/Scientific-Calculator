@@ -102,8 +102,21 @@ function returnInputString() {
 
   Return:
     The updated equation
+
+    MODIFIED: Henry Karagory 03/21/2018
+    - The function will now insert implied multiplication symbols.
 */
 function preprocess(eq, ansValue){
+  // Global regular expression to find missing implied multiplication symbols.
+  var missingMultSymbolRE = /\d\(|\d[a-zA-Z]/g;
+
+  // Insert a multiplication symbol everywhere the regular expression matches.
+  var multSymbolArray = [];
+  while ((multSymbolArray = missingMultSymbolRE.exec(eq)) !== null) {
+    var indexToInsertMultSym = multSymbolArray.index;
+    eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
+  }
+
   if (ansValue != null){
     eq = eq.replace(/ans/g,ansValue.toString());
   }
