@@ -29,7 +29,7 @@ function addToString(element, is_output) {
     else {
         this.leftString += element.toString();
     }
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -46,8 +46,8 @@ function addToString(element, is_output) {
     the inner html specified at htmlEl in the calling object
 */
 function deleteFromString() {
-  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -66,7 +66,7 @@ function deleteFromString() {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function peakString() {
-  return this.leftString + this.rightString;
+    return this.leftString + this.rightString;
 }
 
 /*
@@ -86,13 +86,13 @@ function peakString() {
     the input to the left of the cursor and right of the cursor, concatenated.
 */
 function returnInputString() {
-  var stringToReturn = this.leftString + this.rightString;
-  this.outputString += (stringToReturn + "\n");
-  /* clear string and write it to input box*/
-  this.leftString = "";
-  this.rightString = "";
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
-  return stringToReturn;
+    var stringToReturn = this.leftString + this.rightString;
+    this.outputString += (stringToReturn + "\n");
+    /* clear string and write it to input box*/
+    this.leftString = "";
+    this.rightString = "";
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    return stringToReturn;
 }
 
 /*
@@ -117,54 +117,54 @@ function returnInputString() {
 */
 function preprocess(eq, ansValue, replace=true){
 
-  if(replace){
-    // Global regular expression to find missing implied multiplication symbols.
-    var missingMultSymbolOneAnsRE = /\)\d|\d\(|\d[a-zA-Z]|\)ans/g;
+    if(replace){
+        // Global regular expression to find missing implied multiplication symbols.
+        var missingMultSymbolOneAnsRE = /\)\d|\d\(|\d[a-zA-Z]|\)ans/g;
 
-    // Insert a multiplication symbol everywhere the regular expression matches.
-    var multSymbolArray = [];
-    while ((multSymbolArray = missingMultSymbolOneAnsRE.exec(eq)) !== null) {
-      var indexToInsertMultSym = multSymbolArray.index;
-      eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
+        // Insert a multiplication symbol everywhere the regular expression matches.
+        var multSymbolArray = [];
+        while ((multSymbolArray = missingMultSymbolOneAnsRE.exec(eq)) !== null) {
+            var indexToInsertMultSym = multSymbolArray.index;
+            eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
+        }
+
+        var missingMultSymbolAnsRE = /ans[a-zA-Z]|ans\(|ans\d]/g;
+        multSymbolArray = [];
+        while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
+            var indexToInsertMultSym = multSymbolArray.index;
+            eq = eq.slice(0, indexToInsertMultSym+3) + "*" + eq.slice(indexToInsertMultSym+3, eq.length);
+        }
     }
 
-    var missingMultSymbolAnsRE = /ans[a-zA-Z]|ans\(|ans\d]/g;
-    multSymbolArray = [];
-    while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
-      var indexToInsertMultSym = multSymbolArray.index;
-      eq = eq.slice(0, indexToInsertMultSym+3) + "*" + eq.slice(indexToInsertMultSym+3, eq.length);
+    //Replace the ans string with the actual value
+    if ((ansValue != null) && (eq.includes("ans"))){
+        eq = eq.replace(/ans/g,'(' + ansValue.toString() + ')');
     }
-  }
 
-  //Replace the ans string with the actual value
-  if ((ansValue != null) && (eq.includes("ans"))){
-    eq = eq.replace(/ans/g,'(' + ansValue.toString() + ')');
-  }
+    console.log("Processed eq: " + eq);
 
-  console.log("Processed eq: " + eq);
-
-  /*Add up the total number of left paren
-  Subtract off the total num of right paren
-  The result is the number of left paren to add */
-  var openBracketCount = 0;
-  for(var i = 0; i < eq.length; i++){
-    if(eq.charAt(i) == '('){
-      openBracketCount++;
-    }else if (eq.charAt(i) == ')'){
-      openBracketCount--;
+    /*Add up the total number of left paren
+    Subtract off the total num of right paren
+    The result is the number of left paren to add */
+    var openBracketCount = 0;
+    for(var i = 0; i < eq.length; i++){
+        if(eq.charAt(i) == '('){
+            openBracketCount++;
+        }else if (eq.charAt(i) == ')'){
+            openBracketCount--;
+        }
     }
-  }
 
-  if(openBracketCount > 0){
-    //The previous answer warning state is updated so that "paren were modifed"
-    //Notification can be displayed
-    previousResult.wasWarning = true;
-    for(;openBracketCount > 0; openBracketCount--){
-      eq = eq + ')';
+    if(openBracketCount > 0){
+        //The previous answer warning state is updated so that "paren were modifed"
+        //Notification can be displayed
+        previousResult.wasWarning = true;
+        for(;openBracketCount > 0; openBracketCount--){
+            eq = eq + ')';
+        }
     }
-  }
 
-  return eq;
+    return eq;
 }
 
 /*
@@ -180,13 +180,13 @@ function preprocess(eq, ansValue, replace=true){
     buttonID: CSS selector ID of the HTML object 
 */
 function enableButton(buttonID){
-  var button = document.getElementById(buttonID);
-  button.className = "enabled";
+    var button = document.getElementById(buttonID);
+    button.className = "enabled";
 }
 
 function disableButton(buttonID){
-  var button = document.getElementById(buttonID);
-  button.className = "disabled";
+    var button = document.getElementById(buttonID);
+    button.className = "disabled";
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
@@ -195,17 +195,17 @@ Description: Disables / Enables all memory buttons that should not
 function when no value is stored in memory.
 */
 function disableAllMemoryButtons(){
-  disableButton("mr");
-  disableButton("mAdd");
-  disableButton("mSub");
-  disableButton("mc");
+    disableButton("mr");
+    disableButton("mAdd");
+    disableButton("mSub");
+    disableButton("mc");
 }
 
 function enableAllMemoryButtons(){
-  enableButton("mr");
-  enableButton("mAdd");
-  enableButton("mSub");
-  enableButton("mc");
+    enableButton("mr");
+    enableButton("mAdd");
+    enableButton("mSub");
+    enableButton("mc");
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
@@ -213,17 +213,17 @@ function enableAllMemoryButtons(){
 Description: Toggles the "An attempt was made to fix paren" notification
 */
 function setNotification(status){
-  var notEl = document.getElementById("notification");
-  if(status == 0){
-    notEl.style.background = "rgba(0,255,0,.1)";
-    notEl.innerHTML = "\u2714";
-  }else if(status == 1){
-    notEl.style.background = "rgba(255,128,0,.2)";
-    notEl.innerHTML = "An Attempt Was Made To Fix Parentheses";
-  }else if(status == 2){
-    notEl.style.background = "rgba(255,0,0,.1)";
-    notEl.innerHTML = "Error :(";
-  }
+    var notEl = document.getElementById("notification");
+    if(status == 0){
+        notEl.style.background = "rgba(0,255,0,.1)";
+        notEl.innerHTML = "\u2714";
+    }else if(status == 1){
+        notEl.style.background = "rgba(255,128,0,.2)";
+        notEl.innerHTML = "An Attempt Was Made To Fix Parentheses";
+    }else if(status == 2){
+        notEl.style.background = "rgba(255,0,0,.1)";
+        notEl.innerHTML = "Error :(";
+    }
 }
 
 /*
@@ -240,10 +240,10 @@ function setNotification(status){
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorLeft() {
-  var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
-  this.rightString = lastCharFromLeftString + this.rightString;
-  this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
+    this.rightString = lastCharFromLeftString + this.rightString;
+    this.leftString = this.leftString.slice(0, this.leftString.length - 1);
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -260,9 +260,9 @@ function shiftCursorLeft() {
     the inner html specified at htmlEl in the calling object
 */
 function shiftCursorRight() {
-  this.leftString += this.rightString.charAt(0);
-  this.rightString = this.rightString.slice(1, this.rightString.length);
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    this.leftString += this.rightString.charAt(0);
+    this.rightString = this.rightString.slice(1, this.rightString.length);
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -279,9 +279,10 @@ function shiftCursorRight() {
     the inner html specified at htmlEl in the calling object
 */
 function clearInput() {
-  this.leftString = "";
-  this.rightString = "";
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+    this.outputString = "";
+    this.leftString = "";
+    this.rightString = "";
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -296,7 +297,7 @@ function clearInput() {
     the inner html specified at htmlEl
 */
 function writeInputToDOM(htmlEl, outputString, leftString, rightString, cursor) {
-  htmlEl.innerHTML = outputString + leftString + cursor + rightString;
+    htmlEl.innerHTML = outputString + leftString + cursor + rightString;
 }
 
 /*
@@ -312,11 +313,11 @@ function writeInputToDOM(htmlEl, outputString, leftString, rightString, cursor) 
     this.toggleTrigMode
 */
 function toggleTrigMode() {
-  if (this.trigMode === "deg") {
-    this.trigMode = "rad";
-  } else {
-    this.trigMode = "deg";
-  }
+    if (this.trigMode === "deg") {
+        this.trigMode = "rad";
+    } else {
+        this.trigMode = "deg";
+    }
 }
 
 /*
@@ -333,7 +334,7 @@ function toggleTrigMode() {
     this.toggleTrigMode
 */
 function returnTrigMode() {
-  return this.trigMode;
+    return this.trigMode;
 }
 
 
@@ -348,19 +349,19 @@ function returnTrigMode() {
 
   parameters: 
     htmlEl - an element from the DOM which a user would like to write inner html to.
-*/ 
+*/
 function Input(htmlEl) {
-  /* initalize properties */
-  this.leftString = ""; /* string to the left of the cursor */
-  this.rightString = ""; /* string to the right of the cursor */
+    /* initalize properties */
+    this.leftString = ""; /* string to the left of the cursor */
+    this.rightString = ""; /* string to the right of the cursor */
     this.outputString = "";
-  this.cursor = "|";
-  this.htmlEl = htmlEl;
-  this.trigMode = "deg";
+    this.cursor = "|";
+    this.htmlEl = htmlEl;
+    this.trigMode = "deg";
 
-  /* write cursor to input box during initalization */
-  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor)
-  
+    /* write cursor to input box during initalization */
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor)
+
 }
 
 /* 
@@ -369,17 +370,17 @@ function Input(htmlEl) {
   Description: Object containing properites to their corresponding functions
                for handling input. 
 
-*/ 
+*/
 function InputFunctions() {
-  this.addToString = addToString;
-  this.returnInputString = returnInputString;
-  this.peakString = peakString;
-  this.shiftCursorLeft = shiftCursorLeft; 
-  this.shiftCursorRight = shiftCursorRight;
-  this.clearInput = clearInput;
-  this.deleteFromString = deleteFromString;
-  this.toggleTrigMode = toggleTrigMode;
-  this.returnTrigMode = returnTrigMode;
+    this.addToString = addToString;
+    this.returnInputString = returnInputString;
+    this.peakString = peakString;
+    this.shiftCursorLeft = shiftCursorLeft;
+    this.shiftCursorRight = shiftCursorRight;
+    this.clearInput = clearInput;
+    this.deleteFromString = deleteFromString;
+    this.toggleTrigMode = toggleTrigMode;
+    this.returnTrigMode = returnTrigMode;
 }
 
 /* Chain Input to InputFunctions through prototype  */
