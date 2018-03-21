@@ -8,6 +8,7 @@
 //this is necessary otherwise we risk getting null objects if an element was not yet created
 
 var inputObject = new Input(document.getElementById("display"));
+var previousResult = new PreviousResult();
 
 window.onload = function(){
     // Initial button states

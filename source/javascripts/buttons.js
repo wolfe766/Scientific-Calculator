@@ -179,37 +179,38 @@ function toggle_trig_mode() {
 
 // User pressed button to evaluat and display result
 function press_enter() {
+    if (inputObject.peakString().length > 0) {
+        // Get entered equation
+        var input = inputObject.returnInputString();
 
-    // Get entered equation
-    var input = inputObject.returnInputString();
+        // Preprocess equation
+        var equation = preprocess(input, memoryController.ansValue);
 
-    // Preprocess equation
-    var equation = preprocess(input, memoryController.ansValue);
+        // Get Trig Mode
+        var trigMode = inputObject.returnTrigMode();
 
-    // Get Trig Mode
-    var trigMode = inputObject.returnTrigMode();
+        // Tokenize expression
+        var tokenize = tokenizeExpression(equation);
 
-    // Tokenize expression
-    var tokenize = tokenizeExpression(equation);
+        // Get evaluation of entered equation
+        var value = calculateExpression(tokenize, trigMode);
 
-    // Get evaluation of entered equation
-    var value = calculateExpression(tokenize, trigMode);
+        //enable the ans button if value returned non-error
+        if (!isNaN(value)) {
+            enableButton("ans");
+            memoryController.ansValue = value;
+        }
 
-    //enable the ans button if value returned non-error
-    if(!isNaN(value)){
-        enableButton("ans");
-        memoryController.ansValue = value;
+        //Add to history
+        //eqRaw is the raw user input without * inserted at mult spots like 5sin(4)
+        //This is what is printed to history and to the display - ans is still replaced
+        var eqRaw = preprocess(input, memoryController.ansValue, false);
+        historyEntry = new Entry(eqRaw, value);
+        historyController.addToHistory(historyEntry);
+
+        // Update display of computed value
+        inputObject.addToString(value, true);
+        var top = document.getElementById("display");
+        top.scrollTop = top.scrollHeight;
     }
-
-    //Add to history 
-    //eqRaw is the raw user input without * inserted at mult spots like 5sin(4)
-    //This is what is printed to history and to the display - ans is still replaced
-    var eqRaw = preprocess(input, memoryController.ansValue, false);
-    historyEntry = new Entry(eqRaw,value);
-    historyController.addToHistory(historyEntry);
-
-    // Update display of computed value
-    inputObject.addToString(value, true);
-    var top = document.getElementById("display");
-    top.scrollTop = top.scrollHeight;
 }
