@@ -7,10 +7,11 @@
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Use the title from a page's frontmatter if it has one -->
     <title><%= current_page.data.title || "Middleman" %></title>
-    <%= stylesheet_link_tag "site" %>
-    <%= javascript_include_tag "site" %>
-    <%= javascript_include_tag "input" %>
-    <%= javascript_include_tag "history" %>
+    <link href="../stylesheets/site.css" rel="stylesheet" />
+    <script src="../javascripts/site.js" type="application/javascript" defer></script>
+    <script src="../javascripts/input.js" type="application/javascript" defer></script>
+    <script src="../javascripts/buttons.js" type="application/javascript" defer></script>
+    <script src="../javascripts/history.js" type="application/javascript" defer></script>
   </head>
   <body>
     <%= yield %>
