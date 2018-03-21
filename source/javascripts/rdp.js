@@ -42,6 +42,7 @@ function calculateExpression(tokenQueue, trigMode="rad"){
     if(tokenQueue.length != 0){
         return "ERR: SYNTAX";
     }
+
     return exprValue;
 }
 

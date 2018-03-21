@@ -61,7 +61,7 @@ QUnit.test( "Calculate Expression Simple Test 6", function( assert ) {
 });
 
 QUnit.test( "Calculate Expression Simple Test 7", function( assert ) {
-  var tokenQueue = ["5", "+", "5", "*", "6","-", "10", "/", "10"];
+  var tokenQueue = ["5", "+", "5", "*", "6","\u2212", "10", "/", "10"];
   var expectedValue = 34;
 
   var actualValue = calculateExpression(tokenQueue);
@@ -70,7 +70,7 @@ QUnit.test( "Calculate Expression Simple Test 7", function( assert ) {
 });
 
 QUnit.test( "Calculate Expression Simple Test 8", function( assert ) {
-  var tokenQueue = ["1", "-", "1"];
+  var tokenQueue = ["1", "\u2212", "1"];
   var expectedValue = 0;
 
   var actualValue = calculateExpression(tokenQueue);
@@ -117,7 +117,7 @@ QUnit.test( "Calculate Expression With Parentheses And No Functions Test 3", fun
 });
 
 QUnit.test( "Calculate Expression With Parentheses And No Functions Test 4", function( assert ) {
-  var tokenQueue = ["(", "1", "+", "6", ")", "-", "(", "1", "+", "(", "3", "-", "2", "*", "2", ")", ")"];
+  var tokenQueue = ["(", "1", "+", "6", ")", "\u2212", "(", "1", "+", "(", "3", "\u2212", "2", "*", "2", ")", ")"];
   var expectedValue = 7;
 
   var actualValue = calculateExpression(tokenQueue);
@@ -403,7 +403,7 @@ QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 3", fun
 });
 
 QUnit.test( "Calculate Expression With Pow Function And Parentheses Test 4", function( assert ) {
-  var tokenQueue = ["pow", "(", "(", "5", "-", "7", ")", ",", "(", "2", "*", "3", ")" , ")"];
+  var tokenQueue = ["pow", "(", "(", "5", "\u2212", "7", ")", ",", "(", "2", "*", "3", ")" , ")"];
   var expectedValue = 64;
 
   var actualValue = calculateExpression(tokenQueue);
