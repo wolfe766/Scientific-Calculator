@@ -124,6 +124,47 @@ function preprocess(eq, ansValue){
 }
 
 /*
+  CREATED: Sam Wolfe 03/20/2018
+
+  Description: disables or enables certain memory buttons when
+  there is no value stored in memory
+
+  NOTE: This currently requires that buttons have no other class value
+  than "enabled" or "disabled" this can be changed later if necessary. 
+
+  Parameters:
+    buttonID: CSS selector ID of the HTML object 
+*/
+function enableButton(buttonID){
+  var button = document.getElementById(buttonID);
+  button.className = "enabled";
+}
+
+function disableButton(buttonID){
+  var button = document.getElementById(buttonID);
+  button.className = "disabled";
+}
+
+/*CREATED: Sam Wolfe 03/20/2018
+
+Description: Disables / Enables all memory buttons that should not
+function when no value is stored in memory.
+*/
+function disableAllMemoryButtons(){
+  disableButton("mr");
+  disableButton("mAdd");
+  disableButton("mSub");
+  disableButton("mc");
+}
+
+function enableAllMemoryButtons(){
+  enableButton("mr");
+  enableButton("mAdd");
+  enableButton("mSub");
+  enableButton("mc");
+}
+
+/*
   CREATED: David Levine 03/12/2018
   
   Description: shifts the cursor one position to the left

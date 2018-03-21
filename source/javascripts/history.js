@@ -142,8 +142,9 @@ var memoryController =
   },
 
   memoryClear: function(){
-    //TODO: disable MC, M+, M-, and MR
     this.memValue = null;
+    disableAllMemoryButtons();
+    console.log("Memory Cleared: " + this.memValue)
   },
 
   memoryStore: function(){
@@ -157,6 +158,10 @@ var memoryController =
       console.log("Memory Store Failed -- RDP returned error: " + eq);
     }else{
       this.memValue = eq;
+      console.log("Memory Store Success -- New Value: " + this.memValue);
+
+      //Enable memory buttons on success
+      enableAllMemoryButtons();
     }
   },
 
@@ -169,6 +174,7 @@ var memoryController =
       console.log("Memory Plus Failed -- RDP returned error: " + eq);
     }else{
       this.memValue += eq;
+      console.log("Memory Add Success -- New Value: " + this.memValue);
     }
   },
 
@@ -181,6 +187,7 @@ var memoryController =
       console.log("Memory Minus Failed -- RDP returned: " + eq);
     }else{
       this.memValue -= eq;
+      console.log("Memory Subtract Success -- New Value: " + this.memValue);
     }
   },
 
