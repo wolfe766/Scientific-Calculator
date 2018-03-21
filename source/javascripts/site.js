@@ -1,4 +1,8 @@
-// This is where it all goes :)
+/* CREATED: Brandon Brown and Alec Maier 3/20/2018
+    Memory functionality created by Sam Wolfe
+
+   Description: Main javascript for the calculator. Registers event listeners.
+ */
 
 //window.onload stops JS from executing until the HTML page is fully formed
 //this is necessary otherwise we risk getting null objects if an element was not yet created
@@ -9,6 +13,8 @@ window.onload = function(){
   // Initial button states
   disableButton("ans");
   disableAllMemoryButtons();
+
+  // sets initial trig mode/displays to user
   toggle_trig_mode();
 
   // Memory functionality
@@ -60,7 +66,6 @@ window.onload = function(){
 
   //Listener for clicking on items in the history panel
   document.addEventListener("click", function(e){
-      var e = e;
       var target = e.target;
       if(target.className == "historyEq"){
           inputObject.addToString(target.innerHTML);
