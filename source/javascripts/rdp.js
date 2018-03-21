@@ -94,6 +94,8 @@ function calculateExpressionRecursive(tokenQueue, trigMode){
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Henry Karagory 03/21/2018
+    - Handle divide by zero case.
 
   Description: implements the parse method for the non-terminal 
   symbol term. A term consists of zero or more mulitplication operations against 
@@ -132,6 +134,9 @@ function calculateTerm(tokenQueue, trigMode) {
             // If a string is returned then it is an error message, return the message.
             if(typeof valueTemp == "string"){
                 return valueTemp;
+            }
+            if(valueTemp==0){
+              return "ERR: DIVIDE BY 0";
             }
             value /= valueTemp;
         }
