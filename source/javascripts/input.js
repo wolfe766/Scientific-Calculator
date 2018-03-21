@@ -13,6 +13,7 @@
 
   parameters: 
     element: element to add to string
+    is_output: boolean indicating where to add element to
 
   requires:
     function is called through an input object
@@ -21,9 +22,14 @@
     this.leftString
     the inner html specified at htmlEl in the calling object
 */
-function addToString(element) {
-  this.leftString += element.toString();
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+function addToString(element, is_output) {
+    if(is_output) {
+        this.outputString += ("\t\t\t" + element + "\n");
+    }
+    else {
+        this.leftString += element.toString();
+    }
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -41,7 +47,7 @@ function addToString(element) {
 */
 function deleteFromString() {
   this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -81,10 +87,11 @@ function peakString() {
 */
 function returnInputString() {
   var stringToReturn = this.leftString + this.rightString;
+  this.outputString += (stringToReturn + "\n");
   /* clear string and write it to input box*/
   this.leftString = "";
   this.rightString = "";
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
   return stringToReturn;
 }
 
@@ -108,17 +115,24 @@ function returnInputString() {
   Return:
     The updated equation
 */
-function preprocess(eq, ansValue, replace = true){
+function preprocess(eq, ansValue, replace=true){
 
   if(replace){
     // Global regular expression to find missing implied multiplication symbols.
-    var missingMultSymbolRE = /\)\d|\d\(|\d[a-zA-Z]/g;
+    var missingMultSymbolOneAnsRE = /\)\d|\d\(|\d[a-zA-Z]|\)ans/g;
 
     // Insert a multiplication symbol everywhere the regular expression matches.
     var multSymbolArray = [];
-    while ((multSymbolArray = missingMultSymbolRE.exec(eq)) !== null) {
+    while ((multSymbolArray = missingMultSymbolOneAnsRE.exec(eq)) !== null) {
       var indexToInsertMultSym = multSymbolArray.index;
       eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
+    }
+
+    var missingMultSymbolAnsRE = /ans[a-zA-Z]|ans\(|ans\d]/g;
+    multSymbolArray = [];
+    while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
+      var indexToInsertMultSym = multSymbolArray.index;
+      eq = eq.slice(0, indexToInsertMultSym+3) + "*" + eq.slice(indexToInsertMultSym+3, eq.length);
     }
   }
 
@@ -210,9 +224,6 @@ function setNotification(status){
     notEl.style.background = "rgba(255,0,0,.1)";
     notEl.innerHTML = "Error :(";
   }
-
-  //We always reset the previous result upon updating this banner
-  previousResult.reset();
 }
 
 /*
@@ -232,7 +243,7 @@ function shiftCursorLeft() {
   var lastCharFromLeftString = this.leftString.charAt(this.leftString.length - 1);
   this.rightString = lastCharFromLeftString + this.rightString;
   this.leftString = this.leftString.slice(0, this.leftString.length - 1);
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -251,7 +262,7 @@ function shiftCursorLeft() {
 function shiftCursorRight() {
   this.leftString += this.rightString.charAt(0);
   this.rightString = this.rightString.slice(1, this.rightString.length);
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -270,7 +281,7 @@ function shiftCursorRight() {
 function clearInput() {
   this.leftString = "";
   this.rightString = "";
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor);
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 }
 
 /*
@@ -284,8 +295,8 @@ function clearInput() {
   updates:
     the inner html specified at htmlEl
 */
-function writeInputToDOM(htmlEl, leftString, rightString, cursor) {
-  htmlEl.innerHTML = leftString + cursor + rightString;
+function writeInputToDOM(htmlEl, outputString, leftString, rightString, cursor) {
+  htmlEl.innerHTML = outputString + leftString + cursor + rightString;
 }
 
 /*
@@ -342,12 +353,13 @@ function Input(htmlEl) {
   /* initalize properties */
   this.leftString = ""; /* string to the left of the cursor */
   this.rightString = ""; /* string to the right of the cursor */
+    this.outputString = "";
   this.cursor = "|";
   this.htmlEl = htmlEl;
   this.trigMode = "deg";
 
   /* write cursor to input box during initalization */
-  writeInputToDOM(this.htmlEl, this.leftString, this.rightString, this.cursor)
+  writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor)
   
 }
 
