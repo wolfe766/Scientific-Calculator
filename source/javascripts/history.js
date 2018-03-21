@@ -116,8 +116,11 @@ var historyController =
       scroll.style.background = "#bb0000";
     }
 
-    var historyElementSmall = this.generateSmallHistoryElement(entry);
-    smallContainer.replaceChild(historyElementSmall, smallContainer.childNodes[0]);
+    //do not print small history of the result is an error
+    if(!isNaN(entry.answer)){
+      var historyElementSmall = this.generateSmallHistoryElement(entry);
+      smallContainer.replaceChild(historyElementSmall, smallContainer.childNodes[0]);
+    }
   },
 
   /*CREATED: Sam Wolfe 3/18/2018

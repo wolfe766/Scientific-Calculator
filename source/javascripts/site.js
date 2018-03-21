@@ -61,7 +61,10 @@ window.onload = function(){
   document.addEventListener("click", function(e){
       var e = e;
       var target = e.target;
-      if((target.className == "historyEq") || (target.className == "historyAns")){
+      if(target.className == "historyEq"){
+          inputObject.addToString(target.innerHTML);
+      //Don't add to input if an error is clicked
+      }else if((target.className == "historyAns") && (!isNaN(target.innerHTML))){
           inputObject.addToString(target.innerHTML);
       }
   });
