@@ -9,10 +9,9 @@
 //window.onload stops JS from executing until the HTML page is fully formed
 //this is necessary otherwise we risk getting null objects if an element was not yet created
 
+var inputObject = new Input(document.getElementById("display"));
 
 window.onload = function(){
-
-        var inputObject = new Input(document.getElementById("display"));
         // Calculator Functionality
         document.getElementById("0").addEventListener("click", press_0);
         document.getElementById("1").addEventListener("click", press_1);
@@ -44,7 +43,6 @@ window.onload = function(){
         document.getElementById("clear").addEventListener("click", press_clear);
         document.getElementById("left").addEventListener("click", shiftCursorLeft);
         document.getElementById("right").addEventListener("click", shiftCursorRight);
-        document.getElementById("enter").addEventListener("click", press_enter);
 
             // Memory Functionality
         document.getElementById("ms").addEventListener("click", function(){memoryController.memoryStore()});
