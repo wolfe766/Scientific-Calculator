@@ -121,7 +121,7 @@ function preprocess(eq, ansValue, replace = true){
       eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
     }
 
-    var missingMultSymbolAnsRE = /ans[a-zA-Z|\)ans|ans\(]/g;
+    var missingMultSymbolAnsRE = /ans[a-zA-Z|\)ans|ans\(|ans\d]/g;
     multSymbolArray = [];
     while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
       var indexToInsertMultSym = multSymbolArray.index;
