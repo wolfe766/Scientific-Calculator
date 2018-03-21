@@ -59,7 +59,7 @@ function longestNumberFromPosition(startIndex, expression){
     var endIndex = startIndex + 1;
 
     while(endIndex < expression.length){
-        if(isANumber(expression.substring(startIndex, endIndex+1))){
+        if(isANumber(expression.substring(startIndex, endIndex+1)){
             endIndex++;
         }else{
             break;
