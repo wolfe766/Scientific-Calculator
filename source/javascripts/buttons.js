@@ -220,5 +220,7 @@ function press_enter() {
 
         // Update display of computed value
         inputObject.addToString(value, true);
+        var textarea = document.getElementById("display");
+        textarea.scrollTop = textarea.scrollHeight;
     }
 }
