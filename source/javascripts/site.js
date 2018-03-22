@@ -1,6 +1,7 @@
 /* CREATED: Brandon Brown and Alec Maier 3/20/2018
     Memory functionality created by Sam Wolfe
     MODIFIED: David Levine 3/21/2018
+        -Added blinking cursor support
 
    Description: Main javascript for the calculator. Registers event listeners.
  */

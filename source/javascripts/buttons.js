@@ -1,132 +1,157 @@
 /*
   Created By: Alec Maier 3/18/2018
-  
+  MODIFIED: David Levine 3/22/2018
+    -Added checks to enable or disable memory button after button presses.
   Description: functions for all button presses
 */
 
 // User pressed button to move left
 function press_left() {
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to move right
 function press_right() {
     inputObject.shiftCursorRight();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '0' 
 function press_0() {
     //alert("zero pressed");
     inputObject.addToString(0);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '1'
 function press_1() {
     inputObject.addToString(1);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '2'
 function press_2() {
     inputObject.addToString(2);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '3'
 function press_3() {
     inputObject.addToString(3);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '4'
 function press_4() {
     inputObject.addToString(4);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '5'
 function press_5() {
     inputObject.addToString(5);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '6'
 function press_6() {
     inputObject.addToString(6);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '7'
 function press_7() {
     inputObject.addToString(7);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '8'
 function press_8() {
     inputObject.addToString(8);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '9'
 function press_9() {
     inputObject.addToString(9);
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '+'
 function press_plus() {
     inputObject.addToString("+");
+    checkAndEnableOrDisableMemoryButtons(inputObject);;
 }
 
 // User pressed button to enter '-'
 function press_minus() {
     inputObject.addToString("\u2212");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '*'
 function press_multiply() {
     inputObject.addToString("*");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '/'
 function press_divide() {
     inputObject.addToString("/");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 function press_return() {
     document.getElementById("output").innerHTML = inputObject.returnInputString;
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to clear display
 function press_clear() {
     inputObject.clearInput();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to delete last operation or number
 function press_delete() {
     inputObject.deleteFromString();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter 'tan'
 function press_tan() {
     inputObject.addToString("tan()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter 'sin'
 function press_sin() {
     inputObject.addToString("sin()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter 'cos'
 function press_cos() {
     inputObject.addToString("cos()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter 'sqrt'
 function press_radical() {
     inputObject.addToString("sqrt()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter invervse
 function press_inverse() {
     inputObject.addToString("inv()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter exponent
@@ -134,6 +159,7 @@ function press_exponent() {
     inputObject.addToString("pow(,)");
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter square
@@ -142,32 +168,38 @@ function press_square() {
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '/'
 function press_factorial() {
     inputObject.addToString("fact()");
     inputObject.shiftCursorLeft();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to make the value negative
 function press_negative() {
     inputObject.addToString("-")
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to make value a decimal
 function press_point() {
     inputObject.addToString(".");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter '('
 function press_left_paren() {
     inputObject.addToString("(");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to enter ')'
 function press_right_paren() {
     inputObject.addToString(")");
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to toggole between radians and degrees
@@ -175,6 +207,7 @@ function toggle_trig_mode() {
     inputObject.toggleTrigMode();
     el = document.getElementById("trig_display");
     el.value = inputObject.returnTrigMode();
+    checkAndEnableOrDisableMemoryButtons(inputObject);
 }
 
 // User pressed button to evaluat and display result
@@ -215,6 +248,9 @@ function press_enter() {
             previousResult.wasError = true;
         }
 
+        //Disable all memory functionality
+        disableAllMemoryButtons();
+
         //Update the notification panel
         setNotification(previousResult.getPriorityState());
 
@@ -224,3 +260,4 @@ function press_enter() {
         textarea.scrollTop = textarea.scrollHeight;
     }
 }
+

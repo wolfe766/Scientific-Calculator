@@ -190,11 +190,14 @@ function disableButton(buttonID){
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
+  MODIFIED: David Levine 3/22/2018
+    -Added functionality for disabling and enabling ms.
 
 Description: Disables / Enables all memory buttons that should not
 function when no value is stored in memory.
 */
 function disableAllMemoryButtons(){
+    disableButton("ms");
     disableButton("mr");
     disableButton("mAdd");
     disableButton("mSub");
@@ -202,10 +205,28 @@ function disableAllMemoryButtons(){
 }
 
 function enableAllMemoryButtons(){
+    enableButton("ms");
     enableButton("mr");
     enableButton("mAdd");
     enableButton("mSub");
     enableButton("mc");
+}
+
+
+/*
+    CREATED: David Levine
+
+    Description: Enables the calc buttons if the given
+                 input object has anything written to it. Otherwise
+                 it will disable the buttons.
+*/
+function checkAndEnableOrDisableMemoryButtons(inputObjectFromButtons) {
+    /* No input given, so disable button functionality */
+    if (inputObjectFromButtons.peakString() != "") {
+        enableAllMemoryButtons();
+    } else {
+        disableAllMemoryButtons();
+    }
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
