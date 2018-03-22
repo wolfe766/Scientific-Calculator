@@ -215,6 +215,7 @@ var memoryController =
     {
         ansValue: null,
         memValue: null,
+        inputObject: null,
 
         /*CREATED: Sam Wolfe 3/18/2018
 
@@ -232,8 +233,9 @@ var memoryController =
         */
         memoryClear: function(){
             this.memValue = null;
-            disableAllMemoryButtons();
+            
             console.log("Memory Cleared: " + this.memValue);
+            disableAllMemoryButtons(true, inputObject.peakString() != ""); /* true that mem value is null, and check to see if input in box */
             this.updateMemoryDisplay(true);
         },
 
@@ -256,7 +258,7 @@ var memoryController =
                 console.log("Memory Store Success -- New Value: " + this.memValue);
 
                 //Enable memory buttons on success
-                enableAllMemoryButtons();
+                enableAllMemoryButtons(false); /* pass in false because memValue is NOT null*/
                 this.updateMemoryDisplay();
             }
         },
@@ -325,4 +327,3 @@ var memoryController =
         }
     };
 
-    

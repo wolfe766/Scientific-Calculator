@@ -28,7 +28,9 @@ var blinkTime = 500; /* how much time in miliseconds the cursor should blink */
 window.onload = function(){
     // Initial button states
     disableButton("ans");
-    disableAllMemoryButtons();
+    var isMemNull = true;
+    var haveNoInput = true;
+    disableAllMemoryButtons(isMemNull, haveNoInput);
 
     //Setup blinking cursor
     setInterval(blinkFeature, blinkTime);
@@ -39,12 +41,13 @@ window.onload = function(){
     //document.getElementById("textarea").scrollTop = document.getElementById("textarea").scrollHeight;
 
     // Memory functionality
+    memoryController.inputObject = inputObject;
     document.getElementById("ms").addEventListener("click", function(){memoryController.memoryStore()});
     document.getElementById("ans").addEventListener("click", function(){memoryController.ansToString()});
     document.getElementById("mr").addEventListener("click", function(){memoryController.memoryRecall()});
     document.getElementById("mAdd").addEventListener("click", function(){memoryController.memoryPlus()});
     document.getElementById("mSub").addEventListener("click", function(){memoryController.memoryMinus()});
-    document.getElementById("mc").addEventListener("click", function(){memoryController.memoryClear()});
+    document.getElementById("mc").addEventListener("click", function(){memoryController.memoryClear(inputObject)});
 
     // Calculator Functionality
     document.getElementById("0").addEventListener("click", press_0);

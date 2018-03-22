@@ -193,23 +193,42 @@ function disableButton(buttonID){
   MODIFIED: David Levine 3/22/2018
     -Added functionality for disabling and enabling ms.
 
+
+
 Description: Disables / Enables all memory buttons that should not
 function when no value is stored in memory.
+    
+    parameters:
+        -isMemNull - true is the memory controller has null, false otherwise
+        -noInput - true if there is no input given, false otherwise
 */
-function disableAllMemoryButtons(){
-    disableButton("ms");
-    disableButton("mr");
-    disableButton("mAdd");
-    disableButton("mSub");
-    disableButton("mc");
+function disableAllMemoryButtons(isMemNull, noInput){
+    
+    /* no input at all and there's noInput, or there's input (but null mem value) */
+    if ((isMemNull && noInput) || !noInput) {
+        disableButton("mr");
+        disableButton("mAdd");
+        disableButton("mSub");
+        disableButton("mc");
+    }
+
+    /* If there is input, don't want to disable ms button */
+    if (!noInput) {
+        disableButton("ms")
+    }
+
+    
 }
 
-function enableAllMemoryButtons(){
+function enableAllMemoryButtons(isMemNull){
+    
+    if (!isMemNull) {
+        enableButton("mr");
+        enableButton("mAdd");
+        enableButton("mSub");
+        enableButton("mc");
+    }
     enableButton("ms");
-    enableButton("mr");
-    enableButton("mAdd");
-    enableButton("mSub");
-    enableButton("mc");
 }
 
 
@@ -219,13 +238,16 @@ function enableAllMemoryButtons(){
     Description: Enables the calc buttons if the given
                  input object has anything written to it. Otherwise
                  it will disable the buttons.
+    parameters:
+        -inputObjectFromButtons: the inputObject being used
+        -isMemNull - true is the memory controller has null, false otherwise
 */
-function checkAndEnableOrDisableMemoryButtons(inputObjectFromButtons) {
+function checkAndEnableOrDisableMemoryButtons(inputObjectFromButtons, isMemNull) {
     /* No input given, so disable button functionality */
     if (inputObjectFromButtons.peakString() != "") {
-        enableAllMemoryButtons();
+        enableAllMemoryButtons(isMemNull); 
     } else {
-        disableAllMemoryButtons();
+        disableAllMemoryButtons(isMemNull, false); /* have input now */
     }
 }
 
