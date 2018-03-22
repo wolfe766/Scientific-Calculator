@@ -337,6 +337,27 @@ function returnTrigMode() {
     return this.trigMode;
 }
 
+/*
+    CREATED: David Levine 03/22/2018
+
+    Description: Overwrites the cursor part of the
+                input string. To be called by setInterval in
+                site.js
+    
+    Updates:
+        this.cursor
+        innerHTML at this.htmlEl    
+*/
+function blinkCursor() {
+  if (this.cursor == "|") {
+    this.cursor = " ";
+  } else {
+    this.cursor = "|";
+  }
+
+   writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+}
+
 
 /* 
   CREATED: David Levine 03/12/2018
@@ -360,7 +381,7 @@ function Input(htmlEl) {
     this.trigMode = "deg";
 
     /* write cursor to input box during initalization */
-    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor)
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 
 }
 
@@ -381,6 +402,7 @@ function InputFunctions() {
     this.deleteFromString = deleteFromString;
     this.toggleTrigMode = toggleTrigMode;
     this.returnTrigMode = returnTrigMode;
+    this.blinkCursor = blinkCursor;
 }
 
 /* Chain Input to InputFunctions through prototype  */

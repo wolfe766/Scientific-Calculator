@@ -8,24 +8,13 @@
  /*
     CREATED: David Levine 3/21/2018
     Description: simulates blinking in the textbox by 
-    frequently replacing the cursor with a space or  
-    the space with a cursor depending on what is cursorVisible
-    is set to.
-    Should be bound to 
+    ftoggling the cursor appearance through the html.
 
     Updates: 
-        -cursorVisible
         -innerHTML of the display textarea element
  */
 function blinkFeature(blinkTime) {
-    var displayText = document.getElementById("display");
-    if (isCursorVisible) {
-        isCursorVisible = !isCursorVisible;
-        displayText.innerHTML = displayText.innerHTML.replace("|", " ");
-    } else {
-        isCursorVisible = !isCursorVisible;
-        displayText.innerHTML = displayText.innerHTML.replace(" ", "|");
-    }
+    inputObject.blinkCursor();
 }
 
 //window.onload stops JS from executing until the HTML page is fully formed
@@ -33,7 +22,6 @@ function blinkFeature(blinkTime) {
 
 var inputObject = new Input(document.getElementById("display"));
 var previousResult = new PreviousResult();
-var isCursorVisible = false; /* Should cursor currently be active? */
 var blinkTime = 500; /* how much time in miliseconds the cursor should blink */
 
 window.onload = function(){
