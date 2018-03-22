@@ -1,19 +1,48 @@
 /* CREATED: Brandon Brown and Alec Maier 3/20/2018
     Memory functionality created by Sam Wolfe
+    MODIFIED: David Levine 3/21/2018
 
    Description: Main javascript for the calculator. Registers event listeners.
  */
+
+ /*
+    CREATED: David Levine 3/21/2018
+    Description: simulates blinking in the textbox by 
+    frequently replacing the cursor with a space or  
+    the space with a cursor depending on what is cursorVisible
+    is set to.
+    Should be bound to 
+
+    Updates: 
+        -cursorVisible
+        -innerHTML of the display textarea element
+ */
+function blinkFeature(blinkTime) {
+    var displayText = document.getElementById("display");
+    if (isCursorVisible) {
+        isCursorVisible = !isCursorVisible;
+        displayText.innerHTML = displayText.innerHTML.replace("|", " ");
+    } else {
+        isCursorVisible = !isCursorVisible;
+        displayText.innerHTML = displayText.innerHTML.replace(" ", "|");
+    }
+}
 
 //window.onload stops JS from executing until the HTML page is fully formed
 //this is necessary otherwise we risk getting null objects if an element was not yet created
 
 var inputObject = new Input(document.getElementById("display"));
 var previousResult = new PreviousResult();
+var isCursorVisible = false; /* Should cursor currently be active? */
+var blinkTime = 500; /* how much time in miliseconds the cursor should blink */
 
 window.onload = function(){
     // Initial button states
     disableButton("ans");
     disableAllMemoryButtons();
+
+    //Setup blinking cursor
+    setInterval(blinkFeature, blinkTime);
 
     // sets initial trig mode/displays to user
     toggle_trig_mode();
@@ -78,4 +107,3 @@ window.onload = function(){
         }
     });
 };
-
