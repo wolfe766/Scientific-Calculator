@@ -39,8 +39,11 @@ Also list if people worked together (pair programmed) on a particular section.
 Type 'bundle exec middleman build' into the console to build the website. Then, go into the build folder and open index.html. This will open the fully functional calculator. 
 
 ### Noteworthy features that you might miss:
+
 *You can click on an item in the history box (answer or equation) to place it into the input box.
+
 *The calculator will make an attempt to fix mismatched parentheses
+
 *The calculator has full support for implied multiplication (aka functions like 5(6), 5cos(1), and 5ans)
 
 ### Testing Plans: 
