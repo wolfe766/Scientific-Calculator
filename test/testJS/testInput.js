@@ -6,6 +6,8 @@
   which will be kept track of in a inputTestBugs.txt file in the directory titled testNotes.
 */
 
+
+
 /* create input object which all functions will have access to */
 
 var inputObject = new Input(document.getElementById("input"));
@@ -127,4 +129,6 @@ document.getElementById("clear").addEventListener("click", buttonClear);
 document.getElementById("del").addEventListener("click", buttonDel);
 document.getElementById("tan").addEventListener("click", buttonTan);
 document.getElementById("trig").addEventListener("click", toggleTrigMode);
+
+
 
