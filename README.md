@@ -47,7 +47,8 @@ Type 'bundle exec middleman build' into the console to build the website. Then, 
 *The calculator has full support for implied multiplication (aka functions like 5(6), 5cos(1), and 5ans)
 
 ### Testing Plans: 
-.
-.TBD
-.
+Testing Plan:
+
+All core functionality has been tested. Unit testing involved team members utilizing the Qunit testing framework to test their Javascript code.  Custom test cases were written for interfacing with mockup GUIs, the tests were evaluated in a browser. Integration testing was done manually by checking the results obtained from the calculator in a browser with the results of a TI-84 Plus calculator.
+
 Finally, each team member used https://validator.w3.org/ to ensure that their html and css modifications all had proper markup validatity.
