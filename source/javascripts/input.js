@@ -108,6 +108,8 @@ function returnInputString() {
     - The function will now insert implied multiplication symbols.
   MODIFIED: Sam Wolfe 03/21/2018
     -Added parameter to disable implied multiplcation
+  MODIFIED: Sam Wolfe 03/25/2018
+    -Deal with repeated negative signs
 
   Description: Attempts to fix unbalanced parentheses
   Replaces "ans" with approriate value
@@ -123,16 +125,51 @@ function returnInputString() {
 function preprocess(eq, ansValue, replace=true){
 
     if(replace){
-        // Global regular expression to find missing implied multiplication symbols.
-        var missingMultSymbolOneAnsRE = /\)\(|\)\d|\d\(|\d[a-zA-Z]|\)ans/g;
+
+      // Replace multiple negative signs that occur in a row, even number is equivalent to no parentheses.
+      eq = eq.replace(/-+/g, function(matchedText){
+          console.log(matchedText);
+          if(matchedText.length%2==0){
+            return "";
+          }else{
+            return "-";
+          }
+        });
+
+        // Replace negative signs that occur between parentheses.
+        eq = eq.replace(/\)-\(/g, function(matchedText){
+          console.log(matchedText);
+          return matchedText.charAt(0)+"*-1*"+matchedText.charAt(2);
+        });
+
+       // Negative sign followed by an opening parentheses 
+        eq = eq.replace(/-\(/g, "-1*(");
+
+        eq = eq.replace(/[a-zA-Z]-[a-zA-Z]/g, function(matchedText){
+          return matchedText.charAt(0)+"*-1*"+matchedText.charAt(2);
+        });
+
+        // Negative sign followed by a function
+        eq = eq.replace(/-[a-zA-Z]/, function(matchedText){
+          return "-1*"+matchedText.charAt(1);
+        });
+        /*
+          Global regular expression to find missing implied multiplication symbols with one charcter at the 
+          start of the matched string.
+        */
+        var missingMultSymbolOneCharRE = /\)\(|\)\d|\d\(|\d[a-zA-Z]|\)[a-zA-Z]/g;
 
         // Insert a multiplication symbol everywhere the regular expression matches.
         var multSymbolArray = [];
-        while ((multSymbolArray = missingMultSymbolOneAnsRE.exec(eq)) !== null) {
+        while ((multSymbolArray = missingMultSymbolOneCharRE.exec(eq)) !== null) {
             var indexToInsertMultSym = multSymbolArray.index;
             eq = eq.slice(0, indexToInsertMultSym+1) + "*" + eq.slice(indexToInsertMultSym+1, eq.length);
         }
 
+        /*
+          Global regular expression to find missing implied multiplication symbols with the substring ans
+          at the start of the matched string.
+        */
         var missingMultSymbolAnsRE = /ans[a-zA-Z]|ans\(|ans\d]/g;
         multSymbolArray = [];
         while ((multSymbolArray = missingMultSymbolAnsRE.exec(eq)) !== null) {
@@ -143,14 +180,17 @@ function preprocess(eq, ansValue, replace=true){
 
     //Replace the ans string with the actual value
     if ((ansValue != null) && (eq.includes("ans"))){
+        eq = eq.replace(/-ans/g, "-1*ans" );
         eq = eq.replace(/ans/g,'(' + ansValue.toString() + ')');
     }
 
     console.log("Processed eq: " + eq);
 
-    /*Add up the total number of left paren
-    Subtract off the total num of right paren
-    The result is the number of left paren to add */
+    /*
+      Add up the total number of left paren
+      Subtract off the total num of right paren
+      The result is the number of left paren to add 
+    */
     var openBracketCount = 0;
     for(var i = 0; i < eq.length; i++){
         if(eq.charAt(i) == '('){
