@@ -1,5 +1,8 @@
-/* CREATED: Brandon Brown and Alec Maier 3/20/2018
-    Memory functionality created by Sam Wolfe
+/* 
+    CREATED: Brandon Brown and Alec Maier 3/20/2018
+      - Added functionality for listeners to button presses (non-memory)
+    MODIFIED: Same Wolfe 3/20/2018
+      - Memory functionality created by Sam Wolfe
     MODIFIED: David Levine 3/21/2018
         -Added blinking cursor support
 

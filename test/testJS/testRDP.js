@@ -1,7 +1,7 @@
 /*
-	CREATED: Henry Karagory 3/12/2018
+    CREATED: Henry Karagory 3/12/2018
   
-	Description: This file contains tests for the functions in rdp.js.
+    Description: This file contains tests for the functions in rdp.js.
 */
 
 // Simple tests with no parentheses or functions.

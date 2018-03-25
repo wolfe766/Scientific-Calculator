@@ -5,7 +5,7 @@
 * Overall Project Manager: Sam Wolfe
 * Implementation Manager: 
 * Testing Manager: Henry Karagory
-* Documentation: 
+* Documentation: Brandon Brown
 
 ### Contributions
 Please list who did what for each part of the project.
@@ -16,21 +16,25 @@ Also list if people worked together (pair programmed) on a particular section.
   * Sam: 
   * Henry: Implemented calculateExpression and calculateExpressionRecursive in rdp.js and debugged other methods in rdp.js, adding appropriate documentation.  Implemented all functions in tokenizer.js and added appropriate documentation.  Implemented and documented the implied multiplcation feature in the preprocess method in input.js.
   * David: Implemented the core functionality of input.js: particularly all functionality which allows for manipulating the string and writing said output to the calculator screen. Implemented calculateTerm, calculateFactor, evaluateFunction, factorial, checkFactorialArg, and checkSqrtArg in rdp.js Also made slight modifications to memory enabling/disabling functions in input.js and other functions in history.js and site.js to handle correct useage cases for memory functions.
-  * Brandon: 
+  * Brandon: Implemented listeners for button presses. Helped implement the functions that would be called based on the button the user selected. Added icon to the browser tab. Implemented the GUI(HTML) for the buttons that the user would be able to used.
+
 
 * Testing
   * Alec: 
   * Sam: 
   * Henry: Implemented tests for the recursive descent parser and for the tokenizer and tokenizer helper methods.
   * David: Implmented tests for the recursive descent parser, and wrote a test calculator page to check that it worked, keeping track of bugs I ran into. Also ran generated html and css through the w3 schools validator.
-  * Brandon: 
+  * Brandon: Implemeneted tests for tokenizer and preprocess methods.
+
   
 * Documentation
   * Alec: 
   * Sam: 
   * Henry: Documented implemented code in rdp.js and tokenizer.js.  Added modification notes to functions that were updated  and to the impplied multiplication feature of the preprocess function in input.js.  
+<<<<<<< HEAD
   * David: Documented all specs for the functions that I implemented in rdp.js and input.js. Also noted when I modified other team members functions.
   * Brandon: 
+  * Brandon: Documented listerners for non-memory buttons. Documented code for testing of tokenizer and preprocess methods. Fixed formatting of documentation in files. 
   
 Instructions for Execution:
 
