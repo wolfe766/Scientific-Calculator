@@ -209,7 +209,7 @@ function when no value is stored in memory.
 */
 function disableAllMemoryButtons(isMemNull, noInput){
     
-    /* no input at all and there's noInput, or there's input (but null mem value) */
+    /* no input at all and there's no value in memory */
     if ((isMemNull && noInput) || !noInput) {
         disableButton("mr");
         disableButton("mAdd");
@@ -225,6 +225,7 @@ function disableAllMemoryButtons(isMemNull, noInput){
     
 }
 
+/* See spec above*/
 function enableAllMemoryButtons(isMemNull){
     
     if (!isMemNull) {

@@ -1,6 +1,12 @@
-/*CREATED: Sam Wolfe 3/18/2018
+/*
+CREATED: Sam Wolfe 3/18/2018
+MODIFIED: David Levine 3/22/2018
+    -updated memory controler to have access to input object,
+     so memory can appropriately respond enabling and disabling
+     memory buttons based on the current state of the calculator
 Description: This file manages both the smaller history 
 box and the big history box. 
+
 */
 
 //Number of entries to display in the history at one time
@@ -206,6 +212,10 @@ var historyController =
     };
 
 /*CREATED: Sam Wolfe 3/18/2018
+    MODIFIED: David Levine 03/22/18
+        -Added inputObject as a property to this object.
+         Used that inputObject to pass information to functions 
+         which disable memory buttons
 
 Description: This is the controller object for everything related
 to memory. Properties include the values for ans and the current 
@@ -227,6 +237,8 @@ var memoryController =
         },
 
         /*CREATED: Sam Wolfe 3/18/2018
+            MODIFIED: David Levine 03/22/18
+                -changed disableAllMemoryButtons to make decisions about whether ms should be disabled
 
         Description: Clears the current value stored in memory
         disables all memory buttons
@@ -243,6 +255,9 @@ var memoryController =
 
         Description: Stores the current value in the display to memory
         enables all memory buttons upon success
+         MODIFIED: David Levine 03/22/18
+            -updated enableAllMemoryButtons to pass in a false boolean 
+            (since all memory buttons need to be enabled for a memory Story).
         */
         memoryStore: function(){
             var eq = inputObject.peakString();

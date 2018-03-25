@@ -169,7 +169,7 @@ QUnit.test( "Tokenizer Test With Cos and Nested Sin", function( assert ) {
 });
 
 QUnit.test( "Tokenizer Test With Cos and Nested Tan", function( assert ) {
-    var inputExpressionString = "cos(sin(2))";
+    var inputExpressionString = "cos(tan(2))";
     var expectedTokenQueue = ["cos", "(", "tan", "(", "2", ")", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
@@ -194,19 +194,12 @@ QUnit.test( "Tokenizer Test With Tan and Nested Cos", function( assert ) {
 
 QUnit.test( "Tokenizer Test With Power and Nested Squared Power", function( assert ) {
     var inputExpressionString = "pow(pow(1,2),2)";
-    var expectedTokenQueue = ["pow", "(", "pow", "(", "1", "2", ")", ",", "2", ")"];
+    var expectedTokenQueue = ["pow", "(", "pow", "(", "1", ",", "2", ")", ",", "2", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
 });
 
-QUnit.test( "Tokenizer Test With Power and Nested Power", function( assert ) {
-    var inputExpressionString = "pow(pow(1,3),4)";
-    var expectedTokenQueue = ["pow", "(", "pow", "(", "1", "3", ")", ",", 4", ")"];
-    var actualTokenQueue = tokenizeExpression(inputExpressionString);
-
-    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
-});
 
 QUnit.test( "Tokenizer Test With Function Name 2", function( assert ) {
     var inputExpressionString = "sin(sin(1))";
