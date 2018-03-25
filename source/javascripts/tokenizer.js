@@ -8,6 +8,8 @@
   CREATED: Henry Karagory 3/12/2018
   Description: Accepts a string and returns true if the string represents
   a number, false otherwise.
+    MODIFIED: Alec Maier 3/22/2018
+        - altered conditional return to include negative numbers
 
   Parameters:
     nunberString: A string.

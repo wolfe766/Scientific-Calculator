@@ -275,7 +275,7 @@ function toggle_trig_mode() {
     checkAndEnableOrDisableMemoryButtons(inputObject, isMemNull);
 }
 
-// User pressed button to evaluat and display result
+// User pressed button to evaluate and display result
 function press_enter() {
     if(inputObject.peakString().length > 0){
         //Reset the previous result upon beginning the ENTER sequence

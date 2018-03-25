@@ -8,6 +8,9 @@
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 03/20/2018
+    - Added boolean variable and conditional to handle
+        formatted output being printed to the display
 
   Description: Add element to string based off cursor location
 
@@ -71,6 +74,8 @@ function peakString() {
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 3/20/2018
+    - now prints the returned input string to the output string
 
   Description: Returns input string to user, clears string, and
                writes string to the htmlEl dom element.
@@ -310,6 +315,8 @@ function shiftCursorRight() {
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 3/20/2018
+    - now also clears output string
   
   Description: clears the input box
 
@@ -330,7 +337,8 @@ function clearInput() {
 
 /*
   CREATED: David Levine 03/12/2018
-  
+  MODIFIED: Alec Maier 3/20/2018
+    - now displays output string before input string
   Description: writes the updated input to the DOM 
 
   parameters:
@@ -407,6 +415,9 @@ function blinkCursor() {
   MODIFIED: David Levine 03/14/2018
     -Moved the input functions into another class, which 
      are now chained using prototyping.
+  MODIFIED: Alec Maier 3/20/2018
+    - Added output string to object to handle displaying of
+        past calculations without the need to press clear
 
   Description: Used to return an object that lets a user interact with the 
   html box on the web gui. 
