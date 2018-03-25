@@ -72,9 +72,25 @@ QUnit.test( "Tokenizer Test With Function Name 1", function( assert ) {
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
 });
 
+QUnit.test( "Tokenizer Test With Sin and ANS", function( assert ) {
+    var inputExpressionString = "sin(ANS)";
+    var expectedTokenQueue = ["sin", "(", "ANS", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
 QUnit.test( "Tokenizer Test With Tan", function( assert ) {
     var inputExpressionString = "tan(1)";
     var expectedTokenQueue = ["tan", "(", "1", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
+QUnit.test( "Tokenizer Test With Tan and ANS", function( assert ) {
+    var inputExpressionString = "tan(ANS)";
+    var expectedTokenQueue = ["tan", "(", "ANS", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
@@ -88,9 +104,25 @@ QUnit.test( "Tokenizer Test With Cos", function( assert ) {
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
 });
 
+QUnit.test( "Tokenizer Test With Cos and ANS", function( assert ) {
+    var inputExpressionString = "cos(ANS)";
+    var expectedTokenQueue = ["cos", "(", "ANS", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
 QUnit.test( "Tokenizer Test With Factorial", function( assert ) {
     var inputExpressionString = "fact(1)";
     var expectedTokenQueue = ["fact", "(", "1", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
+QUnit.test( "Tokenizer Test With Factorial and ANS", function( assert ) {
+    var inputExpressionString = "fact(ANS)";
+    var expectedTokenQueue = ["fact", "(", "ANS", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
@@ -107,6 +139,14 @@ QUnit.test( "Tokenizer Test With Negative Number", function( assert ) {
 QUnit.test( "Tokenizer Test With Square Root", function( assert ) {
     var inputExpressionString = "sqrt(1)";
     var expectedTokenQueue = ["sqrt", "(", "1", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
+QUnit.test( "Tokenizer Test With Square Root and ANS", function( assert ) {
+    var inputExpressionString = "sqrt(ANS)";
+    var expectedTokenQueue = ["sqrt", "(", "ANS", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
@@ -136,9 +176,25 @@ QUnit.test( "Tokenizer Test With Exponent", function( assert ) {
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
 });
 
+QUnit.test( "Tokenizer Test With Exponent and ANS", function( assert ) {
+    var inputExpressionString = "pow(ANS,ANS)";
+    var expectedTokenQueue = ["pow", "(", "ANS", ",", "ANS", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
 QUnit.test( "Tokenizer Test With Inverse", function( assert ) {
     var inputExpressionString = "inv(2)";
     var expectedTokenQueue = ["inv", "(", "2", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
+QUnit.test( "Tokenizer Test With Inverse and ANS", function( assert ) {
+    var inputExpressionString = "inv(ANS)";
+    var expectedTokenQueue = ["inv", "(", "ANS", ")"];
     var actualTokenQueue = tokenizeExpression(inputExpressionString);
 
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
@@ -200,6 +256,21 @@ QUnit.test( "Tokenizer Test With Power and Nested Squared Power", function( asse
     assert.deepEqual(actualTokenQueue, expectedTokenQueue);
 });
 
+QUnit.test( "Tokenizer Test With Power and Nested Factorial", function( assert ) {
+    var inputExpressionString = "pow(fact(1),2)";
+    var expectedTokenQueue = ["pow", "(", "fact", "(", "1", ")", ",", "2", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
+
+QUnit.test( "Tokenizer Test With Power including ANS", function( assert ) {
+    var inputExpressionString = "pow(ANS,2)";
+    var expectedTokenQueue = ["pow", "(", "ANS", ",", "2", ")"];
+    var actualTokenQueue = tokenizeExpression(inputExpressionString);
+
+    assert.deepEqual(actualTokenQueue, expectedTokenQueue);
+});
 
 QUnit.test( "Tokenizer Test With Function Name 2", function( assert ) {
     var inputExpressionString = "sin(sin(1))";
