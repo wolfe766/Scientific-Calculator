@@ -16,6 +16,10 @@ body {
   min-width: 400px;
 }
 
+#fullContainer div{
+  max-width:1200px;
+}
+
 /* CREATED: Alec Maier 3/18/2018
     Description: CSS for calculator
  */
@@ -136,6 +140,9 @@ Description: CSS style for History
   font-size: 1.3em;
   font-weight: bold;
   color: rgba(20,20,20,.5);
+  max-width:100%;
+  overflow-x:auto;
+
 }
 
 #bigHistory{
