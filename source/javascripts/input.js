@@ -108,6 +108,8 @@ function returnInputString() {
     - The function will now insert implied multiplication symbols.
   MODIFIED: Sam Wolfe 03/21/2018
     -Added parameter to disable implied multiplcation
+  MODIFIED: Sam Wolfe 03/25/2018
+    -Deal with repeated negative signs
 
   Description: Attempts to fix unbalanced parentheses
   Replaces "ans" with approriate value
