@@ -31,7 +31,6 @@ Also list if people worked together (pair programmed) on a particular section.
   * Alec: 
   * Sam: 
   * Henry: Documented implemented code in rdp.js and tokenizer.js.  Added modification notes to functions that were updated  and to the impplied multiplication feature of the preprocess function in input.js.  
-<<<<<<< HEAD
   * David: Documented all specs for the functions that I implemented in rdp.js and input.js. Also noted when I modified other team members functions.
   * Brandon: 
   * Brandon: Documented listerners for non-memory buttons. Documented code for testing of tokenizer and preprocess methods. Fixed formatting of documentation in files. 
