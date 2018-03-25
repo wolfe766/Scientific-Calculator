@@ -1,8 +1,11 @@
 /*
-  Created By: Alec Maier 3/18/2018
-  MODIFIED: David Levine 3/22/2018
-    -Added checks to enable or disable memory button after button presses.
-  Description: functions for all button presses
+    Created By: Alec Maier 3/18/2018
+    MODIFIED: Brandon Brown 3/19/2018
+      - Added functionality for when user presses enter button
+    MODIFIED: David Levine 3/22/2018
+      -Added checks to enable or disable memory button after button presses.
+
+    Description: functions for all button presses
 */
 
 // User pressed button to move left
