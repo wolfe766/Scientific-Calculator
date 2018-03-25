@@ -8,6 +8,9 @@
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 03/20/2018
+    - Added boolean variable and conditional to handle
+        formatted output being printed to the display
 
   Description: Add element to string based off cursor location
 
@@ -71,6 +74,8 @@ function peakString() {
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 3/20/2018
+    - now prints the returned input string to the output string
 
   Description: Returns input string to user, clears string, and
                writes string to the htmlEl dom element.
@@ -228,22 +233,66 @@ function disableButton(buttonID){
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
+  MODIFIED: David Levine 3/22/2018
+    -Added functionality for disabling and enabling ms.
+
+
 
 Description: Disables / Enables all memory buttons that should not
 function when no value is stored in memory.
+    
+    parameters:
+        -isMemNull - true is the memory controller has null, false otherwise
+        -noInput - true if there is no input given, false otherwise
 */
-function disableAllMemoryButtons(){
-    disableButton("mr");
-    disableButton("mAdd");
-    disableButton("mSub");
-    disableButton("mc");
+function disableAllMemoryButtons(isMemNull, noInput){
+    
+    /* no input at all and there's no value in memory */
+    if ((isMemNull && noInput) || !noInput) {
+        disableButton("mr");
+        disableButton("mAdd");
+        disableButton("mSub");
+        disableButton("mc");
+    }
+
+    /* If there is input, don't want to disable ms button */
+    if (!noInput) {
+        disableButton("ms")
+    }
+
+    
 }
 
-function enableAllMemoryButtons(){
-    enableButton("mr");
-    enableButton("mAdd");
-    enableButton("mSub");
-    enableButton("mc");
+/* See spec above*/
+function enableAllMemoryButtons(isMemNull){
+    
+    if (!isMemNull) {
+        enableButton("mr");
+        enableButton("mAdd");
+        enableButton("mSub");
+        enableButton("mc");
+    }
+    enableButton("ms");
+}
+
+
+/*
+    CREATED: David Levine
+
+    Description: Enables the calc buttons if the given
+                 input object has anything written to it. Otherwise
+                 it will disable the buttons.
+    parameters:
+        -inputObjectFromButtons: the inputObject being used
+        -isMemNull - true is the memory controller has null, false otherwise
+*/
+function checkAndEnableOrDisableMemoryButtons(inputObjectFromButtons, isMemNull) {
+    /* No input given, so disable button functionality */
+    if (inputObjectFromButtons.peakString() != "") {
+        enableAllMemoryButtons(isMemNull); 
+    } else {
+        disableAllMemoryButtons(isMemNull, false); /* have input now */
+    }
 }
 
 /*CREATED: Sam Wolfe 03/20/2018
@@ -305,6 +354,8 @@ function shiftCursorRight() {
 
 /*
   CREATED: David Levine 03/12/2018
+  MODIFIED: Alec Maier 3/20/2018
+    - now also clears output string
   
   Description: clears the input box
 
@@ -325,7 +376,8 @@ function clearInput() {
 
 /*
   CREATED: David Levine 03/12/2018
-  
+  MODIFIED: Alec Maier 3/20/2018
+    - now displays output string before input string
   Description: writes the updated input to the DOM 
 
   parameters:
@@ -375,12 +427,36 @@ function returnTrigMode() {
     return this.trigMode;
 }
 
+/*
+    CREATED: David Levine 03/22/2018
+
+    Description: Overwrites the cursor part of the
+                input string. To be called by setInterval in
+                site.js
+    
+    Updates:
+        this.cursor
+        innerHTML at this.htmlEl    
+*/
+function blinkCursor() {
+  if (this.cursor == "|") {
+    this.cursor = " ";
+  } else {
+    this.cursor = "|";
+  }
+
+   writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
+}
+
 
 /* 
   CREATED: David Levine 03/12/2018
   MODIFIED: David Levine 03/14/2018
     -Moved the input functions into another class, which 
      are now chained using prototyping.
+  MODIFIED: Alec Maier 3/20/2018
+    - Added output string to object to handle displaying of
+        past calculations without the need to press clear
 
   Description: Used to return an object that lets a user interact with the 
   html box on the web gui. 
@@ -398,7 +474,7 @@ function Input(htmlEl) {
     this.trigMode = "deg";
 
     /* write cursor to input box during initalization */
-    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor)
+    writeInputToDOM(this.htmlEl, this.outputString, this.leftString, this.rightString, this.cursor);
 
 }
 
@@ -419,6 +495,7 @@ function InputFunctions() {
     this.deleteFromString = deleteFromString;
     this.toggleTrigMode = toggleTrigMode;
     this.returnTrigMode = returnTrigMode;
+    this.blinkCursor = blinkCursor;
 }
 
 /* Chain Input to InputFunctions through prototype  */
