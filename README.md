@@ -15,6 +15,6 @@ This calculator includes full support for:
 - Detailed error outputs: Explicit details of why your input failed
 
 # Pictures
-![Example Image](https://imgur.com/a39b255a-6125-4c98-8e6d-0d3053bd3592)
+![Example Image](https://i.imgur.com/Mh1OYOc.png)
 
-![Example Image 2](https://imgur.com/e96ee517-6102-43ea-bc0a-d5abf9b393a2)
+![Example Image 2](https://i.imgur.com/YdxRVjZ.png)
